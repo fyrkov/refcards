@@ -1,2 +1,2 @@
 Refcards:
-- [GIT](../git.md)
+- [GIT](./git.md)
