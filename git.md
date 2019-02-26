@@ -19,7 +19,7 @@ git reset --hard HEAD
  
 Files can be changed back in working copy by using:
 ```
-git checkout -- <file>          # `--` promising the command line that there are no more options after the `--`
+git checkout -- <file>          # `--` to promise that there are no more opts after `--`
 ```
 
 Revert file in the current branch using the master version:
