@@ -57,6 +57,11 @@ git pull origin master
 git push  <REMOTENAME> <LOCALBRANCHNAME>:<REMOTEBRANCHNAME> 
 ```
 
+How to update master without checkout?
+```
+git fetch origin master:master          # works only with fast-forward merge
+```
+
 Pushes current branch to it's sybling on the remote:
 ```
 git push <REMOTENAME> HEAD
