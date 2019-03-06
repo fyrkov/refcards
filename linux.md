@@ -287,6 +287,25 @@ Show CPU info:\
 Show memory info:\
 `cat /proc/meminfo`
 
+System run levels. 
+ID | Name	| Description
+------------ | ------------- | -------------
+0 | `Halt` | `Shuts down the system`
+1 | `Single-user mode` | `Mode for administrative tasks`
+2 | `	Multi-user mode` | `Networking disabled`
+3 | `Multi-user mode with networking` | `Starts the system normally`
+5 | `Start the system normally with appropriate display manager (with GUI)` | `Starts the system normally in GUI mode`
+6 | `Reboot` | `	Reboots the system`
+Usage:
+```
+init <#>
+```
+To find current run level:
+```
+who -r
+```
+
+
 **Systemctl** is a command to use `systemd` service manager.\
 Starting a service:\
 `sudo systemctl [start|stop|restart] application`

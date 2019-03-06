@@ -47,7 +47,9 @@ Copy file from local to remote:\
 To check connectivity to the host or reveal IP by the name of the host:\
 `ping <host>`
 
-To check IPs of the routers on the route and number of hops:\
+To check IPs of the routers on the route and number of hops.\
+Can be used to locate where the loss of data occurs, and probably the node is down.\
+Can be used to locate slow nodes.\
 `traceroute <ip address>`
 
 **iproute2** and **net-tools** packages.\
