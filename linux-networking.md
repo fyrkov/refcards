@@ -188,7 +188,7 @@ To dump traffic of a specified interface:\
 
 
 #### HTTPD Webserver
-Packacge name - `httpd`\
+Package name - `httpd`\
 Service:
 ```
 systemctl enable httpd
