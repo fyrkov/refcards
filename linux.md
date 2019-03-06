@@ -305,6 +305,9 @@ To find current run level:
 who -r
 ```
 
+Linux boot process:
+![linux_boot_process](linux_files/Stages-of-Linux-Boot-Process.jpg)
+
 
 **Systemctl** is a command to use `systemd` service manager.\
 Starting a service:\
