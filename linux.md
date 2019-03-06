@@ -136,8 +136,11 @@ done < list.txt
 Check disk usage in this directory:\
 `du -shc *`
 
-Check disk free space:\
+Check disk space and partitions:\
 `df -lH`
+
+Check disk size:\
+`fdisk -l`
 
 Change  access permissions to filesystem objects:\
 `chmod 664 sharedFile` sets read and write permissions for user and group, and only read to others\
@@ -176,6 +179,46 @@ ls -l file.txt
 - hardlink references to the same **Inode** value as the original file.\
 Hardlinks remain linked even if the original or linked files are moved throughout the file system or deleted
 - softlink is like a shortcut in Windows
+
+**Partitions managment**
+
+Create a partitions with `fdsik`:
+```
+fdisk /dev/sdb
+```
+
+Assign File System type to the partition, e.g. `xfs`:
+```
+mkfs.xfs /dev/sdb1
+```
+
+Mount a partition to dir `/data`
+```
+mount /dev/sdb1 /data
+```
+To make this partition be auto-mounted on reboot edit `etc/fstab` that contains information about partitions
+
+To unmount:
+```
+umount /data
+```
+
+To mount everthing from `etc/fstab`
+```
+mount -a
+```
+
+**LVM (Logical Volume Manager) system**
+It bring additional layer of abstraction between physical devices and file systems.\
+It allows merging physical devices into a "Volume group" and then splitting it to "Logical volumes".
+
+disk1 -> volume_group1 -> logical_volume1
+                       -> logical_volume2
+
+disk2 ->               -> logical_volume3
+disk3 -> volume_group2 -> logical_volume4
+disk4 ->               -> logical_volume5
+                       -> logical_volume6
 
 ### Users Management
 
