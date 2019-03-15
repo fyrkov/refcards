@@ -32,7 +32,7 @@ Add your SSH private key to the ssh-agent:\
 ( <intra-site.com> --- <work_host> ) --- <home_host> --- <google.com>
 
 #### Local port forwarding
-Task: access a host <google.com> which is not accessible in this local network (probably closed by a firewall) with help of another host <home_host> with running sshd server:\
+Task: access a host <google.com> which is not accessible in this local network (probably closed by a firewall) with help of another host <home_host> with running sshd server:
 - `<work_host>$ ssh -L 9001:google.com:80 home` 
 - http://localhost:9001 in the web browser on <work_host> machine will open google.com
 
@@ -43,9 +43,10 @@ Task: gvie access to the database host `intra-site.com` which is not accessible 
 - http://localhost:9001 in the web browser on <home_host> machine will open intra-site.com
 
 The main difference is the direction of desired connection:
-local forwarding:     ---> 
-ssh_client            --->        ssh_server.
-remote forwarding:    <--- 
+local forwarding:     --->\
+ssh_client            --->        ssh_server\
+remote forwarding:    <---\
+
 
 #### Connecting to a database behind a firewall
 Another good example is if you need to access a port on your server which can only be accessed from localhost and not remotely.
