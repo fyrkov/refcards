@@ -4,7 +4,7 @@
 
 **Curl** is a "CLI browser".
 
-GET examples:\
+`GET` examples:\
 ```
 curl -s \
 -H "DevAuthorization: fleetadmin|fleetadmin_dev_1" \
@@ -15,13 +15,14 @@ curl --insecure \
 https://eagle.wkda-test.com/employee/ \
 | jq -r
 ```
+where `jq -r` to prettyprint json.
 
-Make a POST request with Parameters:
+`POST` request with Parameters:
 ```
 curl --data "firstName=John&lastName=Doe" https://yourdomain.com/info.php
 ```
 
-POST with request body in the given file and specified headers:
+`POST` with request body in the given file and specified headers:
 ```
 curl -s -XPOST -H "DevAuthorization: fleetadmin|fleetadmin_dev_1" -H "Content-Type: application/json" "https://voyager-core.dev.internal.zedconnect.com/drivers/1/reports" -d@req.json
 ```
