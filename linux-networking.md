@@ -6,7 +6,9 @@
 
 GET examples:\
 ```
-curl -s -H "DevAuthorization: fleetadmin|fleetadmin_dev_1" "https://voyager-core.dev.internal.zedconnect.com/"
+curl -s \
+-H "DevAuthorization: fleetadmin|fleetadmin_dev_1" \
+"https://voyager-core.dev.internal.zedconnect.com/"
 
 curl --insecure \
 -H "Authorization: Bearer <token>" \
