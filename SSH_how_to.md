@@ -42,7 +42,7 @@ Task: gvie access to the database host `intra-site.com` which is not accessible 
 - `<work_host>$ ssh -R 9001:intra-site.com:80 home`
 - http://localhost:9001 in the web browser on <home_host> machine will open intra-site.com
 
-The main difference is the direction of desired connection:
+The main difference is the direction of desired connection:\
 local forwarding:     --->\
 ssh_client            --->        ssh_server\
 remote forwarding:    <---\
