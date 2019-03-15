@@ -4,19 +4,37 @@
 
 **Curl** is a "CLI browser".
 
-GET example:\
-`curl -s -H "DevAuthorization: fleetadmin|fleetadmin_dev_1" "https://voyager-core.dev.internal.zedconnect.com/"`
+`GET` examples:
+```
+curl -s \
+-H "DevAuthorization: fleetadmin|fleetadmin_dev_1" \
+"https://voyager-core.dev.internal.zedconnect.com/"
 
-Make a POST request with Parameters:\
-`curl --data "firstName=John&lastName=Doe" https://yourdomain.com/info.php`
+curl --insecure \
+-H "Authorization: Bearer <token>" \
+https://eagle.wkda-test.com/employee/ \
+| jq -r
+```
+where `jq -r` to prettyprint json.
 
-POST with request body in the given file and specified headers:\
-`curl -s -XPOST -H "DevAuthorization: fleetadmin|fleetadmin_dev_1" -H "Content-Type: application/json" "https://voyager-core.dev.internal.zedconnect.com/drivers/1/reports" -d@req.json`
+`POST` request with Parameters:
+```
+curl --data "firstName=John&lastName=Doe" https://yourdomain.com/info.php
+```
 
-Download the file (may use `wget` instead):\
-`curl -o archive.zip https://domain.com/file.zip`\
-Or with `-O` for saving files with the same names as on the remote server:\
-`curl -O https://domain.com/file.zip`
+`POST` with request body in the given file and specified headers:
+```
+curl -s -XPOST -H "DevAuthorization: fleetadmin|fleetadmin_dev_1" -H "Content-Type: application/json" "https://voyager-core.dev.internal.zedconnect.com/drivers/1/reports" -d@req.json
+```
+
+Download the file (may use `wget` instead):
+```
+curl -o archive.zip https://domain.com/file.zip
+```
+Or with `-O` for saving files with the same names as on the remote server:
+```
+curl -O https://domain.com/file.zip
+```
 
 Query HTTP Headers:\
 `curl -I www.tecmint.com`

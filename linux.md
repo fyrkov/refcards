@@ -220,6 +220,37 @@ disk3 -> volume_group2 -> logical_volume4
 disk4 ->               -> logical_volume5
                        -> logical_volume6
 
+**Swap management**
+Add swap instructions.\
+Create a swap file
+```
+dd if=/dev/zero of=/newswap bs=1M count=1024
+```
+`dd` = command to copy byte per byte, `if` = source, read from a given file instead of standart input, `/dev/zero` = special file that provides null characters, `of` = destination, write to a given file instead of standart output, `bs` = number of bytes to write at once, `count` = how many pieces to copy, i.e. total size.
+Unlike `/dev/null`, `/dev/zero` may be used as a source
+```
+chmod go-r newswap # to set permissions only to root as 600
+mkswap /newswap # make a swap
+swapon /newswap # enable swap
+free -h # check if it is enabled
+```
+To make it be enabled during boot time, add to `/etc/fstab` following line:\
+`/newswap swap swap defaults 0 0` 
+
+**File System check**
+`fsck` utility to check ext2,ext3,ext4 FS. PArameter is actual filesystem, not mapped one, e.g.
+```
+fsck /dev/sdb1
+```
+`xfs_repair` to check and repair XFS FS. `xfs_repair` may need to unmount the FS first.
+
+How to check current FS type?
+```
+df -HT # T for list current FS type
+```
+
+
+
 ### Users Management
 
 `sudo` VS `su`:\
@@ -321,7 +352,7 @@ Prints the message buffer of the kernel which typically contains messages produc
 Report statistics for CPU, IO devices, partitions and network filesystems (NFS), `-1` = refresh every sec:\
 `iostat 1`
 
-Display amount of free and used memory in the system:\
+Display amount of free and used memory in the system, swap information:\
 `free -h`
 
 Show CPU info:\
