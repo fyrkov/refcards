@@ -4,7 +4,7 @@
 
 **Curl** is a "CLI browser".
 
-`GET` examples:\
+`GET` examples:
 ```
 curl -s \
 -H "DevAuthorization: fleetadmin|fleetadmin_dev_1" \
