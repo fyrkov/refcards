@@ -180,6 +180,22 @@ ls -l file.txt
 Hardlinks remain linked even if the original or linked files are moved throughout the file system or deleted
 - softlink is like a shortcut in Windows
 
+**Filesystem structure description**
+- `/` root dir
+- `/boot` contains files that is used by boot loader (grub.cfg)
+- `/dev` system devices, e.g. disks, cdrom, flashdrive, keyboard
+- `/etc` config files 
+- `/usr/bin` common binaries meant to be accessed by locally logged in users
+- `/bin` basic binaries which are required at any run level 
+- `/opt` optional apps which are not part of OS
+- `/proc` running processes (only exist in memory)
+- `/lib` C libraries
+- `/tmp` dir for temporary files
+- `/home` user dirs
+- `/var` system logs
+- `/mnt` mounted external filesystem
+- `/media` for cdrom mounts
+
 **Partitions managment**
 
 Create a partitions with `fdsik`:
@@ -709,3 +725,5 @@ Add alias:\
 `alias grep='grep --color'`
 Apply changes:\
 `source ~/.bashrc`
+
+### Filesystem descripton
