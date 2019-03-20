@@ -574,7 +574,7 @@ The first of the commands below starts the program abcd in the background in suc
 Note that nohupping backgrounded jobs is typically used to avoid terminating them when logging off from a remote SSH session. A different issue that often arises in this situation is that ssh is refusing to log off ("hangs"), since it refuses to lose any data from/to the background job(s).This problem can also be overcome by redirecting all three I/O streams:\
 `nohup ./myprogram > /dev/null 2>&1 &`
 
-`xargs` reads items from standard input as separated by blanks and executes a given command (or an `echo` if absent) once for each argument, for eaxample:\
+`xargs` reads items from standard input as separated by blanks and executes a given command (or an `echo` if absent) once for each argument, for example:\
 `echo 'one two three' | xargs mkdir`
 
 By default, xargs terminates/delimits items using blank spaces. Specify delimiter using `-d` option, for example `xargs -d\n` for newlines.
