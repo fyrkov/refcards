@@ -249,8 +249,6 @@ How to check current FS type?
 df -HT # T for list current FS type
 ```
 
-
-
 ### Users Management
 
 `sudo` VS `su`:\
