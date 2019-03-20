@@ -379,6 +379,16 @@ To find current run level:
 who -r
 ```
 
+Find out the total memory allocated for a particular process, e.g. `bash`:
+```
+pidof bash | xargs ps -o rss,vsz
+```
+where 
+- `RSS`: resident set size, the non-swapped physical memory that a task has used in KiB.
+- `VSZ`: virtual memory size of the process in KiB.
+
+
+
 Linux boot process:
 ![linux_boot_process](linux_files/Stages-of-Linux-Boot-Process.jpg)
 
