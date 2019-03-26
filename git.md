@@ -101,6 +101,11 @@ Rebasing current branch onto top of the <branch1>. Makes consequent history. Cha
 ```
 git rebase <branch1>
 ```
+ 
+Checkout a remote branch:
+```
+git checkout -b test <name of remote>/test
+```
 
 ### Git stash
 Sometimes when you go to pull you may have changes you don't want to commit just yet. One option you have, other than commiting, is to stash the changes.
