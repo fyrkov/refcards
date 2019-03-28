@@ -10,8 +10,8 @@ Maven phases:
 - install - install the package into the local repository, for use as a dependency in other projects locally
 - deploy - done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects
 
-Download dependencies without doing anything else:\
-`mvn dependency:resolve`
+Download dependencies without doing anything else, `-U`=force update:\
+`mvn dependency:resolve -U`
 
 To download a single dependency:\
 `mvn dependency:get -Dartifact=groupId:artifactId:version`
