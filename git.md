@@ -113,6 +113,16 @@ git rebase -i origin/master~4 master # squash 4 commits locally
 git push origin +master # force push it to master
 ```
 
+Setting git editor, e.g. for vs code:
+```
+git config --global core.editor "code --wait"
+```
+
+Open git config in git editor:
+```
+git config --global -e
+```
+
 ### Git stash
 Sometimes when you go to pull you may have changes you don't want to commit just yet. One option you have, other than commiting, is to stash the changes.
 Use the command `git stash` to stash your changes, and `git stash apply` to re-apply your changes after your pull.
