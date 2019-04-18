@@ -107,6 +107,12 @@ Checkout a remote branch:
 git checkout -b test <name of remote>/test
 ```
 
+How to squash commits in git after they have been pushed?
+```
+git rebase -i origin/master~4 master # squash 4 commits locally
+git push origin +master # force push it to master
+```
+
 ### Git stash
 Sometimes when you go to pull you may have changes you don't want to commit just yet. One option you have, other than commiting, is to stash the changes.
 Use the command `git stash` to stash your changes, and `git stash apply` to re-apply your changes after your pull.
