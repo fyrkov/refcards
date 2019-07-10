@@ -21,5 +21,6 @@ To run a single test case:\
 
 Install skipping tests
 `mvn install -DskipTests`
+
 This will skip also compiling tests:
 `mvn install -Dmaven.test.skip=true`
