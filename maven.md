@@ -18,3 +18,8 @@ To download a single dependency:\
 
 To run a single test case:\
 `mvn -Dtest=<TestClass>#<TestMethod> test`
+
+Install skipping tests
+`mvn install -DskipTests`
+This will skip also compiling tests:
+`mvn install -Dmaven.test.skip=true`
