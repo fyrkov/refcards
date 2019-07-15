@@ -103,7 +103,7 @@ Merging branch1 into current branch:
 git merge <branch1>
 ```
 
-Rebasing current branch onto top of the <branch1>. Makes consequent history. Changes in current branch and stays in it
+Rebasing current branch onto top of the `branch1`. Makes consequent history. Changes in current branch and stays in it
 ```
 git rebase <branch1>
 ```
