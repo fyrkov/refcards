@@ -48,7 +48,8 @@ git commit -a //add all unstaged files
 
 History:
 ```
-git log --summary
+git log // full log records as hash + author + date + message
+git log --oneline //show commits as short hash + message
 ```
 
 Adding remote repo and naming it origin:
