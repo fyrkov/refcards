@@ -103,6 +103,8 @@ If the target is an existing dir, the file or dir is copied into the target:\
 `cp file1 dir`\
 Copy the `dir1` directory structure to a new `dir2`:\
 `cp -r dir1 dir2`
+Copy from folder to USB with preserving permissions and other files attributes in verbose mode:\
+`sudo cp -av /home/my_home /media/backup/my_home`
 
 Move `file1` into the `test` directory:\
 `mv file1 test`\
