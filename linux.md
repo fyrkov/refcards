@@ -115,6 +115,8 @@ Remove a regular file:\
 `rm file4`\
 Remove non-empty directory `dir1` and everything within it:\
 `rm -r again`
+Remove all files in the current directory with verbose output:\
+`rm -rfv *`
 
 Navigation hints:
 - `cd` leads to home dir (or `~`)
