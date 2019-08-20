@@ -506,37 +506,19 @@ Reassemble split files *file1aa, file1ab* ... with `cat`:\
 There are 2 main branches of package management: DEB (`apt`) and RPM (`yum`).\
 `apt` = `apt-get` + `apt-cache`
 
-|        |   |   |
+|apt|apt-get|What it does?|
 |--------|---|---|
 |`apt install`	|`apt-get install`	|Installs a package|
 |`apt remove`	|`apt-get remove`	|Removes a package|
 |`apt purge`	|`apt-get purge`	|Removes package with configuration|
-|`apt update`	|`apt-get update`	|Refreshes repository index|
+|`apt update`	|`apt-get update`	|Updates the list of available packages and their versions, but it does not install or upgrade any packages|
 |`apt upgrade`	|`apt-get upgrade`	|Upgrades all upgradable packages|
-|`apt autoremove`	|`apt-get autoremove`	|Removes unwanted packages|
+|`apt autoremove`	|`apt-get autoremove`	|Removes packages that are now no longer needed|
 |`apt full-upgrade`	|`apt-get dist-upgrade`	|Upgrades packages with auto-handling of dependencies|
 |`apt search`	|`apt-cache search`	|Searches for the program|
 |`apt show`	|`apt-cache show`	|Shows package details|
-
-`apt-get update` updates the list of available packages and their versions, but it does not install or upgrade any packages
-
-`apt-get upgrade` actually installs newer versions of the packages
-
-`apt-get dist-upgrade`  will upgrade to a new kernel
-
-`apt-get autoremove` to remove packages that are now no longer needed
-
-`apt-get autoclean` clears out the local repository of retrieved package files
-
-Search for programs in package manager:\
-`apt search torrent client` - 1st option\
-`apt-cache search jdk` - 2nd option (different output)
-
-List all installed packages:\
-`apt list --installed`
-
-Remove packages:\
-`sudo apt-get remove <package>`
+||`apt-get autoclean`|clears out the local repository of retrieved package files|
+|`apt list`||Lists packages with criteria (`--installed`, `--upgradable` etc)|
 
 Using multiple java distributions:\
 `sudo update-alternatives --config java`
