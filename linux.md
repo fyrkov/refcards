@@ -503,7 +503,20 @@ Reassemble split files *file1aa, file1ab* ... with `cat`:\
 
 ### Package managers
 
-There are 2 main branches of package management: DEB (`apt`) and RPM (`yum`).
+There are 2 main branches of package management: DEB (`apt`) and RPM (`yum`).\
+`apt` = `apt-get` + `apt-cache`
+
+|        |   |   |
+|--------|---|---|
+|`apt install`	|`apt-get install`	|Installs a package|
+|`apt remove`	|`apt-get remove`	|Removes a package|
+|`apt purge`	|`apt-get purge`	|Removes package with configuration|
+|`apt update`	|`apt-get update`	|Refreshes repository index|
+|`apt upgrade`	|`apt-get upgrade`	|Upgrades all upgradable packages|
+|`apt autoremove`	|`apt-get autoremove`	|Removes unwanted packages|
+|`apt full-upgrade`	|`apt-get dist-upgrade`	|Upgrades packages with auto-handling of dependencies|
+|`apt search`	|`apt-cache search`	|Searches for the program|
+|`apt show`	|`apt-cache show`	|Shows package details|
 
 `apt-get update` updates the list of available packages and their versions, but it does not install or upgrade any packages
 
