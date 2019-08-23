@@ -1,5 +1,21 @@
 ### Networking
 
+#### Troubleshooting:
+1. Check routing to host
+```
+ip route get 172.31.132.29
+172.31.132.29 via 10.1.19.254 dev wlp5s0 src 10.1.17.31 uid 1000 
+    cache 
+```
+2. Check routing rules
+```
+ip route list
+default via 10.1.19.254 dev wlp5s0 proto dhcp metric 600 
+10.1.16.0/22 dev wlp5s0 proto kernel scope link src 10.1.17.31 metric 600 
+10.255.250.252 via 10.1.19.254 dev wlp5s0 
+169.254.0.0/16 dev wlp5s0 scope link metric 1000
+```
+
 #### Curl & Wget
 
 **Curl** is a "CLI browser".
