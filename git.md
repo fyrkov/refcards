@@ -1,10 +1,9 @@
 How to undo the last commit?
 ```
-git reset --hard HEAD~1         # undo and destory all changes
-git reset --mixed HEAD~1        # undo the commit but keep changes (files unstaged, requires git add .)
-git reset --soft HEAD~1         # undo the commit but keep changes and index (files staged)
-
-git revert HEAD                 # history-safe undoing, creates reverse commit
+git reset --hard HEAD~1        # undo and destory all changes
+git reset --mixed HEAD~1       # undo the commit but keep changes (files unstaged, requires git add .)
+git reset --soft HEAD~1        # undo the commit but keep changes and index (files staged)
+git revert HEAD                # history-safe undoing, creates reverse commit
 ```
 
 
