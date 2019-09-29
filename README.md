@@ -5,4 +5,4 @@ Refcards:
 - [Linux networking](./linux-networking.md)
 - [SSH_how_to](./SSH_how_to.md)
 - [VPN_how_to](./VPN_how_to.md)
-- [spring cloud](./spring-cloud/spring-cloud.md)
+- [Spring Cloud](./spring-cloud/spring-cloud.md)
