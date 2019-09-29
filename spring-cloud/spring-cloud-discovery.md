@@ -1,4 +1,4 @@
-###Spring cloud service discovery
+### Spring cloud service discovery
 
 Spring cloud uses *Netflix Eureka* service discovery engine and *Netflix Ribbon* for client-side load balancing.
 

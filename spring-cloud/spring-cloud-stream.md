@@ -1,4 +1,4 @@
-###Spring cloud stream 
+### Spring cloud stream 
 
 Spring cloud stream is a messaging framework that can be backed by:
 - Apache Kafka

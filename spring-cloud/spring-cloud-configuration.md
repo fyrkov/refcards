@@ -1,4 +1,4 @@
-###Spring cloud configuration server
+### Spring cloud configuration server
 
 - segregates configuration from codebase
 - allows environment specific properties
