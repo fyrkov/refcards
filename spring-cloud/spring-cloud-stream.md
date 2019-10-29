@@ -8,9 +8,9 @@ Spring cloud stream is a messaging framework that can be backed by:
 ![example_schema](spring-cloud-files/spring-cloud-stream-1.gif)
 
 **Source** - publishes a message to channel\
-**Channel** - abstraction over a queue, holds messages. Bind to a queue in configs\
+**Channel** - abstraction over a queue, holds messages. Binds to a queue in configs\
 **Binder** - talks to a specific messaging platform, wrapping specific libraries and APIs\
-**Sink** - listens to a channle for incoming messages and de-serializes them.
+**Sink** - listens to a channel for incoming messages and de-serializes them.
 
 ### Usage
 
