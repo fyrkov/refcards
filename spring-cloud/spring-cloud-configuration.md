@@ -7,6 +7,20 @@
 - can also have a filesystem based repository
 - provides encryption mechanism for sensitive properties
 
+Conguration server can pull configs from different types of sources, but mostly used with git.\
+In this case conguration server works like a git client that can make a `git pull` from a remote git repo.\
+By default server clones remote when configs are first requested.\
+Server can be configured to clone the remote at startup with `cloneOnStart: true`.
+
+From clients POV conguration server provides REST API endpoints
+that follow the pattern `/{application}/{profile}[/{label}]`\
+where `label` refers to a git label (commit id, branch name, or tag).\
+Example of fetching certain configs:
+```
+curl http://localhost:10000/v1/config/eagle-employee-service/ecs-eagle-prod/master | jq . | grep -i --color envname
+
+```
+
 ### Usage
 
 1. To start a config server add a dependency, e.g.
