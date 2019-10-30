@@ -16,6 +16,7 @@ From clients POV conguration server provides REST API endpoints
 that follow the pattern\
 `/{application}/{profile}[/{label}]`\
 where `label` refers to a git label (commit id, branch name, or tag).\
+
 Example of fetching certain configs:
 ```
 curl http://localhost:10000/v1/config/eagle-employee-service/ecs-eagle-prod/master | jq . | grep -i --color envname
