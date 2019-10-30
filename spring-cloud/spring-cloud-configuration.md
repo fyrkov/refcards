@@ -20,7 +20,7 @@ Example of fetching certain configs:
 curl http://localhost:10000/v1/config/eagle-employee-service/ecs-eagle-prod/master | jq . | grep -i --color envname
 
 ```
-Conguration server can be synced with remote repo by:
+Configuration server can be synced with remote repo by:
 - Creating a GitHub webhook that will push notifications to `POST /monitor` endpoint
 - Setting `spring.cloud.config.server.git.refreshRate` to poll
 
