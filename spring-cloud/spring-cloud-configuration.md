@@ -13,7 +13,8 @@ By default server clones remote when configs are first requested.\
 Server can be configured to clone the remote at startup with `cloneOnStart: true`.
 
 From clients POV conguration server provides REST API endpoints
-that follow the pattern `/{application}/{profile}[/{label}]`\
+that follow the pattern\
+`/{application}/{profile}[/{label}]`\
 where `label` refers to a git label (commit id, branch name, or tag).\
 Example of fetching certain configs:
 ```
