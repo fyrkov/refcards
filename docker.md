@@ -12,7 +12,7 @@ sudo service docker start
 
 Add current user to docker group to avoid using sudo each time
 ```
-sudo usermod -aG docker ec2-user
+sudo usermod -aG docker {user}
 ```
 
 Docker container official hub is hub.docker.com.\
