@@ -82,7 +82,7 @@ docker run -p 8080:8080 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 :exclamation: Do not confuse *volumes* and *bind mounts* - there are slightly different.\
 Bind mounts are not recommended.\
 Bind mounts look like `-v {path}:{path}`, volumes like `{name}:{path}`\
-:ecxlamation: new syntax for volumes is `--mount`
+:exclamation: new syntax for volumes is `--mount`
 ```
 docker volume ls
 ```
