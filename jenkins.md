@@ -16,3 +16,14 @@ Each job stores builds in `~/.jenkins/workspace/{jobName}/`.
 It is possible to specify JDK version in  `Manage Jenkins > Global Tool Configuration > JDK`
 
 Jenkins job is stored as `config.xml` inside `.jenkins/jobs/{jobName}`
+
+#### Pipeline job
+Unlike freestyle job pipeline job is based on groovy scripts and is split in stages.
+
+Build can run on agents/slaves, not only master.
+
+
+Useful:
+- `Pipeline Syntax > Snippet Generator`
+- `Pipeline Syntax > Global Variable Reference`
+
