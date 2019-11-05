@@ -75,7 +75,8 @@ docker image build -t "name_of_the_image" .
 
 #### Volumes
 Volume allows persisting data after container stop/restart.\
-Run a container with a volume attached and named `jenkins_home` 
+Run a container with a volume attached and named `jenkins_home`.\
+If it is non-existing it will be created.
 ```
 docker run -p 8080:8080 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 ```
@@ -83,6 +84,8 @@ docker run -p 8080:8080 -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
 Bind mounts are not recommended.\
 Bind mounts look like `-v {path}:{path}`, volumes like `{name}:{path}`\
 :exclamation: new syntax for volumes is `--mount`
+
+List all created volumes:
 ```
 docker volume ls
 ```
