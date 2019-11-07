@@ -22,8 +22,14 @@ Unlike freestyle job pipeline job is based on groovy scripts and is split in sta
 
 Build can run on agents/slaves, not only master.
 
-
 Useful:
 - `Pipeline Syntax > Snippet Generator`
 - `Pipeline Syntax > Global Variable Reference`
 - List of pipeline compatible plugins: https://github.com/jenkinsci/pipeline-plugin/blob/master/COMPATIBILITY.md
+
+Running steps in parallel on different nodes is possible with cloning the workspace with
+```
+stash name: `everything`
+    excludes: 'test-results/**'
+    includes: '**'
+```
