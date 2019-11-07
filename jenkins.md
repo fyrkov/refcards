@@ -33,3 +33,9 @@ stash name: `everything`
     excludes: 'test-results/**'
     includes: '**'
 ```
+and then 
+```
+unstash 'everything'
+```
+
+*Blue Ocean* is an experimantal UI wich is good for parallel pipelines
