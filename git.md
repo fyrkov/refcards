@@ -155,6 +155,11 @@ git stash list
 git stash apply <number_of_stash>
 ```
 
+### Git ~ and ^ references
+`ref~1` means the commit's first parent.\
+`ref~2` means the commit's first parent's first parent.\
+`ref^2` means the commit's second parent (remember, commits can have two parents when they are a merge).
+
 Check the list of tracked files:
 ``` 
 git ls-tree -r master --name-only
