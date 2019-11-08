@@ -9,11 +9,22 @@ git revert HEAD                # history-safe undoing, creates reverse commit
 
 
 
-How to squash all commits in your feature branch into 1 before pushing?
+How to squash all commits in your feature branch into one\
+1.
 ```
 git reset --soft origin/master # will put all modifications to stage
 git add .
 git commit
+```
+2.
+```
+git rebase -i HEAD~3 # interactive rebase allows squashing and renaming comments
+```
+
+How to squash commits in git after they have been pushed?
+```
+git rebase -i origin/master~4 master # squash 4 commits locally
+git push origin +master # force push it to master
 ```
 
 Check current branch and modifications:
@@ -123,12 +134,6 @@ git rebase <branch1>
 Checkout a remote branch:
 ```
 git checkout -b test <name of remote>/test
-```
-
-How to squash commits in git after they have been pushed?
-```
-git rebase -i origin/master~4 master # squash 4 commits locally
-git push origin +master # force push it to master
 ```
 
 Setting git editor, e.g. for vs code:
