@@ -26,6 +26,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 ```
 
+## General OAuth2 info
+
+https://oauth.net/articles/authentication/#common-pitfalls
+
 ### JWT structure
 Decode JWT consists of 3 parts: header, payload and signature.\
 Payload = claims. It can have some pre-defined claims (e.g. below) or custom ones.
@@ -43,3 +47,4 @@ Payload:
   "iat": 1516239022, //issued at time
   "exp": 1516239022 //expiration time
 }
+
