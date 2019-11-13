@@ -4,3 +4,4 @@ Refcards:
 - [Spring Boot](./spring-boot.md)
 - [Spring Web](./spring-web.md)
 - [Spring Security](./spring-security.md)
+- [Spring Cloud](./spring-cloud/spring-cloud.md)

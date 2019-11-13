@@ -1,6 +1,5 @@
 Refcards:
 - [Spring](./spring-refcards/README.md)
-- [Spring Cloud](./spring-cloud/spring-cloud.md)
 - [GIT](./git.md)
 - [Maven](./maven.md)
 - [Linux](./linux.md)
