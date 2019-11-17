@@ -10,7 +10,7 @@ Key components:
 
 ![request_security_flow](Spring_Security_files/request_security_flow.png)
 
-![filter_chainms](Spring_Security_files/filter_chains.png)
+![filter_chains](Spring_Security_files/filter_chains.png)
 
 #### Filter
 Filter contains of 3 methods:
@@ -33,13 +33,35 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 OAuth2 - **authorization** framework. It describes several "delegated authorization" flows.
 
+OAuth2/Oidc terms:
+- Resource server - software that holds resource. Resource server trusts Authorization server, i.e. knows how to validate tokens.
+- Authorization server - sowftware that can issue limited access tokens
+- Client - an application which is getting authorized with limited access. Clients can be trusted and __untrusted__.
+- Resource owner - human who owns data on Resource server. He uses a Client that need to access the resource
+- Subject - in claims is an identifier of the resource owner
+- Principal - subset of subject attributes that a user has approved to provide to the client by the identity server (On consent screen)
+
+Because OAuth2 supports work with different types of clients it has several auth flows:
+- Auth code flow initiated with `response_type=code`
+
+![auth_code_flow](Spring_Security_files/auth_code_flow.png)
+- Implicit flow - for local/native clients initiated with `response_type=token`.\
+An `access_token` is returned directly as URL hash-fragments attached to the callback URI.\
+No authorization `code` is used. The `access_token` is exposed to the browser and local OS.\
+A `refresh_token` typically is not returned because cient authentication does not happen (no `client_secret` used) and there is no way to control the access to the `refresh_token`.
+
+![implicit_flow](Spring_Security_files/implicit_flow.png)
+- Resource owner password flow - for trusted clients. No user interaction
+- Client credential flow. No user interaction
+
 OpenID Connect - **authentication** protocol based on OAuth2.\
 It adds `id_token` (with identity details) to `access_token` response thus eliminating necessity to make antoher call to fetch profile info (identity details).\
-It also ensures authentication process *happens right now*, at the moment of exchanging `access_code`.\
-It also standardize some flow details, like name of claims and `/userinfo` endpoint.
+It also ensures authentication process *happens right now*, at the moment of exchanging of the `access_code`.\
+It also standardize some flow details, like name of claims and `/userinfo` endpoint.\
+It is initiated with `scope=openid`.
 
 
-OpenID Connect code flow example steps:
+OpenID Connect code flow with Google example steps:
 - Unauthenticated user visits service provider (SP) site
 - Service offers him to authenticate with identity provider (IP)
 - If user agrees, server redirects user to IP authorization endpoint, e.g. 
@@ -92,6 +114,7 @@ https://oauth.net/articles/authentication/#common-pitfalls
 
 ### JWT structure
 Decode JWT consists of 3 parts: header, payload and signature.\
+Parts are divided by period, encoded with Base64 and signed (symmetric or assymetric way).\
 Payload = claims. It can have some pre-defined claims (e.g. below) or custom ones.
 ```
 Header
@@ -102,9 +125,9 @@ Header
 Payload:
 {
   "iss": "1234567890", 
-  "sub": "user",
-  "aud": "service1.com", //intended recipient
-  "iat": 1516239022, //issued at time
-  "exp": 1516239022 //expiration time
+  "sub": "user", // identifiesr of an entity who requested token
+  "aud": "service1.com", // intended recipient
+  "iat": 1516239022, // issued at time
+  "exp": 1516239022 // expiration time
 }
 
