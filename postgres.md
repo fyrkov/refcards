@@ -17,6 +17,11 @@ order by
     indexname;
 ```
 
+Create index over coulumn with function applied
+```
+create index if not exists users_work_email_uppercase_key on permission.users (upper(work_email));
+```
+
 Show how much space does index take
 ```
 select pg_size_pretty(pg_relation_size('permission.users_work_email_key'));
