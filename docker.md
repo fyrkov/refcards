@@ -73,6 +73,11 @@ Build an image from a dockerfile located in .
 docker image build -t "name_of_the_image" .
 ```
 
+Show resources consupmtion by a container:
+```
+docker stats <container_id>
+```
+
 #### Volumes
 Volume allows persisting data after container stop/restart.\
 Run a container with a volume attached and named `jenkins_home`.\
