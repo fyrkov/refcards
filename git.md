@@ -6,8 +6,10 @@ git reset --soft HEAD~1        # undo the commit but keep changes and index (fil
 git revert HEAD                # history-safe undoing, creates reverse commit
 ```
 
-
-
+How to undo one specific commit from a history?
+```
+git revert <rev>
+```
 
 How to squash all commits in your feature branch into one\
 1.
