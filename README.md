@@ -1,5 +1,5 @@
 Refcards:
-- [Spring](./spring-refcards/README.md)
+- [Java/Spring](./spring-refcards/README.md)
 - [GIT](./git.md)
 - [Maven](./maven.md)
 - [Linux](./linux.md)
