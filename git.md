@@ -187,10 +187,12 @@ git push --set-upstream origin new_branch   # Push the new branch, set local bra
 Use git bisect to find the first bad commit in an automated way:
 ```
 $git bisect start
-$git bisect bad //marking current HEAD as broken 
-$git checkout HEAD~10 //going 10 commits back. It was not broken at that time
+$git bisect bad
+$git checkout HEAD~10
 $git bisect good
-$git bisect run mvn -Dtest=wkda.api.ElasticSearchIndexUserServiceTest#testIndexUsers test //running particaular test
+# Running a particular test. 
+# It will tell git automatically which commit is good or bad.
+$git bisect run mvn -Dtest=wkda.api.ElasticSearchIndexUserServiceTest#testIndexUsers test
 
 ba0a578c9168fb0da29627fb9c695e6a068646dd is the first bad commit
 commit ba0a578c9168fb0da29627fb9c695e6a068646dd
