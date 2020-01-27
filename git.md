@@ -184,7 +184,18 @@ git push origin :old_branch                 # Delete the old branch
 git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
 ```
 
-LINKS:
-- https://learngitbranching.js.org/
-- https://git-scm.com/book/ru/v2
-- https://services.github.com/on-demand/downloads/github-git-cheat-sheet/
+Use git bisect to find the first bad commit in an automated way:
+```
+$git bisect start
+$git bisect bad //marking current HEAD as broken 
+$git checkout HEAD~10 //going 10 commits back. It was not broken at that time
+$git bisect good
+$git bisect run mvn -Dtest=wkda.api.ElasticSearchIndexUserServiceTest#testIndexUsers test //running particaular test
+
+ba0a578c9168fb0da29627fb9c695e6a068646dd is the first bad commit
+commit ba0a578c9168fb0da29627fb9c695e6a068646dd
+Author: ...
+Date:   Mon Dec 16 18:01:26 2019 +0100
+
+$git bisect reset
+```
