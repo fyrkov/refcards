@@ -9,6 +9,7 @@ git revert HEAD                # history-safe undoing, creates reverse commit
 How to undo one specific commit from a history?
 ```
 git revert -n <rev>
+git revert --continue # after conflicts are resolved (if any occurred)
 ```
 `-n` option to revert in working tree only, without a commit
 
