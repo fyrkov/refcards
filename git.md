@@ -8,8 +8,9 @@ git revert HEAD                # history-safe undoing, creates reverse commit
 
 How to undo one specific commit from a history?
 ```
-git revert <rev>
+git revert -n <rev>
 ```
+`-n` option to revert in working tree only, without a commit
 
 How to squash all commits in your feature branch into one\
 1.
