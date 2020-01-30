@@ -29,5 +29,9 @@ Show dependency tree:
 ```
 mvn dependency:tree
 
+// shows all resolved versions
 mvn dependency:tree -Dverbose -Dincludes=[groupId]:[artifactId]:[type]:[version]
+
+// shows effectively resolved version
+mvn dependency:tree -Dincludes=org.springframework.sync
 ```
