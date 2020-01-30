@@ -24,3 +24,10 @@ Install skipping tests:\
 
 This will skip also compiling tests:\
 `mvn install -Dmaven.test.skip=true`
+
+Show dependency tree:
+```
+mvn dependency:tree
+
+mvn dependency:tree -Dverbose -Dincludes=[groupId]:[artifactId]:[type]:[version]
+```
