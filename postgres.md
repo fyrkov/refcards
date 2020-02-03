@@ -33,3 +33,16 @@ insert into permission.users (id, work_email)
 select '02f7af3c-f4be-4498-9967-da2d70907a2b', 'scheduled.update@auto1.com'
 on conflict do nothing;
 ```
+
+### Hierarchical query
+```
+with recursive subdepartments as (
+    select id, name, parent_id, status, team, created_by, created_on, last_modified_by, modified_on
+    from employee.departments
+    where id = '452f8795-140b-436d-8bf8-665d13c44172'
+    union
+    select e.id, e.name, e.parent_id, e.status, e.team, e.created_by, e.created_on, e.last_modified_by, e.modified_on
+    from employee.departments e
+    inner join subdepartments sub on sub.id = e.parent_id
+) select * from subdepartments;
+```
