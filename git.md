@@ -185,6 +185,13 @@ git branch -m old_branch new_branch         # Rename branch locally
 git push origin :old_branch                 # Delete the old branch    
 git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
 ```
+
+### Cleaning up
+```
+ git branch | grep "EAG-2" | xargs git branch -D
+```
+
+
 ### Git bisect
 Use git bisect to find the first bad commit in an automated way:
 ```
