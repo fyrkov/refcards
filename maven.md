@@ -10,11 +10,28 @@ Maven phases:
 - install - install the package into the local repository, for use as a dependency in other projects locally
 - deploy - done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects
 
-Download dependencies without doing anything else:\
-`mvn dependency:resolve`
+Download dependencies without doing anything else, `-U`=force update:\
+`mvn dependency:resolve -U`
 
 To download a single dependency:\
 `mvn dependency:get -Dartifact=groupId:artifactId:version`
 
 To run a single test case:\
 `mvn -Dtest=<TestClass>#<TestMethod> test`
+
+Install skipping tests:\
+`mvn install -DskipTests`
+
+This will skip also compiling tests:\
+`mvn install -Dmaven.test.skip=true`
+
+Show dependency tree:
+```
+mvn dependency:tree
+
+// shows all resolved versions
+mvn dependency:tree -Dverbose -Dincludes=[groupId]:[artifactId]:[type]:[version]
+
+// shows effectively resolved version
+mvn dependency:tree -Dincludes=org.springframework.sync
+```

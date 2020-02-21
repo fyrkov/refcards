@@ -1,3 +1,35 @@
+How to undo the last commit?
+```
+git reset --hard HEAD~1        # undo and destory all changes
+git reset --mixed HEAD~1       # undo the commit but keep changes (files unstaged, requires git add .)
+git reset --soft HEAD~1        # undo the commit but keep changes and index (files staged)
+git revert HEAD                # history-safe undoing, creates reverse commit
+```
+
+How to undo one specific commit from a history?
+```
+git revert -n <rev>
+git revert --continue # after conflicts are resolved (if any occurred)
+```
+`-n` option to revert in working tree only, without a commit
+
+How to squash all commits in your feature branch into one\
+1.
+```
+git reset --soft origin/master # will put all modifications to stage
+git add .
+git commit
+```
+2.
+```
+git rebase -i HEAD~3 # interactive rebase allows squashing and renaming comments
+```
+
+How to squash commits in git after they have been pushed?
+```
+git rebase -i origin/master~4 master # squash 4 commits locally
+git push origin +master # force push it to master
+```
 
 Check current branch and modifications:
 ```
@@ -42,7 +74,8 @@ git commit -a //add all unstaged files
 
 History:
 ```
-git log --summary
+git log // full log records as hash + author + date + message
+git log --oneline //show commits as short hash + message
 ```
 
 Adding remote repo and naming it origin:
@@ -97,9 +130,24 @@ Merging branch1 into current branch:
 git merge <branch1>
 ```
 
-Rebasing current branch onto top of the <branch1>. Makes consequent history. Changes in current branch and stays in it
+Rebasing current branch onto top of the `branch1`. Makes consequent history. Changes in current branch and stays in it
 ```
 git rebase <branch1>
+```
+ 
+Checkout a remote branch:
+```
+git checkout -b test <name of remote>/test
+```
+
+Setting git editor, e.g. for vs code:
+```
+git config --global core.editor "code --wait"
+```
+
+Open git config in git editor:
+```
+git config --global -e
 ```
 
 ### Git stash
@@ -110,6 +158,11 @@ git stash save "name1"
 git stash list
 git stash apply <number_of_stash>
 ```
+
+### Git ~ and ^ references
+`ref~1` means the commit's first parent.\
+`ref~2` means the commit's first parent's first parent.\
+`ref^2` means the commit's second parent (remember, commits can have two parents when they are a merge).
 
 Check the list of tracked files:
 ``` 
@@ -133,7 +186,27 @@ git push origin :old_branch                 # Delete the old branch
 git push --set-upstream origin new_branch   # Push the new branch, set local branch to track the new remote
 ```
 
-LINKS:
-- https://learngitbranching.js.org/
-- https://git-scm.com/book/ru/v2
-- https://services.github.com/on-demand/downloads/github-git-cheat-sheet/
+### Cleaning up
+```
+ git branch | grep "EAG-2" | xargs git branch -D
+```
+
+
+### Git bisect
+Use git bisect to find the first bad commit in an automated way:
+```
+$git bisect start
+$git bisect bad
+$git checkout HEAD~10
+$git bisect good
+# Running a particular test. 
+# It will tell git automatically which commit is good or bad.
+$git bisect run mvn -Dtest=wkda.api.ElasticSearchIndexUserServiceTest#testIndexUsers test
+
+ba0a578c9168fb0da29627fb9c695e6a068646dd is the first bad commit
+commit ba0a578c9168fb0da29627fb9c695e6a068646dd
+Author: ...
+Date:   Mon Dec 16 18:01:26 2019 +0100
+
+$git bisect reset
+```

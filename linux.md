@@ -103,6 +103,8 @@ If the target is an existing dir, the file or dir is copied into the target:\
 `cp file1 dir`\
 Copy the `dir1` directory structure to a new `dir2`:\
 `cp -r dir1 dir2`
+Copy from folder to USB with preserving permissions and other files attributes in verbose mode:\
+`sudo cp -av /home/my_home /media/backup/my_home`
 
 Move `file1` into the `test` directory:\
 `mv file1 test`\
@@ -115,6 +117,8 @@ Remove a regular file:\
 `rm file4`\
 Remove non-empty directory `dir1` and everything within it:\
 `rm -r again`
+Remove all files in the current directory with verbose output:\
+`rm -rfv *`
 
 Navigation hints:
 - `cd` leads to home dir (or `~`)
@@ -179,6 +183,22 @@ ls -l file.txt
 - hardlink references to the same **Inode** value as the original file.\
 Hardlinks remain linked even if the original or linked files are moved throughout the file system or deleted
 - softlink is like a shortcut in Windows
+
+**Filesystem structure description**
+- `/` root dir
+- `/boot` contains files that is used by boot loader (grub.cfg)
+- `/dev` system devices, e.g. disks, cdrom, flashdrive, keyboard
+- `/etc` config files 
+- `/usr/bin` common binaries meant to be accessed by locally logged in users
+- `/bin` basic binaries which are required at any run level 
+- `/opt` optional apps which are not part of OS
+- `/proc` running processes (only exist in memory)
+- `/lib` C libraries
+- `/tmp` dir for temporary files
+- `/home` user dirs
+- `/var` system logs
+- `/mnt` mounted external filesystem
+- `/media` for cdrom mounts
 
 **Partitions managment**
 
@@ -248,8 +268,6 @@ How to check current FS type?
 ```
 df -HT # T for list current FS type
 ```
-
-
 
 ### Users Management
 
@@ -495,27 +513,22 @@ Reassemble split files *file1aa, file1ab* ... with `cat`:\
 
 ### Package managers
 
-There are 2 main branches of package management: DEB (`apt`) and RPM (`yum`).
+There are 2 main branches of package management: DEB (`apt`) and RPM (`yum`).\
+`apt` = `apt-get` + `apt-cache`
 
-`apt-get update` updates the list of available packages and their versions, but it does not install or upgrade any packages
-
-`apt-get upgrade` actually installs newer versions of the packages
-
-`apt-get dist-upgrade`  will upgrade to a new kernel
-
-`apt-get autoremove` to remove packages that are now no longer needed
-
-`apt-get autoclean` clears out the local repository of retrieved package files
-
-Search for programs in package manager:\
-`apt search torrent client` - 1st option\
-`apt-cache search jdk` - 2nd option (different output)
-
-List all installed packages:\
-`apt list --installed`
-
-Remove packages:\
-`sudo apt-get remove <package>`
+|apt|apt-get|What it does?|
+|--------|---|---|
+|`apt install`	|`apt-get install`	|Installs a package|
+|`apt remove`	|`apt-get remove`	|Removes a package|
+|`apt purge`	|`apt-get purge`	|Removes package with configuration|
+|`apt update`	|`apt-get update`	|Updates the list of available packages and their versions, but it does not install or upgrade any packages|
+|`apt upgrade`	|`apt-get upgrade`	|Upgrades all upgradable packages|
+|`apt autoremove`	|`apt-get autoremove`	|Removes packages that are now no longer needed|
+|`apt full-upgrade`	|`apt-get dist-upgrade`	|Upgrades packages with auto-handling of dependencies|
+|`apt search`	|`apt-cache search`	|Searches for the program|
+|`apt show`	|`apt-cache show`	|Shows package details|
+||`apt-get autoclean`|clears out the local repository of retrieved package files|
+|`apt list`||Lists packages with criteria (`--installed`, `--upgradable` etc)|
 
 Using multiple java distributions:\
 `sudo update-alternatives --config java`
@@ -721,3 +734,5 @@ Add alias:\
 `alias grep='grep --color'`
 Apply changes:\
 `source ~/.bashrc`
+
+### Filesystem descripton
