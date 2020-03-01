@@ -27,3 +27,15 @@ Waiting <- `Object.wait()` or `Thread.sleep()`
 - `CountDownLatch` - one-time, not re-usable. For waiting for some event
 - `Semaphore` - to control access to resources. Has a set of N permits. Permits are not associated with threads, i.e. `acquire()` can be in one thread and `release()` can be called from another. In simplest (N=1) case works like non-reentrant `mutex`.
 - `Barrier` - allows syncing a fixed number of threads at some point. Works like "we meet at 6PM in the mall and then all go..." Latches are for waiting for events, barriers for waiting other threads.
+
+#### Executors
+Executor - primary abstraction for decoupling task submission and task execution.\
+`ExecutorService extends Executor = Thread Pool + TaskQueue`.\
+Thread pool types:
+- `Executors.newFixedThreadPool` - adds up to N worker threads, does not shrink, adds new thread if one dies
+- `Executors.newCachedThreadPool` - dynamically adds/removes worker threads, pool has no bounds
+- `Executors.newSingleThreadPool` - re-creates a worker thread if one dies
+- `Executors.newScheduledThreadPool` - for periodic tasks
+
+`CompletionService = Executor + BlockingQueue`.
+
