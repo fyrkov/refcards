@@ -29,13 +29,19 @@ Waiting <- `Object.wait()` or `Thread.sleep()`
 - `Barrier` - allows syncing a fixed number of threads at some point. Works like "we meet at 6PM in the mall and then all go..." Latches are for waiting for events, barriers for waiting other threads.
 
 #### Executors
-Executor - primary abstraction for decoupling task submission and task execution.\
-`ExecutorService extends Executor = Thread Pool + TaskQueue`.\
-Thread pool types:
+Executor - primary abstraction for decoupling task submission and task execution (unlike `Thread`).
+
+Higher level abstraction `ExecutorService` is an extension of Executor with: 
+- `submit()` -> `Executor.execute()` but accepts also `Callable`
+- `submit()` returns a Future
+- can `shutDown()` the thread pool
+
+`ThreadPoolExecutor` is an implementation of `ExecutorService` backed with a ThreadPool.\
+`Executors` utility class provides factory methods for `ThreadPoolExecutors` by ThreadPool types:
 - `Executors.newFixedThreadPool` - adds up to N worker threads, does not shrink, adds new thread if one dies
 - `Executors.newCachedThreadPool` - dynamically adds/removes worker threads, pool has no bounds
 - `Executors.newSingleThreadPool` - re-creates a worker thread if one dies
 - `Executors.newScheduledThreadPool` - for periodic tasks
 
-`CompletionService = Executor + BlockingQueue`.
+`CompletionService` = `ExecutorService + BlockingQueue`.
 
