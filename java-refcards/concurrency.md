@@ -45,3 +45,7 @@ Higher level abstraction `ExecutorService` is an extension of Executor with:
 
 `CompletionService` = `ExecutorService + BlockingQueue`.
 
+
+#### CompletableFuture
+
+![CompletableFuture_methods](Concurrency/completableFuture.png)
