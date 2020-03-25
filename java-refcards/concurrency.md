@@ -3,7 +3,7 @@ Blocked <- thread is waiting to acquire the monitor, i.e. entering `synchronized
 Waiting <- `Object.wait()` or `Thread.sleep()`
 
 #### On interruption
-- There is as `interrupted` status
+- There is an `interrupted` status
 - If a method is declared throwing `InterruptedException`
   - it is a blockng method 
   - supports stopping blocking, i.e. leaving `BLOCKED|WAITING` state.
