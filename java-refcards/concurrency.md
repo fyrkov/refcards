@@ -1,11 +1,11 @@
 #### BLOCKED vs WAITING
-Blocked <- thread is waiting to acquire the monitor, i.e. entering `synchronized`\
-Waiting <- `Object.wait()` or `Thread.sleep()`
+`BLOCKED` <- thread is waiting to acquire the monitor, i.e. entering `synchronized`\
+`WAITING` <- `Object.wait()` or `Thread.sleep()`
 
 #### On interruption
 - There is an `interrupted` status
 - If a method is declared throwing `InterruptedException`
-  - it is a blockng method 
+  - it is a blocking method 
   - supports stopping blocking, i.e. leaving `BLOCKED|WAITING` state.
 - A thread is interrupted by some other thread through a call to `Thread.interrupt()`
   - In general, `interrupt()` merely sets the thread's `interrupted` status. The code running in that thread supposed to poll the interrupted status and handle it appropriately, usually throwing `InterruptedException` in the end.
