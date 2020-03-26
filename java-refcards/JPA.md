@@ -431,8 +431,23 @@ Mind also `@Modifying` here that which marks method as modifying and is only rel
 
 #### Transactional settings
 
-TBD
-e.g. Propagations, Isolations
+`org.springframework.transaction.annotation.@Transactional` can be configured with propagation behaviors and isolation levels.
+
+Propagations
+- `REQUIRED` - supports current tx if found or creates a new one
+- `REQUIRES_NEW` - always creates a new one and suspends current if found
+- `SUPPORTS` - supports current tx if found, does not create a new one
+- `MANDATORY` - supports current tx if found or throws ex
+- `NOT_SUPPORTED` - execute non-tx and suspends current if found
+- `NEVER` - execute non-tx and or throws ex if found
+- `NESTED` - execute in nested tx if found or creates a new one
+
+Isolations
+- `DEFAULT` - use the default isolation level of the underlying DB
+- `READ_UNCOMMITTED` - dirty reads, non-repeatable reads, lost updates and phantom reads can occur
+- `READ_COMMITTED` - non-repeatable reads, lost updates and phantom reads can occur
+- `REPEATABLE_READ` - phantom reads can occur
+- `SERIALIZABLE` - dirty reads, non-repeatable reads, lost updates and phantom reads are prevented.
 #### Manual tx management
 
 TBD
