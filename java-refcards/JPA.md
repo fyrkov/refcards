@@ -448,6 +448,42 @@ Isolations
 - `READ_COMMITTED` - non-repeatable reads, lost updates and phantom reads can occur
 - `REPEATABLE_READ` - phantom reads can occur
 - `SERIALIZABLE` - dirty reads, non-repeatable reads, lost updates and phantom reads are prevented.
+
+
+#### JPA `@Version` annotation
+`@Version` annotation is used to enable multi version concurrency control (MVCC) for an entity. 
+
+The most significant benefit is that it can prevent the "lost update" anomaly, therefore ensuring that data integrity is not compromised.
+
+```
+@Entity(name = "Product")
+@Table(name = "product")
+public class Product {
+ 
+    @Id
+    private Long id;
+ 
+    @Version
+    private int version;
+}
+```
+
+Hibernate uses the version property in the `WHERE` clause of the executing UPDATE statement:
+```
+UPDATE
+    product
+SET
+    quantity = 5,
+    version = 1
+WHERE
+    id = 1 AND
+    version = 0
+```
+
+If collision occurs, JPA will throw `OptimisticLockException`.
+
+:exclamation: `@Version` can also be configured to use pessimistic locking with `LockModeType`
+
 #### Manual tx management
 
 TBD
