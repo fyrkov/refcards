@@ -42,3 +42,10 @@ single.subscribe();
   
 assertTrue(result[0].equals("Hello"))
 ```
+#### Hot vs Cold Observables
+Cold Observable is providing items in a lazy way.
+The Observer is taking elements only when it is ready to process that item, and items do not need to be buffered in an Observable because they are requested in a pull fashion.
+
+A hot Observable begins generating items and emits them immediately when they are created. 
+Hot Observable emits items at its own pace, and it is up to its observers to keep up.
+When the Observer is not able to consume items as quickly as they are produced by an Observable they need to be buffered or handled in some other way, as they will fill up the memory, finally causing `OutOfMemoryException`.
