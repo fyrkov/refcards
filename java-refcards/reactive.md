@@ -44,8 +44,70 @@ assertTrue(result[0].equals("Hello"))
 ```
 #### Hot vs Cold Observables
 Cold Observable is providing items in a lazy way.
-The Observer is taking elements only when it is ready to process that item, and items do not need to be buffered in an Observable because they are requested in a pull fashion.
+The Observer is taking elements only when it is ready to process that item, and items do not need to be buffered in an Observable because they are requested in a **pull** fashion.
 
-A hot Observable begins generating items and emits them immediately when they are created. 
+A hot Observable begins generating items and emits them immediately when they are created (**push** model). 
 Hot Observable emits items at its own pace, and it is up to its observers to keep up.
 When the Observer is not able to consume items as quickly as they are produced by an Observable they need to be buffered or handled in some other way, as they will fill up the memory, finally causing `OutOfMemoryException`.
+
+#### Observer methods
+- `onNext` is called each time a new event is published
+- `onCompleted` is called when the sequence of events is complete, indicating that we should not expect any more `onNext` calls
+- `onError` is called when an unhandled exception is thrown during the RxJava framework code or our event handling code
+
+#### Types of observables
+1. `ConnectableObservable` doesn't begin emitting items when it is subscribed to, but only when the `connect()` operator is applied to it.
+2. `Single` emits only one value or an error.
+3. `Subject` is simultaneously two elements, a subscriber and an observable. Subject can observe several observables at one time
+4. `Flowable` - backpressure-aware type of Observable. It makes extra request to pull new events at a required pace.
+
+![Subject](reactive_files/Subject.png)
+
+Types of subjects:
+- `PublishSubject` - does not replay past messages
+```
+PublishSubject<Integer> subject = PublishSubject.create(); 
+subject.subscribe(getFirstObserver()); 
+```
+- `BehaviorSubject` - replays the last message and all future messages
+- `ReplaySubject` - replays all past messages
+- `AsyncSubject` - emits only the las message
+
+#### Dealing with Backpressure
+1. Buffering (default RxJava behavior)
+```
+PublishSubject<Integer> source = PublishSubject.<Integer>create();
+         
+source.buffer(1024)
+  .observeOn(Schedulers.computation())
+  .subscribe(ComputeFunction::compute, Throwable::printStackTrace);
+```
+
+2. Batching
+```
+PublishSubject<Integer> source = PublishSubject.<Integer>create();
+ 
+source.window(500)
+  .observeOn(Schedulers.computation())
+  .subscribe(ComputeFunction::compute, Throwable::printStackTrace);
+```
+
+3. Skipping Elements
+```
+PublishSubject<Integer> source = PublishSubject.<Integer>create();
+ 
+source.sample(100, TimeUnit.MILLISECONDS)
+  .observeOn(Schedulers.computation())
+  .subscribe(ComputeFunction::compute, Throwable::printStackTrace);
+```
+
+4. Dropping 
+```
+Observable.range(1, 1_000_000)
+  .onBackpressureDrop()
+  .observeOn(Schedulers.computation())
+  .doOnNext(ComputeFunction::compute)
+  .subscribe(v -> {}, Throwable::printStackTrace);
+```
+
+And more...
