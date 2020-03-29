@@ -28,3 +28,17 @@ Observable example:
                 .subscribe(toDo -> toJsonResponse(request, response, new ResponseDto(200, toDo)));
     };
 ```
+
+Observable example #2 with callbacks defined for Observable, not for Observer:
+```
+String[] result = {""};
+Single<String> single = Observable.just("Hello")
+  .toSingle()
+  .doOnSuccess(i -> result[0] += i)
+  .doOnError(error -> {
+      throw new RuntimeException(error.getMessage());
+  });
+single.subscribe();
+  
+assertTrue(result[0].equals("Hello"))
+```
