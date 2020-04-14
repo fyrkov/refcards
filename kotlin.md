@@ -114,7 +114,6 @@ for ((index, elemnt) in list.withIndex()) {
 }
 ```
 
-
 #### Ranges and `in` check.
 Ranges can be built from comparable objects.
 - 1..9
@@ -172,7 +171,19 @@ fun List<Int>.sumExt(): Int {
 }
 ```
 
-#### Naullable types
+#### "Static" functions
+Companion objects provide static-similar behavior:
+```
+class MyClass {
+    companion object Factory {
+        fun create(): MyClass = MyClass()
+    }
+}
+...
+val instance = MyClass.create()
+```
+
+#### Nullable types
 There is a compile time check for nullity for standard type declareations.\
 Nullable types are declared with `?`
 ```
