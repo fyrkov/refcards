@@ -500,6 +500,18 @@ window.addMouseListener(
 ```
 
 #### Operator overloading
+Supported for the following symbols:
+- `+`, `-` (for `Comparable`)
+- `>`, `<`, `>=`, `<=`
+-  `*`, `/`, `%`
+- unary operators: `+a`, `++a`, `a++`, `-a`,..., `!a`
+- access by index: `x[i]`
+- equality: `==`
+- referential equality: `===`
+- range creation: `1..100`, `a..f`
+- contains: `in`
+
+Example:
 ```
 val list = listOf(1, 2, 3)
 val newList = list + 2 // for immutable creates a new list
