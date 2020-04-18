@@ -171,7 +171,8 @@ fun List<Int>.sumExt(): Int {
 }
 ```
 
-#### "Static" functions
+#### Companion objects
+"Static" functions.
 Companion objects provide static-similar behavior:
 ```
 class MyClass {
@@ -263,7 +264,57 @@ list.flatMap(fun (e): List<Int> {
 })
 ```
 
-#### Accessors
+#### Constructors
+Primary cotr is a part of class header.
+```
+class Person(firstName: String) { /*...*/ }
+// or 
+class Person constructor(firstName: String) { /*...*/ }
+```
+It can not contain initialization code directly in the body but can in special `init` blocks:
+```
+class InitOrderDemo(name: String) {
+    val firstProperty = "First property: $name".also(::println)
+    
+    init {
+        println("First initializer block that prints ${name}")
+    }
+}
+```
+Declaring properties and initializing them from the primary constructor:
+```
+class Person(val firstName: String, 
+        val lastName: String, 
+        var age: Int) { /*...*/ }
+```
+Declaring secondary constructors prefixed with `constructor`:
+```
+class Person {
+    var children: MutableList<Person> = mutableListOf<Person>();
+    constructor(parent: Person) {
+        parent.children.add(this)
+    }
+}
+```
+
+Inheritance with calling a super class constructor:
+```
+open class Parent(val name: String)
+class Child(name: String) : Parent(name)
+...
+class Child : Parent {
+    constructor(name: String, param: Int) : super(name)
+}
+```
+
+
+#### Properties and Accessors
+Access modifiers:
+- `private` means visible inside this class only (including all its members);
+- `protected` — same as `private` + visible in subclasses too;
+- `internal` — any client inside this module who sees the declaring class sees its `internal` members;
+- `public` — any client who sees the declaring class sees its `public` members.
+
 Property without a field
 ```
 class Rectangle(val height: Int, val width: Int) {
@@ -276,6 +327,16 @@ class Rectangle(val height: Int, val width: Int) {
 ...
 println(rectangle.isSquare)
 ```
+Mutable property
+```
+var i = 0
+val foo: Int
+    get() = i++
+    // or
+    get() {
+        return i++
+    }
+```
 
 Making setter private:
 ```
@@ -285,4 +346,164 @@ class Rectangle() {
     val counter: Int = 0
         private set
 }
+```
+
+Defining proprty in an interface and overriding it in sub-classes
+```
+interface User {
+    val nickname: String
+}
+...
+class FacebookUser(val accId: Int) : User {
+    // Here property is stored in a field
+    override val nickname = getFacebookName(accId)
+}
+...
+class SubscribeUser(val email: String) : User {
+    override val nickname: String
+        // property with custom getter doesn't have the corresponding field
+        get() = email.substringBefore('@')
+}
+```
+Defining an extension property (like an extension function)
+```
+val String.lastIndex: Int
+    get() = this.length - 1
+...
+// mutable ext prop
+val String.lastChar: Char
+    get() = get(length - 1)
+    set(value: Char) {
+        this.setCharAt(length - 1, value)
+    }
+```
+
+Lazy property (initialized only on the first access)
+```
+val lazyVal: String by lazy {
+    println("computed lazyVal")
+    "Hello"
+}
+```
+
+Late initialization property. Initialize the property not in the constructor, but in a specially designated for that purpose method
+```
+class MyClass {
+    lateinit var lateProp: String
+    ...
+    fun init() {
+        lateProp = "value"
+    }
+    ...
+    // without lateinit
+    lateProp?.length
+    // with lateinit
+    // may throw UninitializedPropertyAccessException
+    lateProp.length
+}
+```
+
+#### Enum
+```
+enum class Color(val r: Int, val g: Int, val b: Int) {
+    // mind the semicolon
+    BLUE(0,0,255), ORANGE(255,165,0), RED(255,0,0);
+    fun rgb() = (r * 256 + g) * 256 + b
+}
+```
+
+#### Data class
+Has `equals`, `hashCode`, `copy`, `toString` and some others.
+```
+data class Contract(val name: String, val address: String)
+...
+contract.copy(address = "new address")
+```
+:exclamation: `equals` uses only properties defined in the primary constructor.
+
+#### Sealed class
+```
+interface Expr
+class Num(val value: Int) : Expr()
+class Sum(val left: Expr, val right: Expr) : Expr()
+...
+//  compiler says that 'when' expression is not exhausted if there is no `else` branch
+fun eval(e: Expr): Int = when (e) {
+    is Num -> e.value
+    is Sum -> eval(e.left) + eval(e.right)
+    else -> throw IllegalArgumentExpression()
+}
+```
+`sealed` modifier (applicable for a class) restricts class hierarchy to the set of sub-classes **located in the same file**:
+```
+sealed class Expr
+```
+
+#### Nested and inner classes
+Nested class:
+```
+// java
+static class A {}
+// kotlin
+class A {}
+```
+Inner class:
+```
+// java
+class A {}
+// kotlin
+inner class A {}
+```
+Accessing the outer reference from an inner class:
+```
+class A {
+    inner class B {
+        this@A
+    }
+}
+```
+
+#### Class delegation
+Automatically generates delegate methods with `by` keyword:
+```
+interface Base {
+    fun print()
+}
+
+class BaseImpl(val x: Int) : Base {
+    override fun print() { print(x) }
+}
+
+// Derived implemets Base by delegating to b
+class Derived(b: Base) : Base by b
+
+fun main() {
+    val b = BaseImpl(10)
+    Derived(b).print()
+}
+```
+
+#### Object and object expressions
+Object is a singleton in Kotlin.
+```
+object KSingleton {
+    fun foo() {}
+}
+```
+Object expressions can replace java's anonymous classes. These classes are not singletons.
+```
+window.addMouseListener(
+    object : MouseAdapter() {
+        override fun mCLicked(e: MouseEvent) {}
+    }
+)
+```
+
+#### Operator overloading
+```
+val list = listOf(1, 2, 3)
+val newList = list + 2 // for immutable creates a new list
+...
+val mutableList = mutableListOf(1, 2, 3)
+mutableList += 4 // updates the list
 ```
