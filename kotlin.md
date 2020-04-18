@@ -507,3 +507,14 @@ val newList = list + 2 // for immutable creates a new list
 val mutableList = mutableListOf(1, 2, 3)
 mutableList += 4 // updates the list
 ```
+
+Defining custom operator for `get` and `set` with square brackets:
+```
+class Board {...}
+
+operator fun Board.get(x: Int, y: Int): Char {...}
+operator fun Board.set(x: Int, y: Int, valueL Char): Char {...}
+
+board[1, 2] = 'x'
+
+```
