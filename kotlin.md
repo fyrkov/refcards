@@ -306,6 +306,10 @@ class Child : Parent {
     constructor(name: String, param: Int) : super(name)
 }
 ```
+Another way to call parent constructor `super(width)`:
+```
+class GameBoardImpl<T>(width: Int) : BoardImpl(width), GameBoard<T> {}
+```
 
 
 #### Properties and Accessors

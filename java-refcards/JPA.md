@@ -383,7 +383,7 @@ JPQL supported functions:
 #### 17. @Transactional
 
 `@Transactional` on a method makes all the code in this method be executed in one transaction.
-If an exceptions happens inside this code, then everything is rolled back.
+If an **runtime exceptions** happens inside this code, then everything is rolled back.
 
 Enabling TX annotations support:
 ```java
@@ -410,7 +410,7 @@ Tips:
 - `@EnableTransactionManagement` enables processing of `@Transactional` annotation
 - :exclamation: By default processing is done with "Spring AOP Proxies", i.e. `@Transactional` will work only if a method called as method of some `@Component`, and will not work if is called internally, i.e. from this class where he is defined.
 - :exclamation: Another limitation that comes form the previous one - `@Transactional` method can not be private
-- It is possible to switch the processing of the `@Transactional` annotaions to "AspectJ" mode. This will enable "Byte code weaving" instead of "Spring AOP Proxies" and overvome the limitations 2) and 3)
+- It is possible to switch the processing of the `@Transactional` annotaions to "AspectJ" mode. This will enable "Byte code weaving" instead of "Spring AOP Proxies" and overcome the limitations 2) and 3)
 
 
 By default, CRUD methods on repositories derived from `SimpleJpaRepository` are `@Transactional`.\
