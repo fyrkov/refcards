@@ -171,6 +171,25 @@ fun List<Int>.sumExt(): Int {
 }
 ```
 
+Extension functions extending class `A` can be created only in the class `B`. In the followin example it is a **member extension** and can access all class members.
+```
+class Words {
+    private val list = mutableListOf<String>()
+
+    // can be called then only when `this`
+    // to an instance of Words is available
+    fun String.record(): Words {
+        list.add(this)
+        return this@Words
+    }
+}
+...
+val words = Words()
+with(words) {
+    "one".record()
+}
+```
+
 #### Companion objects
 "Static" functions.
 Companion objects provide static-similar behavior:
@@ -209,16 +228,6 @@ List<Int>?
 `instanceof` = `is`\
 casting = `as` (produce `ClassCastException` if can't cast)
 safe casting = `as?` (produce null if can't cast) 
-
-#### New on lambdas
-`run` function runs the lambda and return it last value:
-```
-// this var will store 42
-val foo1 = run {
-    println("")
-    42
-}
-```
 
 #### New lambdas for collections
 
@@ -532,5 +541,186 @@ operator fun Board.get(x: Int, y: Int): Char {...}
 operator fun Board.set(x: Int, y: Int, valueL Char): Char {...}
 
 board[1, 2] = 'x'
+```
+Defining 
 
+#### Some library `inline` functions
+Normal functions that takes lambdas as an argument require creating an anonymous class that will capture outer scope vars. Inline functions are inlined by the compiler as it's body instead. As a result, there is no performance over head.
+
+Usage example for `inline` - calling a higher order function that accepts a lambda in a loop thus eliminating N allocations of anonymous classes.
+
+1. `run` function runs the lambda and return it last value. Can be called with safe access (unlike `with`)
+```
+val windowOrNull = ...
+windowOrNull?.run {
+    width = 300
+}
+```
+2. `let` for nullable types
+```
+fun getEmail(): Email?
+...
+val email = getEmail()
+if (email != null) senEmailTo(email)
+// Or alternatively
+email?.let {e -> sendEmailTo(e)}
+```
+3. `takeIf` returns the receiver object if it passes the predicate or `null` otherwise. The opposite is `takeUnless`
+```
+issue.takeIf { it.status == FIXED }
+...
+person.patronymicName.takeIfString::isNotEmpty)
+...
+issues.filter {it.status == OPEN }
+    .takeIf(List<Issue>::isNotEmpty)
+    ?.let { println("here are some open issues") }
+```
+4. `repeat`
+```
+repeat(10) {
+    println("Welcome")
+}
+```
+5. `synchronized`
+```
+fun foo(lock: Lock) {
+    synchronized(lock) { println("action") }
+}
+// which is equal to
+fun foo(lock: Lock) {
+    lock.lock()
+    try {}
+        println("action")
+    } finally {
+        lock.unlock()
+    }
+}
+```
+6. `withLock`
+```
+val l: Lock = ...
+l.withLock { ... }
+```
+7. `use` for try with resources
+```
+// java
+try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+    return br.readline();
+}
+// kotlin
+BufferedReader(FileReader(path)).use { br-> return br.readLine()}
+```
+
+8. `with` has `this` as implicit receiver. 
+It calls it's second argument (labmda) on the first argument (receiver) as an extension function:
+```
+inline fun <T, R> with(
+    receiver: T,
+    block; T.() -> R
+): R = receiver.block()
+```
+Example:
+```
+val sb = StringBuilder()
+with (sb) {
+    append("Alphabet")
+    for (c in 'a'..'z') {
+        append(c)
+    }
+    toString()
+}
+```
+
+`with` vs `run`:
+```
+with (x) { ... }
+x.run { ... }
+```
+
+9. `apply` calls the given block with `this` as implicit receiver. `apply` returns the receiver, and not the last lambda value like `run` or `with`
+```
+val mainWindow = windowById["main"]?.apply {
+    width = 300
+} ?: return
+```
+
+10. `also` returns the receiver like `apply` but accepts regular lambda.
+ Lambda with the receiver is really useful when you can omit `this` reference because you only call it's members.  However, there are cases when you pass the receiver is an argument.
+```
+ windowById["main"]?.apply {
+    width = 300
+}?.also {
+    showWindow(it)
+}
+```
+
+|                         | { .. this .. } | { .. it .. } |
+|-------------------------|----------------|--------------|
+| return result of lambda | `with` / `run`     | `let`          |
+| return receiver         | `apply`          | `also`         |
+
+#### Lambda with receiver
+Lambda with receiver is simply a lambda with an implicit `this` inside.
+
+Lambda vs lambda with receiver:
+```
+// regular lambda
+val isEven: (Int) -> Boolean = { it % 2 == 0}
+// lambda with receiver. `Int` is receiver type
+val isOdd: Int.() -> Boolean = { it % 2 == 1}
+...
+// calling regular lambda
+isEven(0)
+// lambda with receiver is called as an extension function
+1.isOdd()
+```
+
+#### Sequences
+Is an analogue of Java `Stream` with lazy computations.
+
+Problem: inline functions defined as extensions on Iterables create intermediate collections:
+```
+val list = listOf(1, 2, -3)
+val maxOddSquare = list
+    .map { it * it } // here new List created
+    .filter { it % 2 == 1 } // here new list created
+    .max()
+```
+`Sequence` performing all steps in a lazy manner (only when a terminal operator is called):
+```
+val maxOddSquare = list
+    .asSequence()
+    .map { it*it }
+    .filter { it % 2 == 1 }
+    .max()
+```
+
+:exclamation: Operations on collections are applied for the whole collection on each step (horizontal evaluation).\
+Operations on sequences are applied per element (vertical evaluation).
+
+Generating a sequence not from Iterable:
+```
+// the sequence is finished when lamda return `null`
+val seq = generateSequence {
+    Random.nextInt(5).takeIf { it > 0 }
+}
+...
+val input = generateSequence {
+    readLine().takeUnless { it == "exit" }
+}
+...
+// generating infinite sequnece (lazy!)
+val input = generateSequence(0) { it + 1 }
+numbers.take(5).toList() // [0, 1, 2, 3, 4]
+```
+
+Using `yield` with `Sequence`
+```
+fun fibonacci(): Sequence<Int> = sequence {
+    var elements = Pair(0, 1)
+    while (true) {
+        yield(elements.first)
+        elements = Pair(elements.second, elements.first + elements.second)
+    }
+}
 ```
