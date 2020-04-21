@@ -724,3 +724,34 @@ fun fibonacci(): Sequence<Int> = sequence {
     }
 }
 ```
+
+#### Unit vs Nothing
+`Nothing` is a sub-type for all types. `Nothing` is applicable for functions that never return.
+```
+fun fail(message: String): Nothing {
+    throw IllegalErgumentException(message)
+}
+...
+fun infLoop(): Nothing {
+    while (true) {...}
+}
+```
+
+Why `Nothing` is necessary and why it is sub type for all types?
+```
+val answer = if (timeHasPassed()) {
+    42
+} else {
+    fail("Not ready")
+}
+
+// answer type is inferred as common supertype of Int and Unit which is Any 
+fun fail(message: String): Unit {
+    throw IllegalErgumentException(message)
+}
+
+// answer type is inferred as common supertype of Int and Nothin which is Int
+fun fail(message: String): Nothing {
+    throw IllegalErgumentException(message)
+}
+```
