@@ -789,3 +789,16 @@ val session = Session()
 session.setDescr(null) // warning
 ```
 It is possible to opt in compilation errors with `-Xjsr305=strict` option.
+
+#### Collections in Kotlin and Java
+```
+hashSetOf(1, 2) // java.util.HashSet
+arrayListf(1, 2) // java.util.ArrayList
+hashMapOf(1, 2) // java.util.HashMap
+```
+
+`kotlin.List` -> `java.util.List`
+`kotlin.MutableList` -> `java.util.List`
+
+:exclamation: `kotlin.List` is read-only but not truly immutable. It just lacks mutating methods. So in fact it is the same ArrayList in both cases:
+`kotlin.List` <- `kotlin.MutableList`(+ mutating methods) <- `java.util.ArrayList` (impl)
