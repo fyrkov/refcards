@@ -755,3 +755,37 @@ fun fail(message: String): Nothing {
     throw IllegalErgumentException(message)
 }
 ```
+
+#### Nullability in Kotlin/Java mix
+Nullable Kotlin types are `@Nullable` in Java.
+Regular Kotlin types are `@NotNull` in Java.
+Different annotations are supported, e.g. `javax.annotation` (JSR-305) or `org.jetbrains` or `lombok`...
+
+Default, non-annotated Java types are 
+treated as **platform types** by Kotlin compiler and look like `String!`.
+
+:exclamation: Kotlin compiler does not prevent NPEs on platform types.
+
+Instead of annotating Java code base with both annotations it is possible to define one annotation as default:
+```
+@javax.annotation.Nonnull
+@TypeQualifierDefault(Element.Type.PARAMETER, ...)
+annotation class MyNonnullByDeafult
+...
+package-info.java
+@MyNonnullByDefault
+package mypackage
+```
+By default Kotlin compiler interprets like warnings following situation:
+```
+// Java
+public class Session {
+    @Nonnull
+    public void setDescr(String s) {}
+}
+...
+// Kotlin
+val session = Session()
+session.setDescr(null) // warning
+```
+It is possible to opt in compilation errors with `-Xjsr305=strict` option.
