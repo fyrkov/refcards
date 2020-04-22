@@ -801,4 +801,8 @@ hashMapOf(1, 2) // java.util.HashMap
 `kotlin.MutableList` -> `java.util.List`
 
 :exclamation: `kotlin.List` is read-only but not truly immutable. It just lacks mutating methods. So in fact it is the same ArrayList in both cases:
-`kotlin.List` <- `kotlin.MutableList`(+ mutating methods) <- `java.util.ArrayList` (impl)
+`kotlin.List` 
+    ↑
+`kotlin.MutableList`(+ mutating methods)
+    ↑
+`java.util.ArrayList` (impl)
