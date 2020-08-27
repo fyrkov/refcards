@@ -4,6 +4,7 @@ Refcards:
 - [Spring](./spring-refcards/README.md)
 - [GIT](./git.md)
 - [Maven](./maven.md)
+- [Gradle](./gradle.md)
 - [Linux](./linux.md)
 - [Linux networking](./linux-networking.md)
 - [SSH_how_to](./SSH_how_to.md)
