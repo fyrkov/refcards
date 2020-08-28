@@ -24,7 +24,7 @@ Using the dependency insight report for a given dependency
 gradle -q dependencyInsight --dependency commons-codec --configuration scm
 ```
 
-Debugging with IntelliJ
+Debugging with IntelliJ:\
 1.
 ```
 gradle {task} --debug-jvm
