@@ -22,6 +22,9 @@ gradle dependencies
 Using the dependency insight report for a given dependency
 ```
 gradle -q dependencyInsight --dependency commons-codec --configuration scm
+
+// multi-module
+gradle -q application:dependencyInsight --dependency spring-data-r2dbc --configuration compileClasspath
 ```
 
 Debugging with IntelliJ:\
