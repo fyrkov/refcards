@@ -1,5 +1,10 @@
 ### Postgres snippetes
 
+PSQL example:
+```
+psql -d ${db_name} -U ${postgres_user) -h localhost -p 33225
+```
+
 Operations with timestamp
 ```sql
 insert into event_store (business_event, due_time)  
