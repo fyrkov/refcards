@@ -22,6 +22,11 @@ order by
     indexname;
 ```
 
+Show tables:
+```
+SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';
+```
+
 Create index over coulumn with function applied
 ```
 create index if not exists users_work_email_uppercase_key on permission.users (upper(work_email));
