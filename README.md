@@ -16,3 +16,4 @@ Refcards:
 - [Reactive](./java-refcards/reactive.md)
 - [Kotlin](./kotlin.md)
 - [Python](./python.md)
+- [Kafka](./kafka.md)
