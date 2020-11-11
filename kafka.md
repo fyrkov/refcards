@@ -1,7 +1,7 @@
 ## Kafka core concepts
 
 ##### Topics and Partitions.
-:exclamation: message order is guaranteed only within the same partition
+:exclamation: message order is guaranteed only within the same partition\
 :exclamation: offsets are relevant to a topic-partition pair
 ![Replication](kafka_files/Partitions.png)
 
@@ -20,10 +20,11 @@ Kafka is backed by the Zookeeper.
 ![Replication](kafka_files/Leader.png)
 
 ##### Producers
-Producer sends data to a **topic** only and does not ask for a broker or a partition.
-Upon connecting to any broker it connects to the whole cluster. 
+Producer sends data to a **topic** only and does not ask for a broker or a partition.\
+Upon connecting to any broker it connects to the whole cluster. \
 By default (if message keys not used) messages are sent to partitions in round robin.
 ![Replication](kafka_files/Producers1.png)
+
 Producers can choose an acknowledgement mode:
 ![Replication](kafka_files/Producers2.png)
 
