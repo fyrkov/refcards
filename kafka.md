@@ -40,7 +40,7 @@ So effectively number of consumers should be <= number of partitions.
 
 #### Consumer groups
 Consumers can be aggregated in consumer groups.
-Each consumer group consumes messages independently, i.e.  
+Each consumer group consumes messages independently.
 ![Replication](kafka_files/Consumer_groups.png)
 
 Each consumer group has a service topic named `__consumer_offsets` where it stores current offsets for partitions.
