@@ -1,3 +1,8 @@
+Run specific test
+```
+ gradle test --tests *AwsSsmBootstrapIntegrationTest
+ ```
+
 Listing tasks
 ```
 gradle tasks
