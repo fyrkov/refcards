@@ -1,7 +1,7 @@
 Run specific test
 ```
- gradle test --tests *AwsSsmBootstrapIntegrationTest
- ```
+gradle test --tests *AwsSsmBootstrapIntegrationTest
+```
 
 Listing tasks
 ```
