@@ -99,6 +99,9 @@ Can be used to locate where the loss of data occurs, and probably the node is do
 Can be used to locate slow nodes.\
 `traceroute <ip address>`
 
+Using telnet to test open ports:
+`telnet <domainname or ip> [port]`
+
 **iproute2** and **net-tools** packages.\
 `iproute2` package now reaplces deprecated `net-tools`.
 
