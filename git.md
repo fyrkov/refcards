@@ -191,6 +191,11 @@ git push --set-upstream origin new_branch   # Push the new branch, set local bra
  git branch | grep "EAG-2" | xargs git branch -D
 ```
 
+Delete all local branches who's remote tracking branches has been deleted:
+```
+git fetch --prune && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
+```
+
 
 ### Git bisect
 Use git bisect to find the first bad commit in an automated way:
