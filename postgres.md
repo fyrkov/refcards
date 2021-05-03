@@ -44,6 +44,11 @@ select '02f7af3c-f4be-4498-9967-da2d70907a2b', 'scheduled.update@auto1.com'
 on conflict do nothing;
 ```
 
+Explain plan
+```
+ explain select * from transaction_service.transaction where ...;
+```
+
 ### Hierarchical query
 ```
 with recursive subdepartments as (
