@@ -46,7 +46,7 @@ on conflict do nothing;
 
 Explain plan
 ```
- explain select * from transaction_service.transaction where ...;
+ explain [analyze] select * from transaction_service.transaction where ...;
 ```
 
 ### Hierarchical query
