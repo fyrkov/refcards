@@ -1,6 +1,6 @@
 ## Spring Boot
 
-#### 1 Adding Spring Boot to project
+#### 1 Adding Spring Boot to a project
 Gradle example:
 
 ```groovy
