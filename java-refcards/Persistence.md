@@ -9,7 +9,7 @@
 ![cap-therorem](persistence_files/cap-therorem.jpg)
 
 ### ACID
-ACIS is a set of properties of database transactions
+ACID is a set of properties of database transactions
 - atomicity - whole or nothing
 - consistency - from consistent state to consistent state
 - isolation - concurrent transaction do not interfere
