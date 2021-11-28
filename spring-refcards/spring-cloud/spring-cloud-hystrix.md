@@ -24,7 +24,7 @@ Every remote service is assigned to it's own thread pool.
 
 Netflix Hystrix is a circuit breaker lib.
 
-:exclamation: Hystrix is no longer developed since 2018.
+:exclamation: Hystrix is no longer developed since 2018. The successor is **resilience4j**.
 
 ### Usage
 
