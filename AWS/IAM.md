@@ -37,15 +37,15 @@ Access keys are used to set up a CLI access or an access via SDK.
  aws ec2 describe-instances --profile user1
  ```
 
-IAM Roles\
+##### IAM Roles
 Roles are used to grant permissions to services.\
 Roles has attached policies.
 
- ##### IAM Access advisor. Credentials Report.
- IAM Access advisor shows the service permissions granted to a user.
- Credentials report is a list of all users.
- Both can be used for permissions audit.
+##### IAM Access advisor. Credentials Report.
+IAM Access advisor shows the service permissions granted to a user.
+Credentials report is a list of all users.
+Both can be used for permissions audit.
 
- ##### AWS Cloudshell
- AWS Cloudshell is an AWS CLI running in a browser on a AWS Console site. It does not need credentials and refers to the activated region.
- It also allows storing files in a working directory which persist even after session restart.
+##### AWS Cloudshell
+AWS Cloudshell is an AWS CLI running in a browser on a AWS Console site. It does not need credentials and refers to the activated region.
+It also allows storing files in a working directory which persist even after session restart.

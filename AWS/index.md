@@ -1,1 +1,2 @@
 - [IAM](./IAM.md)
+- [IAM](./EC2.md)
