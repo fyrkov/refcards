@@ -1,2 +1,7 @@
 - [IAM](./IAM.md)
-- [IAM](./EC2.md)
+- [EC2](./EC2.md)
+- [VPC](./VPC.md)
+- [AMI](./AMI.md)
+- [EBS](./EBS.md)
+- [EFS](./EFS.md)
+- [Load Balancers](./LoadBalancers.md)
