@@ -7,25 +7,25 @@ Route 53 supports following DNS record types
 * NS - name servers for hosted zones. A DNS name server is a server that stores the DNS records
 * and some others..
 
-Hosted zones - container of records defining how traffic is routed to domain and its subdomains.\
+Hosted zones - containers of records defining how traffic is routed to domain and its subdomains.\
 `Public hosted zones` for internet, e.g. `app.company.com`.\
 `Private hosted zones` for private domain names within VPC, e.g. `app.company.internal.com`.
 
 #### CNAME vs Aliases
 Both CNAME records and Route 53 "Alias" can be used to redirect to other hostname.\
-Alias is Rout53 specific and can refer to AWS resources: ELBs, API Gateway, S3 Websites, VPC endpoints etc\
+Alias is Route53 specific and can refer directly to AWS resources: ELBs, API Gateway, S3 Websites, VPC endpoints etc.\
 :exclamation: Alias can not refer to EC2 DNS name.\
 Aliases are free of charge.
 
 #### Routing policies:
-* `Simple`. Static routing. Can respond multiple values - in this case a client picks an address randomly from the list.
+* `Simple`. Static routing. Can respond with multiple values - in this case a client picks an address randomly from the list.
 * `Weighted`. Assumes multiple resource. Controls the % of traffic going to each resource. Each record gets a `weight` assigned.
 Traffic share = weight / sum (all weights). Records with `0` weight does not receive traffic.
 * `Latency`. Redirects to a resource with least latency to a client. Latency is based on traffic between users and AWS regions and is evaluated by Route53.
 When specifying a record with latency-based policy it is necessary to pick a region corresponding to the given target (AWS can not find out it automatically).
 * `Failover`. Failover record can be of types primary and secondary. The primary one must have an healthcheck. For secondary it is optional. Once the primary record target becomes unreachable, Route53 switches to the secondary.
 * `Geolocation`. Based on where a user is actually located - this is different from `Latency`. Record has a specified location - continent, country, US state. The policy also has a "default record" (for case when no match on location). Records can also have healthchecks.
-* `Geoproximity` - routes traffic based on the geo location of users and resources. There is an ability to shift more traffic to resources based on the defined `bias`. The bisa value is within [-99,99] where positive values = more traffic. Resources can be AWS (with specified AWS region) or non-AWS (with specified latitude and longitude). To activate this the `Route53 Traffic flow` feature must be activated. With bias=0 always this policy works as `Geoproximity`.
+* `Geoproximity`. Routes traffic based on the geo location of users and resources. There is an ability to shift more traffic to resources based on the defined `bias`. The bias value is within [-99,99] where positive values = more traffic. Resources can be AWS (with specified AWS region) or non-AWS (with specified latitude and longitude). To activate this the `Route53 Traffic flow` feature must be activated. With bias=0 always this policy works as `Geoproximity`.
 * `Multivalue answer`. Used to route traffic to multiple resources. Can be associated with healthchecks. Route53 returns up to 8 healthy records. A client is able to decide which address to use (like client-side load-balancing).
 
 #### Traffic flow
@@ -53,4 +53,11 @@ For private hosted zones the workaround is to have a CloudWatch metric/alarm pai
 
 #### Domain registrar vs DNS service
 It is possible to use 3rd party domain registrars and Route53 together.\
-For this it is necessary to create a public hosted zone in Route53 and then set NS records in the domain registrar to Route53 name servers. 
+For this it is necessary to create a public hosted zone in Route53 and then set NS records in the domain registrar to Route53 name servers.
+
+#### TTL
+Each DNS record has a TTL (Time To Live) which orders clients for how long to cache the reply. Hence depending on the TTL value sometimes it is possible to observe a lag when updating a DNS record.
+
+#### Testing DNS Records
+`nslookup <host>`
+`dig <host>`
