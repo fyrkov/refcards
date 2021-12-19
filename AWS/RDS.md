@@ -31,12 +31,12 @@ Limits:
 * 6hr has passed since last scaling
 
 #### Read replicas
-RR can be
+RRs can be
 * within AZ
 * cross AZ
 * cross region
 
-There can be up to 5 RRs.
+There can be up to **5** RRs.
 
 :exclamation: RDS replication is async!
 
@@ -55,7 +55,7 @@ RRs can be added after DB creation.
 Master DB and stand-by replica are under one DNS name.\
 RDS makes an automatic failover in case of master failure.
 
-:exclamation: the use case for this is not replication.
+:exclamation: the use case for this is not scaling reads.
 Stand-by database does not accept read or write requests.
 
 Going to Multi AZ is a zero downtime op.
@@ -78,7 +78,7 @@ Through snapshot creation and encrypting it, then restoring DB, then migrate cli
 RDS usually are deployed to private subnets.\
 Also SGs are used in RDS as well as in EC2.
 
-To access DB itself apart from user/pass an IAM-based auth can be used for Postgres and MySQL.
+To access DB itself apart from user/pass an `IAM-based auth` can be used for Postgres and MySQL.
 
 EC2 can have IAM role and then can issue and API call to RDS to get an auth token.\
 The EC2 can then use the `IAM token` to access DB.\
@@ -88,12 +88,36 @@ Pros: no user management in DB, only in IAM.
 Aurora is a proprietary AWS DB cluster backed by Postgres or MySQL.\
 Aurora is cloud optimized and outperforms plain RDS.\
 Aurora scales automatically up to 128TB by 10GB increments.\
-Replication lag is lower than RDS (sub 10ms) and there can be up to 15 RRs.\
+Replication lag is lower than RDS (sub 10ms) and there can be up to **15** RRs.
 Aurora costs 20% more than RDS.
+
+After cluster creation it is possible to add:
+* RRs
+* cross-region replicas
+* replica auto-scaling
+* AWS region (making global Aurora)
 
 Aurora maintains 6 copies of data across 3 AZs.\
 4/6 copies required to write, 3/6 required to read.\
 Aurora supports cross region replication.
 
-There is only 1 master. `Writer endpoint` refers to master.\
+There are 2 endpoints. `Writer endpoint` refers to master.\
 `Reader endpoint` connects to RRs and they are load-balanced.
+
+Aurora can be created in 2 setups:
+* `provisioned` - default, requires some prior cluster configuration
+* `serverless` - automated DB scaling based on actual usage. Use case: infrequent unpredictable workloads
+
+Aurora can be created in 2 replication setups:
+* `single master`
+![AuroraArch001.png](AuroraArch001.png)
+
+* `multi-master` (available for MySQL). Every node is a writer. Writes are accepted after a positive confirmation from a quorum of storage nodes. Replication is peer-to-peer. Unlike the single master mode where a fail of writer triggers RRs promotion process, multi-master would require an application just to switch to another writer node <= **hi availability** + **hi uptime** + **immediate failover**\
+![multi-master-aurora](multi-master-aurora.jpg)
+
+##### Global setup
+1 primary region + up to 5 secondary RO regions with replication lag is under 1 sec.\
+Up to 16 RRs per secondary region.\
+Secondary region can be promoted to master in < 1 min.
+
+Use cases: decreased latency globally, hi redundancy + hi availability.
