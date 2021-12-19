@@ -1,7 +1,7 @@
 ### ASG - Auto scaling groups
-LBs and Auto scaling groups work well together, i.e. when ASG scales out the app, LB registers new instances.\
+ELBs and Auto scaling groups work well together, i.e. when ASG scales out the app, ELB registers new instances.\
 For that ASG needs to be attached during creation to ALB's TG or CLB.\
-Then if ASG scales out, new instances get register in LB automatically.
+Then if ASG scales out, new instances get registered in LB automatically.
 
 ASG is configured with:
 * min size, desired capacity, maximum size
@@ -10,16 +10,16 @@ ASG is configured with:
 * network + subnets info
 * LB info
 
-Scaling policy can work on `CloudWatch` alarms.\
-Alarm can monitor metrics like avg CPU, # of requests per instance on the ELB, avg network in/out.\
-A custom metric can be added in the app and pushed to CloudWatch.
+Scaling policy can work on top of `CloudWatch` alarms.\
+An alarm can monitor metrics like avg CPU, # of requests per instance on the ELB, avg network in/out.\
+A custom metric can also be added in the app and pushed to CloudWatch.
 
 Scaling policy can also work based on schedule - e.g. for predicted peak loads.
 
 IAM role attached to an ASG is propagated to spawned EC2 instances.
 
 ASG does not only scale out/in but also re-creates an instance if it goes down for whatever reason (extra safety).\
-ASG can terminate instances that an ELB marks as unhealthy and then replace them.
+ASG can terminate instances that an ELB marks as unhealthy and then ASG replaces them.
 
 ASGs have its own healthcheck directly on EC2s (by default) but can also optionally refer to ELB's healthcheck so that ASG and LB work in sync.
 
@@ -34,16 +34,16 @@ ASGs are free of charge.
 * Predictive scaling. Based on forecast built on top of historical data.
 
 **Scaling cooldown** - 5 mins by default.\
-Cooldown is activated after scaling activity happens.\
-During this period ASG will not do any actions.
+Cooldown is activated after a scaling activity happens.\
+During this period ASG will not perform any actions.
 
 Advice: use ready-to-use AMIs to reduce configuration time (EC2 user data script, etc).
 
 
 #### ASG Termination policies
 1. Default. Choose the AZ with most instances. Delete the instance with the oldest launch configuration.
-2. Lifecycle hooks. An ability ti perform extra steps upon scaling in/out. Instances go into aux `Pending` or `Terminating` states.\
-This can help to gather logs for example from a crashing instance before it gets terminated.
+2. Lifecycle hooks. An ability to perform extra steps upon scaling in/out. Instances go into aux `Pending` or `Terminating` states.\
+This can help for example to gather logs from a crashing instance before it gets terminated.
 
 #### Launch templates vs Launch configuration
 LC is legacy. Must be re-created every time config changes.
@@ -51,3 +51,7 @@ LC is legacy. Must be re-created every time config changes.
 LT is newer. Can have multiple versions.\
 Have parameters subsets for re-use and inheritance.\
 Provision both on-demand and Spot instances.
+
+#### Multi-AZ
+ASG can work across multiple AZs in an AWS Region.\
+ASG can't contain EC2 instances from multiple regions.

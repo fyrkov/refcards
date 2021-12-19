@@ -21,9 +21,8 @@ Hence it gives ability to restore to any point in time from oldest backup (7 day
 Also there are DB Snapshots - manual backups triggered by user and can be stored longer.
 
 #### RDS storage autoscaling
-With this feature enabled RDS storage scales automatically.
-
-Need to set `Maximum Storage Threshold`.
+With this feature enabled RDS storage scales automatically.\
+It requires to set `Maximum Storage Threshold`.
 
 Limits:
 * free storage < 10%
