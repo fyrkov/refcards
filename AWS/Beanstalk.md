@@ -1,5 +1,5 @@
 ### Elastic Beanstalk
-A service to re-use components for deployments: EC2, ASG, ELB, RDS...\
+A service to re-use components for deployments: EC2, ASG, ELB, RDS...
 * Automatically handles capacity provisioning, load balancing, app health monitoring, instance configuration...
 * The responsibility of a developer is only application code.
 * Full control over configuration remains

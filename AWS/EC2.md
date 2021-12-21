@@ -48,3 +48,11 @@ Usually connection timeouts indicate SGs misconfiguration.
 * cluster - all together in one rack. For HPS and hi throughput
 * spread - distributed between AZs. For reducing risks, for  critical apps.
 * partition - for Kafka, Hadoop, Cassandra etc
+
+#### EC2 instance metadata
+Metadata is info about EC2 instance.
+It allows instances to learn about themselves without using IAM role for that purpose.\
+The URL for this is `http://169.254.169.254/latest/meta-data/`.\
+This is reachable only from EC2 instances, e.g. curl from within a EC2.
+
+For example, when a role is attached to a EC2 instance, in fact the instance fetches short lived credentials from the `http://169.254.169.254/latest/meta-data/iam/security-credentials/{role_name}`

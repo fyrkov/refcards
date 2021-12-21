@@ -1,11 +1,13 @@
 ### IAM
-Users and groups.\
+
+
+#### Users and groups.
 A user can have no group.\
 A user can belong to several groups.\
 A group can only contain users, not other groups.
 
-Permissions and policies.\
-Users and groups can be assigned JSON documents called policies, e.g.
+#### Permissions and policies.
+Users and groups can have assigned JSON documents called policies, e.g.
 ```
 {
     "Version": "2012-10-17",
@@ -24,7 +26,7 @@ Users and groups can be assigned JSON documents called policies, e.g.
     ]
 }
 ```
-*Inline* policy is a policy attached directly to a user.
+*Inline* policy is a policy attached directly to a user or a role.
 
 Access keys.
 Access keys are used to set up a CLI access or an access via SDK.
