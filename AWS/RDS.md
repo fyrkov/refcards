@@ -49,7 +49,7 @@ Cross replication is paid.
 
 RRs can be added after DB creation.
 
-#### RDS Multi AZ (Disaster Recovery)
+#### RDS Multi-AZ (Disaster Recovery)
 **Sync** replication between AZs.\
 Master DB and stand-by replica are under one DNS name.\
 RDS makes an automatic failover in case of master failure.
@@ -58,6 +58,9 @@ RDS makes an automatic failover in case of master failure.
 Stand-by database does not accept read or write requests.
 
 Going to Multi AZ is a zero downtime op.
+
+When upgrading a database with Multi-AZ deployment, both the primary and standby DB instances are upgraded at the same time.\
+This causes downtime until the upgrade is complete.
 
 #### Encryption
 RDS can encrypt DBs at rest with KMS keys (AES-256 encryption).\

@@ -46,8 +46,8 @@ Usually connection timeouts indicate SGs misconfiguration.
 
 #### EC2 placement groups:
 * cluster - all together in one rack. For HPS and hi throughput
-* spread - distributed between AZs. For reducing risks, for  critical apps.
-* partition - for Kafka, Hadoop, Cassandra etc
+* spread - distributed between AZs. For reducing risks, for  critical apps. Each instances is placed in a distinct rack.
+* partition - for Kafka, Hadoop, Cassandra etc. Each partition is placed in a distinct rack.
 
 #### EC2 instance metadata
 Metadata is info about EC2 instance.

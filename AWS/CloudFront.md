@@ -22,7 +22,7 @@ CloudFront provides a DNS hostname to access data like `df41nr17o8fgm.cloudfront
 
 #### Access control
 For S3:
-1. OAI - Origin Access Identity is like IAM role for a CloudFront origin.
+1. Need to create OAI - Origin Access Identity which is like IAM role for a CloudFront origin.
 2. S3 Bucket policy must be updated. Can be done automatically when CLoudFront is configured.
 
 For EC2:
