@@ -34,7 +34,7 @@ The processing consumer can call the `ChangeMessageVisibility` API to get more t
 
 #### FIFO queues
 * Messages are ordered based on `message group ID`.
-* As a downside, throughput is limited to 300 msg/s without batching, 3k msg/s with batching.
+* As a downside, throughput is limited to 300 msg/s without batching, 3000 msg/s with batching.
 * Exactly-once send capability
 * Deduplication using either "content based deduplication" or "deduplication ID" token
 
