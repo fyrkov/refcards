@@ -33,10 +33,10 @@ It the message is not processed/deleted within the visibility timeout, it can be
 The processing consumer can call the `ChangeMessageVisibility` API to get more time programatically.
 
 #### FIFO queues
-Messages are ordered based on `message group ID`.
+* Messages are ordered based on `message group ID`.
 * As a downside, throughput is limited to 300 msg/s without batching, 3k msg/s with batching.
 * Exactly-once send capability
-* Has either "content based deduplication" or "deduplication ID" token
+* Deduplication using either "content based deduplication" or "deduplication ID" token
 
 #### Dead letter queues
 Something wrong can be with a message - it can cause a consumers to fail.\
