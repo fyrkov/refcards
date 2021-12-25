@@ -1,8 +1,8 @@
 ### EFS
 
 Elastic File System - managed network file system that can be mounted on many EC2.\
-Works with Ec2 instances in multi-AZ.\
-Hihgly available, expensive, pay per use.\
+Works with EC2 instances in multi-AZ.\
+Highly available, expensive, pay per use.\
 Uses security group to control access.\
 Compatible with Linux AMIs only.
 
@@ -31,4 +31,10 @@ SG of EFS must allow SGs of EC2 hosts.
 #### EFS vs EBS:
 * EBS can be attached to only one EC2 at a time
 * EBS is locked to one AZ
-* 
+
+#### Performance modes
+* General Purpose performance mode - lo latency
+* Max I/O performance mode - hi throughput and ops/sec
+
+#### EFS Infrequent Access (EFS IA)
+EFS IA is a storage class that provides price/performance that is cost-optimized for files, not accessed every day, with storage prices up to 92% lower compared to EFS Standard. 
