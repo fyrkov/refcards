@@ -7,7 +7,7 @@
   * Kinesis Data Analytics: analyze data streams with SQL or Apache Flink
   * Kinesis Video Streams: capture, process and store video streams
 
-![KinesisOverview](KinesisOverview.png)
+![KinesisOverview](files/KinesisOverview.png)
 A stream consists of shards. More shards - more throughput.\
 KCL = Kinesis Client Library.
 KPL = Kinesis Producer Library.
@@ -21,11 +21,11 @@ KPL = Kinesis Producer Library.
 
 #### Kinesis Data Firehose
 * Kinesis Data Firehose is for load streaming data into S3 and other destinations.
-* Kinesis Data Firehose write to destinations in batches.
+* Kinesis Data Firehose writes to destinations in batches.
 * It is near real-time system (min possible buffer time is 60 sec)
 * Automatic scaling, fully manageable
 * No data storage, no replay capability
-![KinesisDataFirehose](KinesisDataFirehose.png)
+![KinesisDataFirehose](files/KinesisDataFirehose.png)
 
 #### Kinesis Data Analytics
 * Perform real-time analytics on Kinesis Streams using SQL

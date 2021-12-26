@@ -1,4 +1,4 @@
-![AWSStorageOffers](AWSStorageOffers.png)
+![AWSStorageOffers](files/AWSStorageOffers.png)
 
 ### AWS Snow Family
 
@@ -69,14 +69,14 @@ A Gateway has to be installed in on-premise datacenter of the client and require
 * Can be mounted on many servers
 * **Integrates with Active Directory for user authentication**
 
-![FileGateway](FileGateway.png)
+![FileGateway](files/FileGateway.png)
 
 2. **FSx File Gateway**
 * Gives native access to AWS FSx for Windows File Server
 * Most recent data is cached in the File Gateway
 * Windows native compatibility (SMB, NTFS, Active Directory)
 
-![FSxFileGateway](FSxFileGateway.png)
+![FSxFileGateway](files/FSxFileGateway.png)
 
 3. **Volume Gateway**
 * Block storage using iSCSI proto backed by S3
@@ -85,7 +85,7 @@ A Gateway has to be installed in on-premise datacenter of the client and require
 * **Stored Volumes**: entire dataset is on premise, scheduled backup to S3
 
 Use case: backup volumes on on-premises servers.
-![VolumeGateway](VolumeGateway.png)
+![VolumeGateway](files/VolumeGateway.png)
 
 4. **Tape Gateway**
 * For companies that have backup process using physical tapes

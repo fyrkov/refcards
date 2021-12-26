@@ -21,14 +21,14 @@ ECS has an integration with ALB.
 * A client first need to create and run a fleet of EC2s.
 * ASGs are registered with ECS cluster. To do so a machine must have an ECS agent. AWS AMIs have it pre-installed.
 * ECS Task = running container. An EC2 can run many ECS Tasks depending on available resources.
-![ECS-EC2](ECS-EC2.png)
+![ECS-EC2](files/ECS-EC2.png)
 
 2. **Fargate Launch Type for ECS.**
 * A client does not need to provision infra (no EC2s to manage) = serverless.
 * AWS runs client's containers based on the CPU/RAM requirements.
 * ENIs (Elastic Network Interfaces) will be assigned to ECS Tasks to provide them with IPs
 * Because an ENI takes a unque IP, a client needs to make sure there are enough private IP addresses within a VPC
-![ECS-FARGATE](ECS-FARGATE.png)
+![ECS-FARGATE](files/ECS-FARGATE.png)
 
 #### IAM Roles for ECS Tasks
 ECS Tasks need to have IAM Roles like EC2 instances.
@@ -42,7 +42,7 @@ An underlying EC2 need to have permissions:
 ECS tasks need to have their own roles.\
 Tasks implementing different services need to have different roles.\
 A task role is defined in the task definition.\
-![ECS-Roles](ECS-Roles.png)
+![ECS-Roles](files/ECS-Roles.png)
 
 #### ECS + EFS
 It is possible to mount EFS to both EC2+ECS and Fargate tasks and thus set up data sharing between tasks.\

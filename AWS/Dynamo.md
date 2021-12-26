@@ -60,7 +60,7 @@ Use cases:
 Tables are across multiple regions.\
 Implemented with two-way replication between Dynamo tables in different regions.\
 All tables are masters.\
-Dynamo Streams as a mandatory pre-requisite.
+:exclamation: Enabling **DynamoDB Streams** as a mandatory pre-requisite.
 
 Use case: make Dynamo lo latency in multiple regions
 

@@ -112,10 +112,10 @@ Aurora can be created in 2 setups:
 
 Aurora can be created in 2 replication setups:
 * `single master`
-![AuroraArch001.png](AuroraArch001.png)
+![AuroraArch001.png](files/AuroraArch001.png)
 
 * `multi-master` (available for MySQL). Every node is a writer. Writes are accepted after a positive confirmation from a quorum of storage nodes. Replication is peer-to-peer. Unlike the single master mode where a fail of writer triggers RRs promotion process, multi-master would require an application just to switch to another writer node <= **hi availability** + **hi uptime** + **immediate failover**\
-![multi-master-aurora](multi-master-aurora.jpg)
+![multi-master-aurora](files/multi-master-aurora.jpg)
 
 ##### Global setup
 1 primary region + up to 5 secondary RO regions with replication lag is under 1 sec.\

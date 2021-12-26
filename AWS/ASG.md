@@ -39,6 +39,7 @@ During this period ASG will not perform any actions.
 
 Advice: use ready-to-use AMIs to reduce configuration time (EC2 user data script, etc).
 
+:exclamation: When there are multiple policies in force at the same time, there's a chance that each policy could instruct ASG to scale out (or in) at the same time. Then ASG chooses the policy that provides the largest capacity for both scale-out and scale-in.
 
 #### ASG Termination policies
 1. Default. Choose the AZ with most instances. Delete the instance with the oldest launch configuration.
@@ -55,3 +56,8 @@ Provision both on-demand and Spot instances.
 #### Multi-AZ
 ASG can work across multiple AZs in an AWS Region.\
 ASG can't contain EC2 instances from multiple regions.
+
+#### Instance tenancy in VPC
+By default, all instances in the VPC run as shared tenancy instances.\
+When you create a launch configuration, the default value for the instance placement tenancy is `null` and the instance tenancy is controlled by the tenancy attribute of the VPC.\
+You can specify the instance placement tenancy for your launch configuration as `default` or `dedicated` and thus override VPC setting.

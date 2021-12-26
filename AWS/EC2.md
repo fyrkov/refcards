@@ -56,3 +56,18 @@ The URL for this is `http://169.254.169.254/latest/meta-data/`.\
 This is reachable only from EC2 instances, e.g. curl from within a EC2.
 
 For example, when a role is attached to a EC2 instance, in fact the instance fetches short lived credentials from the `http://169.254.169.254/latest/meta-data/iam/security-credentials/{role_name}`
+
+#### EC2 Hibernate
+When you hibernate an instance, AWS signals the operating system to perform hibernation (suspend-to-disk).\
+Hibernation saves the contents from the instance memory (RAM) to your Amazon EBS root volume.\
+AWS then persists the instance's Amazon EBS root volume and any attached Amazon EBS data volumes.
+
+When you start your instance:
+* The Amazon EBS root volume is restored to its previous state
+* The RAM contents are reloaded
+* The processes that were previously running on the instance are resumed
+* Previously attached data volumes are reattached and the instance retains its instance ID
+
+#### EC2 Monitoring
+By default, Amazon EC2 sends metric data to CloudWatch in 5-minute periods.\
+To send metric data for your instance to CloudWatch in 1-minute periods, you can enable `detailed monitoring` on the instance.

@@ -27,6 +27,6 @@ Supports runtimes:
 Beanstalk has some preconfigured templates, e.g. "single instance", "single spot instance", "hi avail" etc.
 
 #### Web server tier vs Worker tier
-![Beanstalk_Web_env](Beanstalk_Web_env.png)
+![Beanstalk_Web_env](files/Beanstalk_Web_env.png)
 
-![Beanstalk_worker_env](Beanstalk_worker_env.png)
+![Beanstalk_worker_env](files/Beanstalk_worker_env.png)

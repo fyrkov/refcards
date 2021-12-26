@@ -30,4 +30,4 @@ Components:
   * These creds come with a predefined IAM policy
 
 Example: provide temp access to S3 bucket using Facebook Login:\
-![Cognito_Federated_Identity_Pools.png](Cognito_Federated_Identity_Pools.png)
+![Cognito_Federated_Identity_Pools.png](files/Cognito_Federated_Identity_Pools.png)

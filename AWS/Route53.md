@@ -61,3 +61,11 @@ Each DNS record has a TTL (Time To Live) which orders clients for how long to ca
 #### Testing DNS Records
 `nslookup <host>`
 `dig <host>`
+
+#### Route 53 Resolver
+Amazon Route 53 effectively connects user requests to infrastructure running in AWS – such as Amazon EC2 instances – and can also be used to route users to infrastructure outside of AWS.\
+By default, Route 53 Resolver automatically answers DNS queries for local VPC domain names for EC2 instances.\
+You can integrate DNS resolution between Resolver and DNS resolvers on your on-premises network by configuring forwarding rules.
+
+To resolve any DNS queries for resources in the AWS VPC from the on-premises network, you can create an `inbound endpoint` on Route 53 Resolver and then DNS resolvers on the on-premises network can forward DNS queries to Route 53 Resolver via this endpoint.\
+To resolve DNS queries for any resources in the on-premises network from the AWS VPC, you can create an `outbound endpoint` on Route 53 Resolver and then Route 53 Resolver can conditionally forward queries to resolvers on the on-premises network via this endpoint.

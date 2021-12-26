@@ -36,7 +36,7 @@ Need to send a message to multiple services, hence queues.\
 We can push once to SNS and subscribe all SQS queues to the topic.
 * Ability to add more SQS subscriberes in future
 * Need to allow SQS policies for SNS to write
-![SQS-SNS](SQS-SNS.png)
+![SQS-SNS](files/SQS-SNS.png)
 
 #### FIFO topic
 * Messages are ordered based on `message group ID`.

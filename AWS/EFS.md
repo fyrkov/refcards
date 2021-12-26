@@ -6,7 +6,7 @@ Highly available, expensive, pay per use.\
 Uses security group to control access.\
 Compatible with Linux AMIs only.
 
-![EFS](EFS.png)
+![EFS](files/EFS.png)
 
 Features:
 * very hi throughput

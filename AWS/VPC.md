@@ -13,7 +13,7 @@ Subnet types:
 * VPN-only subnet: The subnet doesn't have a route to the internet gateway, but it has its traffic routed to a virtual private gateway for a Site-to-Site VPN connection
 
 
-![subnets-diagram](subnets-diagram.png)
+![subnets-diagram](files/subnets-diagram.png)
 
 Note the following:
 

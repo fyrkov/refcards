@@ -38,14 +38,14 @@ API Gateway has a default (and max) timeout of 29secs when calling a target.
 
 Use case: **to give permissions to users in your AWS acc.**
 
-![API_Gateway_security1.png](API_Gateway_security1.png)
+![API_Gateway_security1.png](files/API_Gateway_security1.png)
 2. Lambda Authorizer (formerly Custom Authorizer)
 * Uses a Lambda to validate a token in headers
 * Option to cache a result
 * Lambda must return and IAM policy for the user
 
 Use case: **helps with 3rd party types of auth: OAuth, SAML**
-![API_Gateway_security2.png](API_Gateway_security2.png)
+![API_Gateway_security2.png](files/API_Gateway_security2.png)
 
 3. Cognito User Pools
 * Cognito fully manages user lifecycle
@@ -55,4 +55,4 @@ Use case: **helps with 3rd party types of auth: OAuth, SAML**
 
 Use case: **Client manages his own user pool in Cognito. Can be backed up by Facebook, Google login etc. Authorization layer must be implemented in backend**
 
-![API_Gateway_security3.png](API_Gateway_security3.png)
+![API_Gateway_security3.png](files/API_Gateway_security3.png)
