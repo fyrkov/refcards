@@ -41,6 +41,15 @@ Advice: use ready-to-use AMIs to reduce configuration time (EC2 user data script
 
 :exclamation: When there are multiple policies in force at the same time, there's a chance that each policy could instruct ASG to scale out (or in) at the same time. Then ASG chooses the policy that provides the largest capacity for both scale-out and scale-in.
 
+#### ASG lifecycle hooks
+Lifecycle hooks enable you to perform custom actions as the ASG launches or terminates instances.\
+When an instance is paused, it remains in a wait state either until you complete the lifecycle\
+action using the `complete-lifecycle-action` command or the `CompleteLifecycleAction` operation,\
+or until the timeout period ends (one hour by default).
+
+For example, you could install or configure software on newly launched instances,\
+or download log files from an instance before it terminates.
+
 #### ASG Termination policies
 1. Default. Choose the AZ with most instances. Delete the instance with the oldest launch configuration.
 2. Lifecycle hooks. An ability to perform extra steps upon scaling in/out. Instances go into aux `Pending` or `Terminating` states.\

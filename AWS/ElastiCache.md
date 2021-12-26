@@ -1,17 +1,17 @@
 ### ElastiCache
 
-Managed Redis or Memcached - in memory DBs with hi perf and lo latency.
+Managed Redis or Memcached - in memory datastore with hi perf and lo latency.
 
 :exclamation: Using ElastiCache requires app code changes
 
-Redis:
+**Redis**:
 * Multi-AZ with auto failover
 * RRs to scale reads and hi availability
 * persistent
 * backup and restore features
 * encryption at rest and in-flight (with TLS)
 
-Memcached:
+**Memcached**:
 * Multi-node data partitioning (sharding)
 * not hi availability (no replication)
 * not persistent
@@ -23,7 +23,7 @@ Memcached:
 * REDIS native auth token can be used for auth. Memcached supports SASL-based auth.
 * REDIS supports TLS in-flight encryption
 
-#### Use patterns
+#### Use patterns for caching
 * Lazy loading - all read data is cached, data can become stale.
 * Write through - app updates cache when writes to DB, no stale data
 

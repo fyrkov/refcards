@@ -1,6 +1,5 @@
 ### IAM
 
-
 #### Users and groups.
 A user can have no group.\
 A user can belong to several groups.\
@@ -42,6 +41,13 @@ Access keys are used to set up a CLI access or an access via SDK.
 ##### IAM Roles
 Roles are used to grant permissions to services.\
 Roles has attached policies.
+
+#### Assuming IAM Roles
+IAM roles allow you to delegate access to users or services that normally don't have access\
+to your organization's AWS resources. IAM users or AWS services can assume a role to obtain\
+temporary security credentials that can be used to make AWS API calls.\
+Consequently, you don't have to share long-term credentials for access to a resource.\
+Using IAM roles, it is possible to access cross-account resources.
 
 ##### IAM Access advisor. Credentials Report.
 IAM Access advisor shows the service permissions granted to a user.

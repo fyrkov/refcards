@@ -86,7 +86,7 @@ EC2 can have IAM role and then can issue and API call to RDS to get an auth toke
 The EC2 can then use the `IAM token` to access DB.\
 Pros: no user management in DB, only in IAM.
 
-#### Aurora
+### Aurora
 Aurora is a proprietary AWS DB cluster backed by Postgres or MySQL.\
 Aurora is cloud optimized and outperforms plain RDS.\
 Aurora scales automatically up to 128TB by 10GB increments.\
@@ -112,9 +112,16 @@ Aurora can be created in 2 setups:
 
 Aurora can be created in 2 replication setups:
 * `single master`
+
 ![AuroraArch001.png](files/AuroraArch001.png)
 
-* `multi-master` (available for MySQL). Every node is a writer. Writes are accepted after a positive confirmation from a quorum of storage nodes. Replication is peer-to-peer. Unlike the single master mode where a fail of writer triggers RRs promotion process, multi-master would require an application just to switch to another writer node <= **hi availability** + **hi uptime** + **immediate failover**\
+* `multi-master` (available for MySQL). Every node is a writer.\
+Writes are accepted after a positive confirmation from a quorum of storage nodes.\
+Replication is peer-to-peer.\
+Unlike the single master mode where a fail of writer triggers RRs promotion process,\
+multi-master would require an application just to switch to another writer node\
+=> **hi availability** + **hi uptime** + **immediate failover**
+
 ![multi-master-aurora](files/multi-master-aurora.jpg)
 
 ##### Global setup

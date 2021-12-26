@@ -4,7 +4,7 @@ VPC has its range of IPv4 addresses, e.g. `10.0.0.0/16`
 
 A VPC is a regional network that can include subnets in different AZs in the region.\
 After you create a VPC, you can add one or more subnets in each Availability Zone.\
-VPC cannot span across multiple regions.
+VPC can not span across multiple regions.
 
 A subnet is a range of IP addresses in your VPC.
 Subnet types:
@@ -24,8 +24,34 @@ Note the following:
 
 Each subnet must be associated with a route table, which specifies the allowed routes for outbound traffic leaving the subnet.
 
-The route table associated with subnet 1 routes all IPv4 traffic (`0.0.0.0/0`) and IPv6 traffic (`::/0`) to an internet gateway (for example, `igw-1a2b3c4d`). Because instance 1A has an IPv4 Elastic IP address and an IPv6 address, it can be reached from the internet over both IPv4 and IPv6.
+The route table associated with subnet 1 routes all IPv4 traffic (`0.0.0.0/0`) and IPv6 traffic (`::/0`) to an internet gateway (for example, `igw-1a2b3c4d`).\
+Because instance 1A has an IPv4 Elastic IP address and an IPv6 address, it can be reached from the internet over both IPv4 and IPv6.
 
-The instance 2A can't reach the internet, but can reach other instances in the VPC. You can allow an instance in your VPC to initiate outbound connections to the internet over IPv4 but prevent unsolicited inbound connections from the internet using a network address translation (NAT) gateway or instance.
+The instance 2A can't reach the internet, but can reach other instances in the VPC.\
+You can allow an instance in your VPC to initiate outbound connections to the internet
+over IPv4 but prevent unsolicited inbound connections from the internet using a network
+address translation (NAT) gateway or a NAT instance.
 
-The route table associated with subnet 3 routes all IPv4 traffic (`0.0.0.0/0`) to a virtual private gateway (for example, `vgw-1a2b3c4d`). Instance 3A can reach computers in the corporate network over the Site-to-Site VPN connection.
+The route table associated with subnet 3 routes all IPv4 traffic (`0.0.0.0/0`) to a virtual private gateway (for example, `vgw-1a2b3c4d`).\
+Instance 3A can reach computers in the corporate network over the Site-to-Site VPN connection.
+
+#### VPC Sharing
+Use VPC sharing to share **one or more subnets** with other AWS accounts belonging\
+to the same parent organization from AWS Organizations.\
+The owner account **cannot share the VPC itself**.
+
+VPC sharing (part of Resource Access Manager) allows multiple AWS accounts to create their\
+application resources such as EC2 instances, RDS databases, Redshift clusters, and Lambda functions,\
+into shared and centrally-managed Amazon Virtual Private Clouds (VPCs).\
+To set this up, the account that owns the VPC (owner) shares one or more subnets with\
+other accounts (participants) that belong to the same organization from AWS Organizations.
+
+After a subnet is shared, the participants can view, create, modify, and delete their\
+application resources in the subnets shared with them.\
+Participants cannot view, modify, or delete resources that belong to other participants or the VPC owner.
+
+#### VPC Peering
+A VPC peering connection is a networking connection between two VPCs that enables you\
+to route traffic between them using private IPv4 addresses or IPv6 addresses.\
+Instances in either VPC can communicate with each other as if they are within the same network.\
+Unlike VPC sharing VPC peering does not facilitate centrally managed VPCs. 

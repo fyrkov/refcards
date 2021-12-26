@@ -71,4 +71,14 @@ Use cases:
 * reducing costs
 
 #### Transactions
-Allow to write to two tables at the same time transactionally.
+Allow writing to two tables at the same time transactionally.
+
+#### Reads consistency
+By default, Dynamo offers _eventually consistency reads_.\
+It is also possible ot opt in for _strongly consistent reads_.\
+Read operations (such as `GetItem`, `Query`, and `Scan`) provide a `ConsistentRead` parameter.\
+Strongly consistency comes with some disadvantages:
+* A SCR might not be available if there is a network delay or outage. In this case, DynamoDB may return a server error (HTTP 500).
+* SCRs may have higher latency than eventually consistent reads.
+* SCRs are not supported on global secondary indexes.
+* SCRs use more throughput capacity than eventually consistent reads.
