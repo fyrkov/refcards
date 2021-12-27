@@ -3,6 +3,8 @@
 - [ASG](./ASG.md)
 - [Beanstalk](./Beanstalk.md)
 - [CloudFront](./CloudFront.md)
+- [CloudTrail](./CloudTrail.md)
+- [CloudWatch](./CloudWatch.md)
 - [Cognito](./Cognito.md)
 - [Dynamo](./Dynamo.md)
 - [EC2](./EC2.md)

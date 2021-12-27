@@ -1,9 +1,5 @@
 ### EC2
 
-EC2 User Data script.\
-The script is run once when a machine starts.
-It is a bash script with `sudo` rights.
-
 EC2 instances parameters: vCPU, RAM, Storage, Network speed, EBS bandwidth.
 
 EC2 instance types: `m5.2xlarge`, where `m` - class, `5` - generation, `2xlarge` - size
@@ -18,6 +14,9 @@ EC2 instance types: `m5.2xlarge`, where `m` - class, `5` - generation, `2xlarge`
 
 Instances types comparison chart: https://instances.vantage.sh/
 
+#### EC2 User Data script.
+The script is run once when a machine starts.\
+It is a bash script with `sudo` rights.
 
 #### EC2 Instance connect
 It is possible to use "EC2 Instance connect" from a browser from the console page instead of using SSH.\
@@ -71,3 +70,12 @@ When you start your instance:
 #### EC2 Monitoring
 By default, Amazon EC2 sends metric data to CloudWatch in 5-minute periods.\
 To send metric data for your instance to CloudWatch in 1-minute periods, you can enable `detailed monitoring` on the instance.
+
+#### Collecting logs from EC2
+:exclamation: By default, no logs from EC2 machine will go to CloudWatch.\
+IT is necessary to install a CloudWatch Agent on EC2 to push logs.\
+For this an EC2 instance must have an appropriate IAM role.
+
+#### EC2 instance recovery.
+CloudWatch Alarms can be used to trigger EC2 actions: `stop`, `terminate`, `reboot`, `recover`.\
+In case of recovery EC2 instance recovery keeps: same private, public, elastic IPs, metadata, placement group.
