@@ -1,6 +1,7 @@
 - [AMI](./AMI.md)
 - [API Gateway](./APIGateway.md)
 - [ASG](./ASG.md)
+- [AWS Config](./AwsConfig.md)
 - [Beanstalk](./Beanstalk.md)
 - [CloudFront](./CloudFront.md)
 - [CloudTrail](./CloudTrail.md)

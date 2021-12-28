@@ -58,6 +58,8 @@ This can help for example to gather logs from a crashing instance before it gets
 #### Launch templates vs Launch configuration
 LC is legacy. Must be re-created every time config changes.
 
+:exclamation: you can't modify a launch configuration after you've created it.
+
 LT is newer. Can have multiple versions.\
 Have parameters subsets for re-use and inheritance.\
 Provision both on-demand and Spot instances.

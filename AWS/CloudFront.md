@@ -79,7 +79,8 @@ A group has one primary origin and one secondary origin.\
 The secondary is used when the primary fails.
 
 #### Global Accelerator
-Global Accelerator is a global service and is not part of CloudFront.
+GA is a networking service that helps you improve the availability and performance of the applications that you offer to your global users.\
+Global Accelerator is not part of CloudFront.
 
 Scenario:
 An app (ALB) is deployed in one region.\
@@ -105,7 +106,7 @@ Global Accelerator:
 * Improves performance for applications over TCP or UDP, e.g. gaming, IoT, VoIP.
 * No caching
 * Regional failover
-* HAs embedded app healthchecks
+* Has embedded app healthchecks
 
 CloudFront:
 * improves performance for cacheable content, e.g. media
