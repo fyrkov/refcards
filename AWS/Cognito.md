@@ -1,7 +1,9 @@
 ### Cognito
+To provide access to AWS resources from the side of the application end users.\
+Do not create IAM users for that.
 
 Components:
-1. Cognito User Pools:
+1. Cognito User Pools (CUP):
 * Sign in functionality for app users
 * Integrated with API Gateway
 
@@ -11,7 +13,7 @@ Components:
 
 3. Cognito sync
 * Synchronize data from device to Cognito
-* May be deprecated an replaced by AppSync
+* May be deprecated and replaced by AppSync
 
 #### Cognito User Pools (CUP)
 * ~= serverless database of users
