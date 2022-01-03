@@ -38,7 +38,8 @@ and this throughput automatically scales with the number of shards in a stream.
 ![KinesisDataFirehose](files/KinesisDataFirehose.png)
 
 #### Kinesis Data Analytics
-* Perform real-time analytics on Kinesis Streams using SQL
+* Perform real-time analytics on Kinesis Streams using SQL.
+* KDA can not directly ingest data from the source as it ingests data either from KDS or KDF
 * Fully managed, auto scaling
 * Use cases
   * Time-series analytics

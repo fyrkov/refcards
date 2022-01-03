@@ -29,6 +29,11 @@ Endpoint integration types:
 #### Timeout
 API Gateway has a default (and max) timeout of 29secs when calling a target.
 
+#### Throttling
+You can configure throttling and quotas for your APIs to help protect them from being overwhelmed by too many requests.\
+When request submissions exceed the steady-state request rate and burst limits, API Gateway begins to throttle requests.\
+Clients may receive `429 Too Many Requests` error responses at this point. 
+
 #### Security
 1. IAM Permissions
 * Create an IAM policy authorization and attach to User / Role

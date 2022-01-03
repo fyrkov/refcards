@@ -37,10 +37,12 @@ Snowball can not transfer directly to Glacier.\
 To do so it is possible to transfer to s3 and set up lifecycle rules.
 
 ### FSx
-Use case: launch a hi perf 3rd party filed system on AWS (instead of EFS).\
+Use case: launch a hi perf 3rd party distributed file system on AWS (instead of EFS).\
 :exclamation: EFS is a shared POSIX system meaning that it is for Unix machines.\
 FSx is a fully managed service that supports:
-* FSx for Lustre. Use case: parallel distributed FS for large scale computing, machine learning, HPC on Linux. Has seamless integration with S3 - can read S3 as FS and can write directly to S3 through FS. Has hi throughput, lo latency.
+* FSx for Lustre. Use case: parallel distributed FS for large scale computing, machine learning, HPC on Linux.
+Has seamless integration with S3 - can read S3 as FS and can write directly to S3 through FS.
+Has hi throughput, lo latency.
 * FSx for Windows File Server.
 * FSx for NetApp ONTAP
 
