@@ -40,8 +40,8 @@ Usually connection timeouts indicate SGs misconfiguration.
 * "Convertible Reserved" can change types.
 * "Spot instance" are unused EC2 capacity that can be bid on and claimed when they become available. Most cost efficient. For short workloads like batch jobs. Spot price changes over time and are different per AZ. An instance is lost when the cost exceeds max budget price.
 * "Dedicated host" - a dedicated physical server. For compliance reqs and server-bound software licenses. For 1 or 3 years period.
-* "Dedicated instance" - a soft version of dedicated host. No insight into the underlying sockets and cores.
-
+* "Dedicated instance" - a soft version of dedicated host. Still enables the use of dedicated physical servers. No insight into the underlying sockets and cores.
+* Spot Fleet
 
 #### EC2 placement groups:
 * cluster - all together in one rack. For HPS and hi throughput
@@ -79,3 +79,12 @@ For this an EC2 instance must have an appropriate IAM role.
 #### EC2 instance recovery.
 CloudWatch Alarms can be used to trigger EC2 actions: `stop`, `terminate`, `reboot`, `recover`.\
 In case of recovery EC2 instance recovery keeps: same private, public, elastic IPs, metadata, placement group.
+
+#### Spot Fleet 
+With a normal spot instance request, you place a bid for a specific instance type in one specific AZ and hope you get it.\
+With spot fleets, you can request a variety of different instance types that meet your requirements.\
+Additionally, you can spread your spot fleet bet across multiple AZs to increase the likelihood of getting your instance fulfilled.
+
+By default, Spot Fleets are set to maintain target capacity by launching replacement instances after Spot Instances in the fleet are terminated.\
+You can submit a Spot Fleet as a one-time request, which does not persist after the instances have been terminated.\
+You can include On-Demand Instance requests in a Spot Fleet request.

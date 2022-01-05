@@ -30,7 +30,6 @@ Access control:
   * cross-account access to SNS topics.
   * allowing other services to write to an SNS topic
 
-
 #### SNS + SQS Fan Out Pattern
 Need to send a message to multiple services, hence queues.\
 We can push once to SNS and subscribe all SQS queues to the topic.

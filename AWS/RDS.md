@@ -45,7 +45,7 @@ An app must update connection string to leverage RRs.
 
 In AWS there is usually a network cost for data exchange between AZs.\
 For RDS replication in the same region but different AZs there is no cost.\
-Cross replication is paid.
+Cross-region replication is paid.
 
 RRs can be added after DB creation.
 

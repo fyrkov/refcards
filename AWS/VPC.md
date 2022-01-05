@@ -6,6 +6,13 @@ A VPC is a regional network that can include subnets in different AZs in the reg
 After you create a VPC, you can add one or more subnets in each Availability Zone.\
 VPC can not span across multiple regions.
 
+Max CIDR per VPC is 5, for each CIDR:
+* min size is /28 (16 IP addresses)
+* max size is /16 (65536 IP addresses)
+
+:exclamation: VPC CIDR should not overlap with your other Networks (e.g., corporate)\
+:exclamation: 5 addresses in each CIDR/subnet are always reserved by AWS. Hence, `/27` gives not 32 IP addresses, but 32-5 = 27
+
 A subnet is a range of IP addresses in your VPC.
 Subnet types:
 * Public subnet: The subnet's IPv4 or IPv6 traffic is routed to an internet gateway and can reach the public internet.

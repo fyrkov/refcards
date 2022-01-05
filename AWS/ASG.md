@@ -62,7 +62,7 @@ LC is legacy. Must be re-created every time config changes.
 
 LT is newer. Can have multiple versions.\
 Have parameters subsets for re-use and inheritance.\
-Provision both on-demand and Spot instances.
+Can provision both on-demand and Spot instances.
 
 #### Multi-AZ
 ASG can work across multiple AZs in an AWS Region.\
