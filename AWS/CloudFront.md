@@ -79,18 +79,9 @@ A group has one primary origin and one secondary origin.\
 The secondary is used when the primary fails.
 
 #### Global Accelerator
-GA is a networking service that helps you improve the availability and performance of the applications that you offer to your global users.\
-Global Accelerator is not part of CloudFront.
-
-Scenario:
-An app (ALB) is deployed in one region.\
-Clients use it globally. There is need to reduce latency.
-
-Unicast IP - one server holds one IP address.\
-Anycast IP - all servers hold the same IP address and clients are routed to the nearest one.\
-Global Accelerator uses Anycast IP and AWS global network and its edge locations to route traffic to the optimal regional endpoint based on health, client location, and policies.\
-Global Accelerator gets 2 static IP addresses.\
-The static IP addresses accept incoming traffic onto the AWS global network from the edge location that is closest to your users.
+AWS Global Accelerator is a network layer service that directs traffic to optimal endpoints over the AWS global network,
+this improves the availability and performance of your internet applications.
+It provides two static anycast IP addresses that act as a fixed entry point to your application endpoints in a single or multiple AWS Regions.
 
 Global Accelerator endpoints can be:
 * Elastic IP
@@ -98,8 +89,21 @@ Global Accelerator endpoints can be:
 * ALB
 * NLB
 
-Global Accelerator assigns each accelerator a default DNS name that points to the 2 static IP addresses.\
-Global Accelerator perform healthchecks on the app and does automatic failover in case on of targets fails.
+AWS Global Accelerator uses endpoint weights to determine the proportion of traffic that is directed to endpoints in an endpoint group,
+and traffic dials to control the percentage of traffic that is directed to an endpoint group (an AWS region where your application is deployed).
+
+Scenario:
+An app (ALB) is deployed in one region.\
+Clients use it globally. There is need to reduce latency.
+
+Unicast IP - one server holds one IP address.\
+Anycast IP - all servers hold the same IP address and clients are routed to the nearest one.\
+GA uses Anycast IP and AWS global network and its edge locations to route traffic to the optimal regional endpoint based on health, client location, and policies.\
+GA gets 2 static IP addresses.\
+The static IP addresses accept incoming traffic onto the AWS global network from the edge location that is closest to your users.
+
+GA assigns each accelerator a default DNS name that points to the 2 static IP addresses.\
+GA perform healthchecks on the app and does automatic failover in case on of targets fails.
 
 #### Global Accelerator vs CloudFront
 Global Accelerator:

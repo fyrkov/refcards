@@ -42,6 +42,18 @@ address translation (NAT) gateway or a NAT instance.
 The route table associated with subnet 3 routes all IPv4 traffic (`0.0.0.0/0`) to a virtual private gateway (for example, `vgw-1a2b3c4d`).\
 Instance 3A can reach computers in the corporate network over the Site-to-Site VPN connection.
 
+#### IGW Internet Gateway
+Enables resources in VPC connect to the Internet.
+* Must be created separately from VPC
+* One VPC can only be attached to one IGW and vice versa
+* IGW on its own does not allow Internet access - Route Tables associate with subnets also must be edited!
+
+#### Bastion host
+How to give access to EC2 hosts in a **private subnet**?\
+There is a concept of **bastion host** - an EC2 host placed in a public subnet and open to the Internet.\
+Users can ssh into bastion host first then ssh from bastion host to target hosts in the private subnet (2 hops).
+
+
 #### VPC Sharing
 Use VPC sharing to share **one or more subnets** with other AWS accounts belonging\
 to the same parent organization from AWS Organizations.\

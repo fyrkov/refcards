@@ -1,5 +1,5 @@
 ### Resources Access Manager (RAM)
-Share AWS resources with other AWS accs: wihtihn Organization or any acc to avoid resource duplication.\
+Share AWS resources with other AWS accs: within Organization or any acc to avoid resource duplication.\
 Resources that can be shared:
 * VPC Subnets (most used)
   * allow to have all resources launched in the same subnet

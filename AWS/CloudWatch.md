@@ -83,7 +83,7 @@ For logs aggregation Subscription Filters can be used:
 
 #### Collecting logs from EC2
 :exclamation: By default, no logs from EC2 machine will go to CloudWatch.\
-IT is necessary to install a CloudWatch Agent on EC2 to push logs.\
+It is necessary to install a **CloudWatch Agent** on EC2 to push logs.\
 For this an EC2 instance must have an appropriate IAM role.\
 It is also possible ot install an agent on on-premises servers.
 
@@ -94,7 +94,7 @@ Unified Agent is new one.\
 Unified Agent has centralized configuration using SSM Parameter Store.\
 Apart from logs, it additionally collects system-level metrics with hi granularity such as
 * CPU
- * RAM
+* RAM
 * Disk
 * Netstat
 * Processes
@@ -113,6 +113,8 @@ Alarms are used to trigger notifications for any metric.
   * SNS
 
 :exclamation: alarms can be created not only on top of metrics but also on logs > log metrics filters.
+
+:exclamation: You can use CloudWatch Alarms to send an email via SNS
 
 Testing an alarm is possible with
 `aws cloudwatch set-alarm-state ...`

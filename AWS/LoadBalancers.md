@@ -104,8 +104,21 @@ Works only for ALB, NLB. Does not work with CLB.
 #### Connection Draining/Deregistration Delay
 The time to complete in-flight requests if an instance is de-registered.\
 LB then stops sending new requests and waits for existing in-flight requests to complete.\
-By default is 300 seconds, can be between [0,3600] seconds.
+By default is `300 seconds`, can be between `[0,3600] seconds`.
 
 #### ASGs
 LBs and Auto scaling groups work well together, i.e. when ASG scales out the app, LB registers new instances.\
 For that ASG needs to be attached during creation to LB's TG.
+
+#### Authentication with ALB + Cognito
+
+ALB can be used to securely authenticate users for accessing your applications.\
+This enables you to offload the work of authenticating users to your LB so that your applications can focus on their business logic.\
+You can use Cognito User Pools to authenticate users through:
+* IdP that is OpenID Connect (OIDC) compliant.
+* well-known social IdPs, such as Amazon, Facebook, or Google through user pools supported by Cognito
+* corporate identities, using SAML, LDAP, or Microsoft AD through user pools supported by Cognito
+
+You configure user authentication by creating an authenticate action for one or more listener rules.
+
+More: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/listener-authenticate-users.html

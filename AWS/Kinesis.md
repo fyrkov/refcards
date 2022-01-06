@@ -2,7 +2,7 @@
 * For collecting, processing and analyzing streaming data in real time.
 * Ingest data such as app logs, metrics, website clickstreams, IoT telemetry.
 * Subcomponents
-  * Kinesis Data Streams: capture, process and store data streams
+  * Kinesis Data Streams (=Kafka under the hood): capture, process and store data streams
   * Kinesis Data Firehose: load data streams into AWS data stores
   * Kinesis Data Analytics: analyze data streams with SQL or Apache Flink
   * Kinesis Video Streams: capture, process and store video streams

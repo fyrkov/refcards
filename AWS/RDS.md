@@ -64,7 +64,7 @@ This causes downtime until the upgrade is complete.
 
 #### Encryption
 RDS can encrypt DBs at rest with KMS keys (AES-256 encryption).\
-Encryption has to be defined at launch time.\
+:exclamation: Encryption has to be defined at launch time.\
 If master is not encrypted, RRs can not be encrypted.
 
 In flight encryption is supported with TLS between clients and DBs.\

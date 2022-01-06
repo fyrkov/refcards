@@ -3,7 +3,8 @@
 AWS WAF is a web application firewall that helps protect your web applications or APIs against common web exploits and bots.
 
 It blocks common attack patterns, such as SQL injection or cross-site scripting.\
-You can also customize rules that filter out specific traffic patterns.
+You can also customize rules that filter out specific traffic patterns, e.g.:\
+block web requests based on the IP addresses that the requests originate from
 
 WAF can be deployed on:
 * CloudFront
