@@ -5,7 +5,7 @@ Route 53 supports following DNS record types
 * AAAA - ipv6
 * CNAME - maps hostname to hostname
 * NS - name servers for hosted zones. A DNS name server is a server that stores the DNS records
-* and some others..
+* and some others...
 
 Hosted zones - containers of records defining how traffic is routed to domain and its subdomains.\
 `Public hosted zones` for internet, e.g. `app.company.com`.\
