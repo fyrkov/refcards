@@ -28,6 +28,11 @@ With enhanced fan-out developers can register stream consumers to use enhanced f
 and receive their own 2MB/second pipe of read throughput per shard,\
 and this throughput automatically scales with the number of shards in a stream.
 
+#### Ability to consume later 
+KDS provides the ability to consume records in the same order a few hours later.\
+For example, you have a billing application and an audit application that runs a few hours behind the billing application.\
+Because KDS stores data for up to 365 days, you can run the audit application up to 7 days behind the billing application.
+
 #### Kinesis Data Firehose
 * Kinesis Data Firehose is for load streaming data into S3 and other destinations.
 * Kinesis Data Firehose writes to destinations in batches.

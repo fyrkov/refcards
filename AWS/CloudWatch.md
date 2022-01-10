@@ -120,6 +120,9 @@ Testing an alarm is possible with
 `aws cloudwatch set-alarm-state ...`
 
 ##### EC2 instance recovery
+You can create an Amazon CloudWatch alarm to automatically recover the Amazon EC2 instance if it becomes impaired.\
+:exclamation: Terminated instances cannot be recovered.
+
 * Status check:
   * Instance status = check EC2 VM
   * System status = check underlying hardware

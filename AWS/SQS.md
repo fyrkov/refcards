@@ -29,7 +29,7 @@ Access control:
 After a message is polled by a consumer, the message becomes invisible to other consumers.\
 By default, this timeout is 30 seconds and can be set up to 12 hours in queue settings.\
 This means that the consumer has 30 seconds to process the message.\
-It the message is not processed/deleted within the visibility timeout, it can be picked up by another consumer.\
+If the message is not processed/deleted within the visibility timeout, it can be picked up by another consumer.\
 The processing consumer can call the `ChangeMessageVisibility` API to get more time programatically.
 
 #### FIFO queues
@@ -40,8 +40,6 @@ The processing consumer can call the `ChangeMessageVisibility` API to get more t
 
 :exclamation: You can't convert an existing standard queue into a FIFO queue. To make the move, you must either create a new FIFO queue for your application or delete your existing standard queue and recreate it as a FIFO queue.
 
-
-
 #### Dead letter queues
 Something wrong can be with a message - it can cause a consumers to fail.\
 After the `MaximumReceives` threshold is exceeded, the message goes into a DLQ.\
@@ -50,6 +48,7 @@ DLQ also has a retention period and it is important to fetch messages from it wi
 A DLQ and the `MaximumReceives` are specified in the settings of a target queue.
 
 #### Delivery delay
+Delay queues let you postpone the delivery of new messages.\
 Consumers do not see messages in a delay queue immediately.\
 Delay can be up to 15 mins.\
 By default, it is 0 sec.\

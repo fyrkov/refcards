@@ -154,3 +154,6 @@ Types of VPC Endpoints:
 ![](files/VPC_interface_endpoint.png)
 * **Gateway endpoint**. Provisions a gateway and must be used as a target in a route table. Supports S3 and Dynamodb
 ![](files/VPC_gateway_endpoint.png)
+
+#### VPN CloudHub
+// TODO

@@ -86,7 +86,10 @@ ASG can't contain EC2 instances from multiple regions.
 #### Instance tenancy in VPC
 By default, all instances in the VPC run as shared tenancy instances.\
 When you create a launch configuration, the default value for the instance placement tenancy is `null` and the instance tenancy is controlled by the tenancy attribute of the VPC.\
-You can specify the instance placement tenancy for your launch configuration as `default` or `dedicated` and thus override VPC setting.
+You can specify the instance placement tenancy for your launch configuration as `default`(=shared), `dedicated` and `host` and thus override VPC setting.
+
+You can change the tenancy of an instance from `dedicated` to `host`.\
+You can change the tenancy of an instance from `host` to `dedicated`
 
 #### Stand By mode
 The standby mode helps to temporarily remove an instance from ASG.\

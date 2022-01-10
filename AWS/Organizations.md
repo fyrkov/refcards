@@ -23,7 +23,13 @@ OU can be in another OU.\
 OUs form a tree structure with the `Root` on top.
 
 #### Service Control Policies (SCP)
+SCPs are similar to AWS Identity and Access Management (IAM) permission policies and use almost the same syntax.\
+However, an SCP never grants permissions.\
+Instead, SCPs are JSON policies that specify the maximum permissions for the affected accounts.
+
 * Whitelist or Blacklist IAM actions
+* :exclamation: SCPs affect only IAM users and roles
+* :exclamation: SCPs do not affect any service-linked role
 * Applied to OU or Account level
 * Does not apply to the master acc
 * SCP are applied to all the Users and Roles of the Account, including Root.

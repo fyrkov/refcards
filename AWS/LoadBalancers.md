@@ -51,7 +51,7 @@ ALB can be `internet-facing` or `internal`.
 
 #### NLB
 Supports TCP, TLS, UDP, i.e. OSI Layer 4.\
-Has hi throughput and lo latency (\~100ms) comparing to ALB (\~400ms).
+Has hi throughput and lo latency (~100ms) comparing to ALB (~400ms).
 
 NLB has an assigned static IP instead of a hostname.
 
@@ -63,7 +63,11 @@ TGs can group EC2, IP addresses, ALB (it is possible to chain NLB -> ALB).
 
 NLB does not have attached SGs and therefore EC2 SGs need to allow not by SG but by IP ranges (NLB is transparent for EC2s)
 
-#### GLB
+NLB can target:
+* Instance Id
+* Private IP of the instance
+
+#### GLB (Gateway Load Balancer)
 Required when for example all traffic needs to go through fleet of 3rd party network components like a firewall or DPI system etc.
 
 Operates at layer 3 - IP packets.
@@ -73,7 +77,6 @@ Combines functions:
 * load balancing traffic to 3party components
 
 Uses the GENEVE protocol on port 6081.
-
 
 #### Sticky sessions (Session affinity)
 CLB and ALB can route the same client to the same instance.\

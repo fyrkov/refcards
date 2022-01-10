@@ -83,8 +83,9 @@ A Gateway has to be installed in on-premise datacenter of the client and require
 3. **Volume Gateway**
 * Block storage using iSCSI proto backed by S3
 * **Backed up by EBS snapshots which can restore client's on-premises volumes.**
-* **Cached Volumes**: lo latency access to most recent data.
-* **Stored Volumes**: entire dataset is on premise, scheduled backup to S3
+* Types:
+  * **Cached Volumes**: With cached volumes, the AWS Volume Gateway stores the full volume in its Amazon S3 service bucket, and just the recently accessed data is retained in the gateway’s local cache for low-latency access.
+  * **Stored Volumes**: With stored volumes, your entire data volume is available locally in the gateway, for fast read access. Volume Gateway also maintains an asynchronous copy of your stored volume in the service’s Amazon S3 bucket.
 
 Use case: backup volumes on on-premises servers.
 ![VolumeGateway](files/VolumeGateway.png)
@@ -103,3 +104,20 @@ Service can store and manage credentials or can also integrate with auth systems
 The service is accessed via an FTP endpoint or DNS in Route53.
 
 Use case: setting up FTP interface to S3.
+
+### DataSync
+AWS DataSync is an online data transfer service that simplifies, automates, and accelerates copying large amounts of data to and from AWS storage services over the internet or AWS Direct Connect.
+
+AWS DataSync fully automates and accelerates moving large active datasets to AWS, up to 10 times faster than command-line tools. It is natively integrated with:
+* Amazon S3
+* Amazon EFS
+* Amazon FSx for Windows File Server
+* Amazon CloudWatch
+* AWS CloudTrail
+
+DataSync uses a purpose-built network protocol and scale-out architecture to transfer data.\
+A single DataSync agent is capable of saturating a 10 Gbps network link.
+
+DataSync fully automates the data transfer.\
+It comes with retry and network resiliency mechanisms, network optimizations, built-in task scheduling, monitoring via the DataSync API and Console, and CloudWatch metrics, events, and logs that provide granular visibility into the transfer process.\
+DataSync performs data integrity verification both during the transfer and at the end of the transfer.
