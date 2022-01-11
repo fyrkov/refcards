@@ -80,6 +80,18 @@ For this an EC2 instance must have an appropriate IAM role.
 CloudWatch Alarms can be used to trigger EC2 actions: `stop`, `terminate`, `reboot`, `recover`.\
 In case of recovery EC2 instance recovery keeps: same private, public, elastic IPs, metadata, placement group.
 
+#### Spot Instances FAQ
+To launch a Spot Instance, create a Spot Instance request, or Amazon EC2 creates a Spot Instance request on your behalf.\
+The Spot Instance launches when the **Spot Instance request** is fulfilled.\
+A Spot Instance request is either **one-time** or **persistent**.\
+If the spot request is **persistent**, the request is opened again after your Spot Instance is **interrupted**.
+
+**Spot Instance interruption** – EC2 terminates, stops, or hibernates your Spot Instance when Amazon EC2 needs the capacity back or the Spot price exceeds the maximum price for your request.
+
+:exclamation: canceling the request does not terminate the instance; you must terminate the running Spot Instance manually.
+
+![](files/spot_lifecycle.png)
+
 #### Spot Fleet 
 With a normal spot instance request, you place a bid for a specific instance type in one specific AZ and hope you get it.\
 With spot fleets, you can request a variety of different instance types that meet your requirements.\

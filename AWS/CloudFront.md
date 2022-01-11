@@ -105,6 +105,8 @@ The static IP addresses accept incoming traffic onto the AWS global network from
 GA assigns each accelerator a default DNS name that points to the 2 static IP addresses.\
 GA perform healthchecks on the app and does automatic failover in case on of targets fails.
 
+![](files/GlobalAccelerator.jpg)
+
 #### Global Accelerator vs CloudFront
 Global Accelerator:
 * Improves performance for applications over TCP or UDP, e.g. gaming, IoT, VoIP.

@@ -48,11 +48,18 @@ DLQ also has a retention period and it is important to fetch messages from it wi
 A DLQ and the `MaximumReceives` are specified in the settings of a target queue.
 
 #### Delivery delay
-Delay queues let you postpone the delivery of new messages.\
+1. **Delay queues** let you postpone the delivery of new messages.\
 Consumers do not see messages in a delay queue immediately.\
 Delay can be up to 15 mins.\
 By default, it is 0 sec.\
 The delay can be set at a queue level or overridden with API when a producer sends a message.
+
+2. You can use message timers to set an initial invisibility period for a message added to a queue.\
+So, if you send a message with a 60-second timer, the message isn't visible to consumers for its first 60 seconds in the queue.\
+The default (minimum) delay for a message is 0 seconds. The maximum is 15 minutes.\
+You should use message timers to postpone the delivery of **certain messages** to the queue by one minute.\
+:exclamation: FIFO queues don't support timers on individual messages!\
+To set a delay period on an entire queue, rather than on individual messages, use delay queues.
 
 #### Long polling
 Long polling can be enabled and configured up to 20 seconds.\

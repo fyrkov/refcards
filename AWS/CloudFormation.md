@@ -16,5 +16,8 @@ Behind the scenes, Elastic Beanstalk uses CloudFormation to create and maintain 
 * **change set** is a preview of changes that will be executed by stack operations to create, update, or remove resources.
 * **stack set** is a group of stacks you manage together that can replicate a group.
 
+A **stack** cannot be used to deploy the same template across AWS accounts and regions.\
+A **stack set** lets you create stacks in AWS accounts across regions by using a single AWS CloudFormation template.
+
 #### Terraform VS CloudFormation
 CloudFormation supports Terraform
