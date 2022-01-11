@@ -57,6 +57,16 @@ Keeps the previous key active, so you can decrypt old data.\
 In this case better to use aliases (to hide the change of the key from the applications).\
 Use case: good for rotations of keys that are not eligible for automatic rotation (like asymmetric keys).
 
+#### Deleting CMK
+Deleting a customer master key (CMK) in AWS Key Management Service (AWS KMS) is destructive and potentially dangerous.\
+Therefore, AWS KMS enforces a waiting period.\
+To delete a CMK in AWS KMS you schedule key deletion.\
+You can set the waiting period from a minimum of 7 days up to a maximum of 30 days.\
+The default waiting period is 30 days.\
+During the waiting period, the CMK status and key state is Pending deletion.\
+To recover the CMK, you can cancel key deletion before the waiting period ends.\
+After the waiting period ends you cannot cancel key deletion, and AWS KMS deletes the CMK.
+
 #### CLI examples
 ```shell
 # 1) encryption

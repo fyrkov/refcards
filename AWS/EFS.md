@@ -20,7 +20,7 @@ Use cases:
 * data sharing
 * Wordpress
 
-EFS is created inside the VPC and can be mounted across different AZs (but still the same region).
+EFS is created inside the VPC and can be mounted across different AZs (but still the same region).\
 In each AZ then it can have own SG (or the same SG ).
 
 EC2 hosts can be attached from EFS page.\
@@ -38,3 +38,10 @@ SG of EFS must allow SGs of EC2 hosts.
 
 #### EFS Infrequent Access (EFS IA)
 EFS IA is a storage class that provides price/performance that is cost-optimized for files, not accessed every day, with storage prices up to 92% lower compared to EFS Standard. 
+
+#### Security
+* You control which EC2s can access your EFS by using VPC SG rules and IAM policies.
+* Use VPC SGs to control the network traffic to and from your file system.
+* Attach an IAM policy to your EFS to control which clients can mount EFS and with what permissions
+* EFS Access Points to manage application access.
+* Control access to files and directories with POSIX-compliant user and group-level permissions.

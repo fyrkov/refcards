@@ -1,9 +1,10 @@
 ### API Gateway
-AI Gateway provides HTTP endpoints in front of Lambdas or HTTP endpoints + additional features:
+API Gateway supports stateless RESTful APIs and stateful WebSocket APIs.\
+API Gateway features:
 * Supports Websocket, RT streaming
 * Versioning, e.g. `/v1, /v2`
 * Handles multiple envs: dev, test, prod
-* Handles security: auth+auth
+* Can handle security: authentication + authorization
 * Can create API keys and handle requests throttling
 * Swagger/OpenAPI import to quickly define APIs
 * Transform and validate requests and responses
@@ -12,7 +13,7 @@ AI Gateway provides HTTP endpoints in front of Lambdas or HTTP endpoints + addit
 API type is selected upon creation:
 * HTTP API
 * WebSocket
-* REST API / REST API prvate
+* REST API / REST API private
 
 Endpoint types can be:
 * Edge-optimized. For global clients. Requests are routed through CloudFront edge locations => improved latency. The Gateway itself stays in one region.
@@ -49,7 +50,7 @@ Use case: **to give permissions to users in your AWS acc.**
 * Option to cache a result
 * Lambda must return and IAM policy for the user
 
-Use case: **helps with 3rd party types of auth: OAuth, SAML**
+Use case: **helps with 3rd party types of auth: OAuth, SAML**\
 ![API_Gateway_security2.png](files/API_Gateway_security2.png)
 
 3. Cognito User Pools

@@ -28,7 +28,7 @@ App will get a fixed hostname like `xxx.region.elb.amazonaws.com`
 #### ALB
 Allows balancing to multiple apps across machines (target groups).\
 Allows balancing to multiple apps on the same host (containers).\
-Supports redirect, e.g. HTTPS -> HTTPS.\
+Supports redirect, e.g. HTTPS -> HTTPS.
 
 Routing can be based on URL, path, hostname, query string, headers, source IP.\
 For that listener rules can be modified after creation in IF-THEN style.
@@ -36,7 +36,14 @@ For that listener rules can be modified after creation in IF-THEN style.
 ALB is good for Docker and ECS as it supports routing to dynamic ports in ECS.\
 CLB would require one LB per app.
 
-Target groups can group EC2 intances, ECS tasks, Lambdas, IP addresses, other ALB.\
+Target groups can group:
+* EC2 instances
+* ECS tasks
+* Lambdas
+* IP addresses (private, not public!)
+* other ALB.
+
+
 ALB can route to multiple TGs.\
 Healthchecks are at the TG level.\
 ALB require listener rules to define routing to TGs.\
