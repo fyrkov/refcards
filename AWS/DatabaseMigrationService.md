@@ -2,11 +2,25 @@
 
 AWS Database Migration Service helps you migrate databases to AWS quickly and securely.\
 The source database remains fully operational during the migration, minimizing downtime to applications that rely on the database.\
-DMR supports homogeneous migrations such as Oracle to Oracle, as well as heterogeneous migrations between different database platforms, such as Oracle to Amazon Aurora.
 
 Use cases:
-* Homogeneous Database Migrations
-* Heterogeneous Database Migrations
+* Homogeneous Database Migrations: Oracle -> Oracle
+* Heterogeneous Database Migrations: MySql -> Postgres
 * Continuous Data Replication
 * Database Consolidation
 * Development and Test
+
+During migration the source database remains available.
+
+**CDC (Change Data Capture)** - continuous date replication
+
+A client needs to create an EC2 instances that will perform DMS task.
+
+Data migration can be:
+* Full load + CDC – The task migrates existing data and then updates the target database based on changes to the source database.
+* CDC only – The task migrates ongoing changes after you have data on your target database.
+
+
+
+#### SCT Schema Conversion Tool
+In case of migration between different databases (or different major versions?) SCT is required to convert the data schema.

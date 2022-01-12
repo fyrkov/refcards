@@ -6,7 +6,7 @@ EC2 instance types: `m5.2xlarge`, where `m` - class, `5` - generation, `2xlarge`
 
 |Purpose|Classes|Use cases|
 |--|--|--|
-|General|G, M,..|
+|General|T, M,..|
 |Compute|C|CPU loading: Batch processing workloads, hi performance servers, media transcoding|
 |Memory Optimized|R,X,..|Large datasets in memory, in-memory databases, cache stores|
 |Accelerated Computing|P,G,..|floating point calculations, graphics processing|
