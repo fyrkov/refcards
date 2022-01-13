@@ -7,9 +7,9 @@ You can also customize rules that filter out specific traffic patterns, e.g.:\
 block web requests based on the IP addresses that the requests originate from
 
 WAF can be deployed on:
-* CloudFront
 * ALB
 * API Gateway
+* CloudFront
 
 A user defines Web ACL (Access Control List):
 * Rules include: IPs, HTTP headers, body, URI strings

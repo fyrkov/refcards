@@ -134,7 +134,7 @@ Network Access Control List (NACL) = firewall at subnet level.
 * NACL must deal with **Ephemeral ports** (short lived random ports that a client opens and holds to get a response from a server)
 
 Use case: blocking specific IPs at the subnet level.\
-![](files/NACL_SGs_incoming.png)
+![](files/NACL_SGs_incoming.png)\
 ![](files/NACL_SGs_outgoing.png)
 
 ![](files/SG_vs_NACL.png)
@@ -177,7 +177,7 @@ To expose a service an **AWS Private Link** can be used. Both sides must:
 For transitive peering between many VPCs and on-premise DCs.\
 Makes a star connection topology.
 
-TGW is a regional resource, but can work **cross-region** and **cross-accounts**.\
+TGW is a regional resource, but can work **cross-region** and **cross-accounts**.
 
 To limit anyone to anyone peering a **Route Table** associated with the TGW can be edited.
 
@@ -208,7 +208,7 @@ This design is suitable if you have multiple branch offices and existing interne
 ![](files/AWS_VPN_CloudHub-diagram.png)
 
 #### VPC Flow Logs
-VPC Flow Logs capture info aboutIP traffic at levels:
+VPC Flow Logs capture info about IP traffic at levels:
 * VPC
 * Subnet
 * ENI

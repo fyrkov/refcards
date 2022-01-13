@@ -68,7 +68,9 @@ TGs can group EC2, IP addresses, ALB (it is possible to chain NLB -> ALB).
 
 ~~Listener rules work only for traffic/port pair.~~  what about more complex listener rules??
 
-NLB does not have attached SGs and therefore EC2 SGs need to allow not by SG but by IP ranges (NLB is transparent for EC2s)
+:exclamation: NLB does not have attached SGs!\
+Therefore EC2 SGs need to allow not by SG but by IP ranges (NLB is transparent for EC2s).\
+Also blocking traffic at NLB level is not possible (unlike ALB), only NACL and EC2 SGs left.
 
 NLB can target:
 * Instance Id
@@ -97,7 +99,6 @@ ALB - always enabled. No charges.\
 NLB - can be enabled. Charges apply.\
 CLB - disbled by default, no charges if enabled.
 
-
 #### TLS
 LBs use X.509 cert.\
 A cert can be added to LB in listeners when an HTTPS is selected.\
@@ -106,7 +107,8 @@ It is possible to add list of optional certs to support multiple domains.
 
 How does one machine serve multiple websites?\
 It is necessary to load multiple SSL certs.\
-**SNI** - Server Name Indication is a new protocol that resolves this issue and allows to expose multiple HTTPS applications each with its own SSL certificate on the same listener. Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
+**SNI** - Server Name Indication is a new protocol that resolves this issue and allows exposing multiple HTTPS applications each with its own SSL certificate on the same listener.\
+Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
 
 Clients can use SNI to specify the hostname they want to reach.\
 Works only for ALB, NLB. Does not work with CLB.

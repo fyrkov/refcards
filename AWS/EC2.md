@@ -6,10 +6,10 @@ EC2 instance types: `m5.2xlarge`, where `m` - class, `5` - generation, `2xlarge`
 
 |Purpose|Classes|Use cases|
 |--|--|--|
-|General|T, M,..|
+|General|T, M,...|
 |Compute|C|CPU loading: Batch processing workloads, hi performance servers, media transcoding|
-|Memory Optimized|R,X,..|Large datasets in memory, in-memory databases, cache stores|
-|Accelerated Computing|P,G,..|floating point calculations, graphics processing|
+|Memory Optimized|R,X,...|Large datasets in memory, in-memory databases, cache stores|
+|Accelerated Computing|P,G,...|floating point calculations, graphics processing|
 |Storage Optimized|I,D,H|Lo latency hi throughput IO: Databases, distributed filesystems|
 
 Instances types comparison chart: https://instances.vantage.sh/
@@ -79,6 +79,11 @@ For this an EC2 instance must have an appropriate IAM role.
 #### EC2 instance recovery.
 CloudWatch Alarms can be used to trigger EC2 actions: `stop`, `terminate`, `reboot`, `recover`.\
 In case of recovery EC2 instance recovery keeps: same private, public, elastic IPs, metadata, placement group.
+
+#### Enhanced Networking
+1. **ENA - Elastic Network Adapter** - provides higher bandwidth with 100Gbps.
+2. **EFA - Elastic Fabric Adapter** - improved ENA for HPC, works for Linux.\
+Good for inter-node communications. It bypasses the OS layer to provide lower latency (works with special MPI interface).  
 
 #### Spot Instances FAQ
 To launch a Spot Instance, create a Spot Instance request, or Amazon EC2 creates a Spot Instance request on your behalf.\

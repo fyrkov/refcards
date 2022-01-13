@@ -1,6 +1,7 @@
 ### CloudTrail
 Provides governance, compliance and audit for AWS account.\
 Everything that modifies resources within the account will appear in CloudTrail.\
+CT provides event history of your AWS account activity, including actions taken through the AWS Console, AWS SDKs, CLI tools, and other AWS services.\
 CT is enabled by default.\
 CT can put logs into CloudWatch Logs or S3.\
 CT can be applied to all regions(default) or a single region.

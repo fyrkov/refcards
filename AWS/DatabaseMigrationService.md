@@ -1,7 +1,13 @@
 ### Database Migration Service (DMR)
 
 AWS Database Migration Service helps you migrate databases to AWS quickly and securely.\
-The source database remains fully operational during the migration, minimizing downtime to applications that rely on the database.\
+AWS DMS enables you to seamlessly migrate data from supported sources to
+* relational databases
+* data warehouses
+* streaming platforms: Amazon Managed Streaming of Kafka (Amazon MSK)
+* and other data stores in AWS cloud
+
+The source database remains fully operational during the migration, minimizing downtime to applications that rely on the database.
 
 Use cases:
 * Homogeneous Database Migrations: Oracle -> Oracle
@@ -19,7 +25,6 @@ A client needs to create an EC2 instances that will perform DMS task.
 Data migration can be:
 * Full load + CDC – The task migrates existing data and then updates the target database based on changes to the source database.
 * CDC only – The task migrates ongoing changes after you have data on your target database.
-
 
 
 #### SCT Schema Conversion Tool

@@ -130,10 +130,12 @@ You can create an Amazon CloudWatch alarm to automatically recover the Amazon EC
 * Optionally, it can send an alert to SNS topic
 
 #### CloudWatch Events
+CloudWatch Events delivers a near real-time stream of system events that describe changes in AWS resources.\
+These help to trigger notifications based on changes happening in AWS services.
 * Event pattern: intercepts events from AWS services
   * Example sources: EC2 instance start, CodeBuild failure, S3, Trusted Advisor
   * Can intercept any API call with CloudTrail integration
-* Can also be "Scheduled", e.g. crate an event every 4 hours
+* Can also be "Scheduled", e.g. create an event every 4 hours
 * JSON payload is crated from the event and passed to a target:
   * Compute: Lambda, Batch, ECS Task
   * Integration: SQS, SNS, KDS, KDF
@@ -141,9 +143,9 @@ You can create an Amazon CloudWatch alarm to automatically recover the Amazon EC
   * Maintenance: SSM, EC2 Actions
 
 #### EventBridge
-EventBridge is an extension of CloudWatch events to receive events from 3rd party sources like DataDog, Auth0, Zendesk etc.\
+EventBridge is an extension of CloudWatch Events to receive events from 3rd party sources like DataDog, Auth0, Zendesk etc.\
 For this there are "partner event buses".\
-It is also possible to adda "custom event bus" for your own applications.
+It is also possible to add a "custom event bus" for your own applications.
 
 EventBridge can analyze events in your bus and infer the schema.\
 The Schema Registry allows you to generate code for your applications that will know in advance how data is structured.\
