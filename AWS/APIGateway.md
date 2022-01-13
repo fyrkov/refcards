@@ -9,6 +9,7 @@ API Gateway features:
 * Swagger/OpenAPI import to quickly define APIs
 * Transform and validate requests and responses
 * Cache API responses
+* **Can terminate TLS and be configured for mutual TLS**
 
 API type is selected upon creation:
 * HTTP API
@@ -17,7 +18,7 @@ API type is selected upon creation:
 
 Endpoint types can be:
 * Edge-optimized. For global clients. Requests are routed through CloudFront edge locations => improved latency. The Gateway itself stays in one region.
-* Regional. For clients within same region. Is not integrated with CLoudFront edge locations by def but it can be added manually to have some improve  improvements as above.
+* Regional. For clients within same region. Is not integrated with CloudFront edge locations by def, but it can be added manually to have some improve  improvements as above.
 * Private. Can be accessed only in the VPC using an interface VPC endpoint (ENI). Resource policy is used to define access.
 
 Endpoint integration types:

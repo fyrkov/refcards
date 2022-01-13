@@ -3,7 +3,7 @@
 CloudFront is a CDN.\
 It improves read performance as content is cached and edged.\
 216 Points of presence globally = edge locations.\
-Embedded DDoS protection, integration with Shield and WAF.\
+Embedded DDoS protection, integration with AWS Shield and WAF.\
 Can expose external HTTPS and can talk to internal HTTPS backends.
 
 CloudFront origins:
@@ -55,7 +55,7 @@ We can use CloudFront Signed URLs / Signed Cookies. We attach a policy with:
 * IP ranges to access the data from
 * Trusted signers (which AWS accs can create signed URLs)
 
-URLs can be valid for minutes (temporary media content) or years (private users's files).\
+URLs can be valid for minutes (temporary media content) or years (private user's files).\
 Signed URL gives access to individual files whereas Signed Cookies are useful to access multiple files.
 
 To provide an end-user with a signed URL it is necessary to have an app that will authorize a user and will generate a Signed URL using AWS SDK and requesting AWS CloudFront. Then the app returns a signed URL to the user.
@@ -65,7 +65,7 @@ CloudFront Signed URLs vs S3 Pre-signed URLs:
 * S3 Pre-Signed URLs issue a request on behalf of a person who pre-signed the URL. Uses IAM key of the signing IAM principal. Only allows access to S3. Has limited lifetime.
 
 #### Price classes
-CLoudFront access data price is different per regions and costs can be controlled with price classes
+CloudFront access data price is different per regions and costs can be controlled with price classes
 * Price Class All - all regions, best performance
 * Price Class 200 exclude most expensive regions, e.g. Australia
 * Price Class 100 include least expensive regions - North America and Europe

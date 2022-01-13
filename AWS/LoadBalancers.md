@@ -97,7 +97,6 @@ ALB - always enabled. No charges.\
 NLB - can be enabled. Charges apply.\
 CLB - disbled by default, no charges if enabled.
 
-
 #### TLS
 LBs use X.509 cert.\
 A cert can be added to LB in listeners when an HTTPS is selected.\

@@ -8,7 +8,7 @@ A group can only contain users, not other groups.
 
 #### Permissions and policies.
 
-Users and groups can have assigned JSON documents called policies, e.g.
+Entities (IAM identities or AWS resources) can have assigned JSON documents called policies, e.g.
 
 ```
 {
@@ -31,7 +31,24 @@ Users and groups can have assigned JSON documents called policies, e.g.
 
 *Inline* policy is a policy attached directly to a user or a role.
 
-Access keys. Access keys are used to set up a CLI access or an access via SDK.
+#### Identity-based policies and resource-based policies
+A policy is an object in AWS that, when associated with an identity or resource, defines their permissions.\
+There are 2 types:
+* **Identity-based policies** are attached to an IAM user, group, or role. 
+* **Resource-based policies** are attached to a resource. For example, you can attach resource-based policies to Amazon S3 buckets, Amazon SQS queues, VPC endpoints, and AWS Key Management Service encryption keys.
+
+#### More policy types
+The following policy types, listed in order from most frequently used to less frequently used, are available for use in AWS. For more details, see the sections below for each policy type.
+
+* **Identity-based policies** – Attach managed and inline policies to IAM identities (users, groups to which users belong, or roles). Identity-based policies grant permissions to an identity.
+* **Resource-based policies** – Attach inline policies to resources. The most common examples of resource-based policies are Amazon S3 bucket policies and IAM role trust policies. Resource-based policies grant permissions to the principal that is specified in the policy. Principals can be in the same account as the resource or in other accounts.
+* **Permissions boundaries** – Use a managed policy as the permissions boundary for an IAM entity (user or role). That policy defines the maximum permissions that the identity-based policies can grant to an entity, but does not grant permissions. Permissions boundaries do not define the maximum permissions that a resource-based policy can grant to an entity.
+* **Organizations SCPs** – Use an AWS Organizations service control policy (SCP) to define the maximum permissions for account members of an organization or organizational unit (OU). SCPs limit permissions that identity-based policies or resource-based policies grant to entities (users or roles) within the account, but do not grant permissions.
+* **Access control lists (ACLs)** – Use ACLs to control which principals in other accounts can access the resource to which the ACL is attached. ACLs are similar to resource-based policies, although they are the only policy type that does not use the JSON policy document structure. ACLs are cross-account permissions policies that grant permissions to the specified principal. ACLs cannot grant permissions to entities within the same account.
+* **Session policies** – Pass advanced session policies when you use the AWS CLI or AWS API to assume a role or a federated user. Session policies limit the permissions that the role or user's identity-based policies grant to the session. Session policies limit permissions for a created session, but do not grant permissions. For more information, see Session Policies.
+
+#### Access keys
+Access keys are used to set up a CLI access or access via SDK.
 
 * Access key id ~= username,
 * Secret Access Key ~= password.
