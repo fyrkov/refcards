@@ -53,7 +53,7 @@ Use case: distribute paid restricted content.\
 We can use CloudFront Signed URLs / Signed Cookies. We attach a policy with:
 * URL expiration
 * IP ranges to access the data from
-* Trusted signers (which AWS accs can create signed URLs)
+* Trusted signers (which AWS accounts can create signed URLs)
 
 URLs can be valid for minutes (temporary media content) or years (private user's files).\
 Signed URL gives access to individual files whereas Signed Cookies are useful to access multiple files.
@@ -63,6 +63,10 @@ To provide an end-user with a signed URL it is necessary to have an app that wil
 CloudFront Signed URLs vs S3 Pre-signed URLs:
 * CloudFront Signed URLs allows access to a path, no matter the origin (not only S3). It is an account wide key-pair, only the root manages it.
 * S3 Pre-Signed URLs issue a request on behalf of a person who pre-signed the URL. Uses IAM key of the signing IAM principal. Only allows access to S3. Has limited lifetime.
+
+CloudFront signed cookies allow you to control who can access your content when you don't want to change\
+your current URLs or when you want to provide access to multiple restricted files, for example,\
+all of the files in the subscribers' area of a website.
 
 #### Price classes
 CloudFront access data price is different per regions and costs can be controlled with price classes

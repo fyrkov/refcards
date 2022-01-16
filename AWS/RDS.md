@@ -12,7 +12,6 @@ RDS is a managed service which adds on top (comparing to EC2):
 * Storage is backed by EBS (gp2 or io1)
 * SSH not allowed
 
-
 #### RDS backups
 Backups are enabled by default and created automatically - daily full backup during the maintenance window.\
 Transaction logs are backed up every 5 mins.\
@@ -85,3 +84,10 @@ To access DB itself apart from user/pass an `IAM-based auth` can be used for Pos
 EC2 can have IAM role and then can issue and API call to RDS to get an auth token.\
 The EC2 can then use the `IAM token` to access DB.\
 Pros: no user management in DB, only in IAM.
+
+#### RAID configurations
+Creating a **RAID 0** array allows you to achieve a higher level of performance for a file system than you can provision on a single Amazon EBS volume.\
+Use RAID 0 when I/O performance is of the utmost importance.
+
+RAID 5 and RAID 6 are not recommended for Amazon EBS.\
+RAID 1 is also not recommended for use with Amazon EBS.

@@ -128,3 +128,8 @@ Replication tasks can be scheduled hourly/daily/weekly.
 DataSync can establish replication between:
 * DC and AWS
 * 2 AWS accounts in different regions
+
+#### DataSync vs File Gateway
+AWS recommends that you should use AWS DataSync to migrate existing data to Amazon S3, and subsequently\
+use the File Gateway configuration of AWS Storage Gateway to retain access to the migrated data and for ongoing updates\
+from your on-premises file-based applications.

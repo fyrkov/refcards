@@ -45,16 +45,30 @@ Usually connection timeouts indicate SGs misconfiguration.
 
 #### EC2 placement groups:
 * cluster - all together in one rack. For HPS and hi throughput
-* spread - distributed between AZs. For reducing risks, for  critical apps. Each instances is placed in a distinct rack.
+* spread - distributed between AZs. For reducing risks, for  critical apps.\
+Each instance is placed in a distinct rack (even within same AZ).\
+A spread placement group can span multiple AZs in the same Region.\
+You can have a maximum of 7 running instances per AZ per group.
 * partition - for Kafka, Hadoop, Cassandra etc. Each partition is placed in a distinct rack.
 
 #### EC2 instance metadata
 Metadata is info about EC2 instance.
 It allows instances to learn about themselves without using IAM role for that purpose.\
-The URL for this is `http://169.254.169.254/latest/meta-data/`.\
+The URL for this is `http://169.254.169.254/latest/meta-data/` \
 This is reachable only from EC2 instances, e.g. curl from within a EC2.
 
 For example, when a role is attached to a EC2 instance, in fact the instance fetches short lived credentials from the `http://169.254.169.254/latest/meta-data/iam/security-credentials/{role_name}`
+
+#### EC2 Root Device Volumes
+EC2 can start with:
+* instance store (not persistable, data is deleted when an instance is terminated)
+* EBS root device volume. An instance can be stopped and later restarted without affecting data stored in the attached volume
+
+By default, the root volume for an AMI backed by Amazon EBS is deleted when the instance terminates.\
+You can change the default behavior to ensure that the volume persists after the instance terminates.\
+To change the default behavior, set the DeleteOnTermination attribute to false using a block device mapping.
+
+You can configure the root volume to persist for a running instance using the command line tools only.
 
 #### EC2 Hibernate
 When you hibernate an instance, AWS signals the operating system to perform hibernation (suspend-to-disk).\

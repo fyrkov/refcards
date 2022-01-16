@@ -83,6 +83,10 @@ Can provision both on-demand and Spot instances.
 ASG can work across multiple AZs in an AWS Region.\
 ASG can't contain EC2 instances from multiple regions.
 
+Actions such as changing the AZs for your group or explicitly terminating or detaching instances can lead to the ASG becoming unbalanced between AZs.\
+Amazon EC2 Auto Scaling compensates by rebalancing the Availability Zones.\
+When rebalancing, ASG launches new instances before terminating the old ones, so that rebalancing does not compromise the performance or availability of app.
+
 #### Instance tenancy in VPC
 By default, all instances in the VPC run as shared tenancy instances.\
 When you create a launch configuration, the default value for the instance placement tenancy is `null` and the instance tenancy is controlled by the tenancy attribute of the VPC.\

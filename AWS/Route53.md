@@ -11,6 +11,11 @@ Hosted zones - containers of records defining how traffic is routed to domain an
 `Public hosted zones` for internet, e.g. `app.company.com`.\
 `Private hosted zones` for private domain names within VPC, e.g. `app.company.internal.com`.
 
+#### Private hosted zones
+To create a private hosted zone using the Route 53 console for each VPC that you want to associate with the Route 53 hosted zone, change the following VPC settings to true:
+* `enableDnsHostnames`
+* `enableDnsSupport`
+
 #### CNAME vs Aliases
 Both CNAME records and Route 53 "Alias" can be used to redirect to other hostname.\
 Alias is Route53 specific and can refer directly to AWS resources: ELBs, API Gateway, S3 Websites, VPC endpoints etc.\

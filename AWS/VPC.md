@@ -157,7 +157,8 @@ A VPC endpoint enables connections between a virtual private cloud (VPC) and sup
 Types of VPC Endpoints:
 * **Interface endpoint**. Provisions an ENI (private IP) as an entry point (must attach SG). Support most AWS services\
 ![](files/VPC_interface_endpoint.png)
-* **Gateway endpoint**. Deprecated. Provisions a gateway and must be used as a target in a route table. Supports S3 and Dynamodb\
+* **Gateway endpoint**. Deprecated. Provisions a gateway and must be used as a target in a route table.\
+Supports S3 (along with Interface endpoint) and DynamoDB(the only option).\
 ![](files/VPC_gateway_endpoint.png)
 
 2. How to expose a service in a VPC to many other VPCs?\

@@ -74,3 +74,17 @@ With Java SDK there is no need to implement the pattern manually, it is done in 
 
 #### VPC Access
 Clients can access SQS from their VPC using `VPC endpoints`, without using public IPs, and without needing to traverse the public internet.  
+
+#### Temporary Queues
+Temporary queues help you save development time and deployment costs when using common message patterns such as request-response.\
+You can use the **Temporary Queue Client** to create high-throughput, cost-effective, application-managed temporary queues.
+
+The client maps multiple temporary queues—application-managed queues created on demand for a particular process—onto a single Amazon SQS queue automatically.\
+This allows your application to make fewer API calls and have a higher throughput when the traffic to each temporary queue is low. When a temporary queue is no longer in use, the client cleans up the temporary queue automatically, even if some processes that use the client aren't shut down cleanly.
+
+The following are the benefits of temporary queues:
+* They serve as lightweight communication channels for specific threads or processes.
+* They can be created and deleted without incurring additional costs.
+
+They are API-compatible with static (normal) Amazon SQS queues.\
+This means that existing code that sends and receives messages can send messages to and receive messages from virtual queues.

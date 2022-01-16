@@ -8,7 +8,7 @@
   * Kinesis Video Streams: capture, process and store video streams
 
 
-#### Kinesis Data Streams
+### Kinesis Data Streams
 ![KinesisOverview](files/KinesisOverview.png)\
 A stream consists of shards. More shards - more throughput.\
 KCL = Kinesis Client Library.
@@ -28,12 +28,16 @@ With enhanced fan-out developers can register stream consumers to use enhanced f
 and receive their own 2MB/second pipe of read throughput per shard,\
 and this throughput automatically scales with the number of shards in a stream.
 
+#### Batching
+When a host needs to send many records per second (RPS) to KDS, simply calling the basic `PutRecord` API action in a loop is inadequate.\
+To reduce overhead and increase throughput, the application must batch records and implement parallel HTTP requests.
+
 #### Ability to consume later 
 KDS provides the ability to consume records in the same order a few hours later.\
 For example, you have a billing application and an audit application that runs a few hours behind the billing application.\
 Because KDS stores data for up to 365 days, you can run the audit application up to 7 days behind the billing application.
 
-#### Kinesis Data Firehose
+### Kinesis Data Firehose
 * Kinesis Data Firehose is for load streaming data into S3 and other destinations.
 * Kinesis Data Firehose writes to destinations in batches.
 * It is near real-time system (min possible buffer time is 60 sec)
@@ -42,7 +46,7 @@ Because KDS stores data for up to 365 days, you can run the audit application up
 
 ![KinesisDataFirehose](files/KinesisDataFirehose.png)
 
-#### Kinesis Data Analytics
+### Kinesis Data Analytics
 * Perform real-time analytics on Kinesis Streams using SQL.
 * KDA can not directly ingest data from the source as it ingests data either from KDS or KDF
 * Fully managed, auto scaling

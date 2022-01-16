@@ -1,6 +1,6 @@
 ### ElastiCache
 
-Managed Redis or Memcached - in memory datastore with hi perf and lo latency.
+Managed Redis or Memcached - in-memory datastore with hi perf and lo latency.
 
 :exclamation: Using ElastiCache requires app code changes
 
@@ -10,12 +10,15 @@ Managed Redis or Memcached - in memory datastore with hi perf and lo latency.
 * persistent
 * backup and restore features
 * encryption at rest and in-flight (with TLS)
+* supports Geospatial data
+* HIPAA eligible and PCI DSS compliant
 
 **Memcached**:
 * Multi-node data partitioning (sharding)
 * not hi availability (no replication)
 * not persistent
 * no backup and restore
+* supports multi-threading
 
 #### Cache security
 * does not support IAM auth
