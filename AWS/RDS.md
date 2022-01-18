@@ -58,8 +58,14 @@ Stand-by database does not accept read or write requests.
 
 Going to Multi AZ is a zero downtime op.
 
-When upgrading a database with Multi-AZ deployment, both the primary and standby DB instances are upgraded at the same time.\
+1. When upgrading a database with Multi-AZ deployment, both the primary and standby DB instances are upgraded at the same time.\
 This causes downtime until the upgrade is complete.
+
+
+2. RDS applies OS updates by following these steps:
+* Perform maintenance on the standby.
+* Promote the standby to primary.
+* Perform maintenance on the old primary, which becomes the new standby.
 
 #### Encryption
 RDS can encrypt DBs at rest with KMS keys (AES-256 encryption).\

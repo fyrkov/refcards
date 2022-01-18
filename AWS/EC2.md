@@ -119,3 +119,7 @@ Additionally, you can spread your spot fleet bet across multiple AZs to increase
 By default, Spot Fleets are set to maintain target capacity by launching replacement instances after Spot Instances in the fleet are terminated.\
 You can submit a Spot Fleet as a one-time request, which does not persist after the instances have been terminated.\
 You can include On-Demand Instance requests in a Spot Fleet request.
+
+#### Spot Blocks
+Spot Blocks allow you to request EC2 Spot Instances for 1 to 6 hours at a time to avoid being interrupted.\
+Spot Blocks are deprecated and is being phased out.

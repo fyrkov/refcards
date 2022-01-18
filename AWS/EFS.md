@@ -36,6 +36,10 @@ SG of EFS must allow SGs of EC2 hosts.
 * General Purpose performance mode - lo latency
 * Max I/O performance mode - hi throughput and ops/sec
 
+#### Throughput modes
+* Bursting. System's throughput scales as the amount of data stored in the standard storage class grows.
+* Provisioned Throughput. Instantly provision the throughput of your file system (in MiB/s) independent of the amount of data stored.
+
 #### EFS Infrequent Access (EFS IA)
 EFS IA is a storage class that provides price/performance that is cost-optimized for files, not accessed every day, with storage prices up to 92% lower compared to EFS Standard. 
 

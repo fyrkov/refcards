@@ -15,7 +15,8 @@ EBS characteristics: size, IOPS, Throughput
 
 HDD types are not allowed to be "boot volumes".
 
-`Io1/io2 `can have **"multi-attach"** to multiple EC2 instances in the same AZ. Apps must handle concurrent access.
+`Io1/io2 `can have **"multi-attach"** to multiple EC2 instances in the same AZ.\
+Apps must handle concurrent access.
 
 ![](files/EBS_types.jpg)
 

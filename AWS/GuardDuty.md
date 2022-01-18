@@ -9,8 +9,8 @@ Input data includes:
 * DNS logs
 
 GuardDuty can detect threats:
-* Tor Network-related activity
 * cryptocurrency mining-related activity.
+* Tor Network-related activity
 
 User can set up CloudWatch Event rules to be notified of findings.\
 CloudWatch Event rules can target Lambda or SNS.
