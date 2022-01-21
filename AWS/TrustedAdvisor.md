@@ -10,3 +10,9 @@ Trusted Advisor helps with:
 * Security. Trusted Advisor can improve the security of your application by recommending you to enable AWS security features, and review your permissions.
 * Fault tolerance. Trusted Advisor can increase the availability of your AWS application by recommending you  to take advantage of auto scaling, health checks, multi-AZ Regions, and backup capabilities.
 * Service quotas. 
+
+Example recommendations:
+* Under-utilized EC2s, EBS, idle ELBs
+* SGs with unrestricted ports
+* Are resources like ASG, RDS, ELB multi-AZ?
+* Reaching limits for reserved EC2 instances 
