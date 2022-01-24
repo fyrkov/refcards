@@ -1,7 +1,7 @@
 ### Secrets manager
 Secrets Manager supersedes the SSM Parameter Store for storing secrets and appeared later. 
 
-* Capability to force rotation of secretes every X days
+* Capability to force rotation of secrets every X days
 * Automate generation of secretes on rotation (uses a separate Lambda)
 * Integrated with RDS (**Mostly meant for RDS integration**)
 * Encryption by KMS 

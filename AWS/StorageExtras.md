@@ -40,9 +40,10 @@ To do so it is possible to transfer to S3 and set up lifecycle rules.
 Use case: launch a hi perf 3rd party distributed file system on AWS (instead of EFS).\
 :exclamation: EFS is a shared POSIX system meaning that it is for Unix machines.\
 FSx is a fully managed service that supports:
-* FSx for Lustre. Use case: parallel distributed FS for large scale computing, machine learning, HPC on Linux.
-Has seamless integration with S3 - can read S3 as FS and can write directly to S3 through FS.
-Has hi throughput, lo latency.
+* FSx for Lustre. Use case: parallel distributed FS for large scale computing, machine learning, HPC on Linux.\
+Has seamless integration with S3 - can read S3 as FS and can write directly to S3 through FS.\
+Has hi throughput, lo latency.\
+FSx for Lustre provides the ability to both process the 'hot data' in a parallel and distributed fashion as well as  store the 'cold data' on S3.
 * FSx for Windows File Server.
 * FSx for NetApp ONTAP
 
@@ -84,8 +85,10 @@ A Gateway has to be installed in on-premise datacenter of the client and require
 * Block storage using iSCSI proto backed by S3
 * **Backed up by EBS snapshots which can restore client's on-premises volumes.**
 * Types:
-  * **Cached Volumes**: With cached volumes, the AWS Volume Gateway stores the full volume in its Amazon S3 service bucket, and just the recently accessed data is retained in the gateway’s local cache for low-latency access.
-  * **Stored Volumes**: With stored volumes, your entire data volume is available locally in the gateway, for fast read access. Volume Gateway also maintains an asynchronous copy of your stored volume in the service’s Amazon S3 bucket.
+  * **Cached Volumes**: With cached volumes, the AWS Volume Gateway stores the full volume in its Amazon S3 service bucket\
+  and just the recently accessed data is retained in the gateway’s local cache for low-latency access.
+  * **Stored Volumes**: With stored volumes, your entire data volume is available locally in the gateway, for fast read access.\
+  Volume Gateway also maintains an asynchronous copy of your stored volume in the service’s Amazon S3 bucket.
 
 Use case: backup volumes on on-premises servers.
 ![VolumeGateway](files/VolumeGateway.png)

@@ -13,7 +13,7 @@ There are 2 tiers, free and advanced (paid).
 Parameter policy can for instance be expiration date to force updating passwords.
 
 #### Access
-:exclamation: a service for example needs an access both for SSM GetParameter/GetParameterByPath
+:exclamation: a service for example needs an access both for SSM `GetParameter`/`GetParameterByPath`
 and for KMS CMK to decrypt the value in case the parameter is encrypted.  
 
 #### CLI examples

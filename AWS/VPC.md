@@ -10,10 +10,16 @@ Max CIDR per VPC is 5, for each CIDR:
 * min size is /28 (16 IP addresses)
 * max size is /16 (65536 IP addresses)
 
+Possible ranges for AWS VPC subnets:
+* `10.0.0.0/16`
+* `172.31.0.0/16`
+* `192.168.0.0/16`
+
 :exclamation: VPC CIDR should not overlap with your other Networks (e.g., corporate)\
 :exclamation: 5 addresses in each CIDR/subnet are always reserved by AWS. Hence, `/27` gives not 32 IP addresses, but 32-5 = 27
 
-A subnet is a range of IP addresses in your VPC.
+A subnet is a range of IP addresses in your VPC.\
+Each subnet must reside within one AZ and cannot span zones.\
 Subnet types:
 * Public subnet: The subnet's IPv4 or IPv6 traffic is routed to an internet gateway and can reach the public internet.
 * Private subnet: The subnet’s IPv4 or IPv6 traffic is not routed to an internet gateway and cannot reach the public internet.
@@ -227,7 +233,7 @@ Use cases:
 
 
 #### AWS Direct Connect
-Provides a dedicated **private** connection (not routed ver public Internet) between your DC and VPC.\
+Provides a dedicated **private** connection (not routed over public Internet) between your DC and VPC.\
 For this a dedicated connection must be set up between client's DC and AWS Direct Connect locations.\
 Client must also set up a VPGW on his VPC.\
 Use cases:
@@ -240,6 +246,9 @@ Use cases:
 
 In case of multiple regions/VPCs it is necessary to use **DirectConnect Gateway**:\
 ![](files/DirectConnect2.png)
+
+With **AWS Direct Connect plus VPN**, you can combine one or more AWS Direct Connect connections with the AWS VPC VPN:\
+![](files/aws-direct-connect-vpn.png)
 
 #### Traffic Mirroring
 Allows you to capture and inspect network traffic in a VPC.\

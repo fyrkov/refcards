@@ -76,6 +76,14 @@ NLB can target:
 * Instance Id
 * Private IP of the instance
 
+Request Routing and IP Addresses:
+* If you specify targets using an instance ID, traffic is routed to instances using the primary private IP address specified in the primary network interface for the instance.\
+The load balancer rewrites the destination IP address from the data packet before forwarding it to the target instance.
+* If you specify targets using IP addresses, you can route traffic to an instance using any private IP address from one or more network interfaces.\
+This enables multiple applications on an instance to use the same port.\
+Note that each network interface can have its security group.\
+The load balancer rewrites the destination IP address before forwarding it to the target.
+
 #### GLB (Gateway Load Balancer)
 Required when for example all traffic needs to go through fleet of 3rd party network components like a firewall or DPI system etc.
 
