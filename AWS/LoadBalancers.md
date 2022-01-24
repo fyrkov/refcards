@@ -115,7 +115,8 @@ It is possible to add list of optional certs to support multiple domains.
 
 How does one machine serve multiple websites?\
 It is necessary to load multiple SSL certs.\
-**SNI** - Server Name Indication is a new protocol that resolves this issue and allows exposing multiple HTTPS applications each with its own SSL certificate on the same listener.\
+**SNI** - Server Name Indication is a new protocol that resolves this issue and allows exposing multiple\
+HTTPS applications each with its own SSL certificate on the same listener.\
 Read more here: https://aws.amazon.com/blogs/aws/new-application-load-balancer-sni/
 
 Clients can use SNI to specify the hostname they want to reach.\

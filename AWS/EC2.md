@@ -23,7 +23,7 @@ It is possible to use "EC2 Instance connect" from a browser from the console pag
 This still relies on the open ssh port.
 
 #### IAM role
-An EC2 can have an attached IAM role (!=SG) and therefore can be authorized to perform action towards AWS resources.
+An EC2 can have an attached IAM role (!=SG) and therefore can be authorized to perform actions towards AWS resources.
 
 #### Security Groups
 SGs contain only `allow` rules.\
@@ -38,9 +38,12 @@ Usually connection timeouts indicate SGs misconfiguration.
 * "On demand" (billing per second). High cost, no upfront payment, no commitment.
 * "Reserved" (1 year minimum), also Scheduled Reserved. Up to 75% discount. Can be paid upfront.
 * "Convertible Reserved" can change types.
-* "Spot instance" are unused EC2 capacity that can be bid on and claimed when they become available. Most cost efficient. For short workloads like batch jobs. Spot price changes over time and are different per AZ. An instance is lost when the cost exceeds max budget price.
+* "Spot instance" are unused EC2 capacity that can be bid on and claimed when they become available. Most cost efficient.\
+For short workloads like batch jobs. Spot price changes over time and are different per AZ.\
+An instance is lost when the cost exceeds max budget price.
 * "Dedicated host" - a dedicated physical server. For compliance reqs and server-bound software licenses. For 1 or 3 years period.
-* "Dedicated instance" - a soft version of dedicated host. Still enables the use of dedicated physical servers. No insight into the underlying sockets and cores.
+* "Dedicated instance" - a soft version of dedicated host. Still enables the use of dedicated physical servers.\
+No insight into the underlying sockets and cores.
 * Spot Fleet
 
 #### EC2 placement groups:
@@ -57,7 +60,7 @@ It allows instances to learn about themselves without using IAM role for that pu
 The URL for this is `http://169.254.169.254/latest/meta-data/` \
 This is reachable only from EC2 instances, e.g. curl from within a EC2.
 
-For example, when a role is attached to a EC2 instance, in fact the instance fetches short lived credentials from the `http://169.254.169.254/latest/meta-data/iam/security-credentials/{role_name}`
+For example, when a role is attached to a EC2 instance, in fact the instance fetches short-lived credentials from the `http://169.254.169.254/latest/meta-data/iam/security-credentials/{role_name}`
 
 #### EC2 Root Device Volumes
 EC2 can start with:
@@ -66,7 +69,7 @@ EC2 can start with:
 
 By default, the root volume for an AMI backed by Amazon EBS is deleted when the instance terminates.\
 You can change the default behavior to ensure that the volume persists after the instance terminates.\
-To change the default behavior, set the DeleteOnTermination attribute to false using a block device mapping.
+To change the default behavior, set the `DeleteOnTermination` attribute to false using a block device mapping.
 
 You can configure the root volume to persist for a running instance using the command line tools only.
 
@@ -87,12 +90,12 @@ To send metric data for your instance to CloudWatch in 1-minute periods, you can
 
 #### Collecting logs from EC2
 :exclamation: By default, no logs from EC2 machine will go to CloudWatch.\
-IT is necessary to install a CloudWatch Agent on EC2 to push logs.\
+It is necessary to install a CloudWatch Agent on EC2 to push logs.\
 For this an EC2 instance must have an appropriate IAM role.
 
 #### EC2 instance recovery.
 CloudWatch Alarms can be used to trigger EC2 actions: `stop`, `terminate`, `reboot`, `recover`.\
-In case of recovery EC2 instance recovery keeps: same private, public, elastic IPs, metadata, placement group.
+In case of recovery EC2 instance keeps: same private, public, elastic IPs, metadata, placement group.
 
 #### Enhanced Networking
 1. **ENA - Elastic Network Adapter** - provides higher bandwidth with 100Gbps.
@@ -122,4 +125,4 @@ You can include On-Demand Instance requests in a Spot Fleet request.
 
 #### Spot Blocks
 Spot Blocks allow you to request EC2 Spot Instances for 1 to 6 hours at a time to avoid being interrupted.\
-Spot Blocks are deprecated and is being phased out.
+Spot Blocks are deprecated and are being phased out.

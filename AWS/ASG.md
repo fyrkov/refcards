@@ -5,7 +5,7 @@ Then if ASG scales out, new instances get registered in LB automatically.
 
 ASG is configured with:
 * min size, desired capacity, maximum size
-* launch configuration/template: AMi + instance type, EC2 user data, EBS, SGs, SSH key pair
+* launch configuration/template: AMI + instance type, EC2 user data, EBS, SGs, SSH key pair
 * scaling policies
 * network + subnets info
 * LB info
@@ -39,7 +39,8 @@ During this period ASG will not perform any actions.
 
 Advice: use ready-to-use AMIs to reduce configuration time (EC2 user data script, etc).
 
-:exclamation: When there are multiple policies in force at the same time, there's a chance that each policy could instruct ASG to scale out (or in) at the same time. Then ASG chooses the policy that provides the largest capacity for both scale-out and scale-in.
+:exclamation: When there are multiple policies in force at the same time, there's a chance that each policy could instruct ASG to scale out (or in) at the same time.\
+Then ASG chooses the policy that provides the largest capacity for both scale-out and scale-in.
 
 #### ASG healthchecks
 ASG doesn't terminate an instance that came into service based on EC2 status checks and ELB health checks until the health check **grace period** expires.\
@@ -52,9 +53,9 @@ ASG might also delay or not terminate instances that fail to report data for sta
 This usually happens when there is insufficient data for the status check metrics in Amazon CloudWatch.
 
 By default, ASG doesn't use the results of ELB healthchecks to determine an instance's health status when the group's health check configuration is set to EC2.\
-As a result, ASG doesn't terminate instances that fail ELB health checks.\
+As a result, ASG doesn't terminate instances that fail ELB health checks.
 
-You can define **custom healthchecks** in ASG.\
+You can define **custom healthchecks** in ASG.
 
 #### ASG lifecycle hooks
 Lifecycle hooks enable you to perform custom actions as the ASG launches or terminates instances.\
