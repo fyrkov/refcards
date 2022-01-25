@@ -105,7 +105,7 @@ Stickiness is an attribute of TG.
 Balancing to instances in different AZs evenly.\
 ALB - always enabled. No charges.\
 NLB - can be enabled. Charges apply.\
-CLB - disbled by default, no charges if enabled.
+CLB - disabled by default, no charges if enabled.
 
 #### TLS
 LBs use X.509 cert.\

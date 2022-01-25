@@ -109,9 +109,11 @@ The service is accessed via an FTP endpoint or DNS in Route53.
 Use case: setting up FTP interface to S3 when the company relies on FTP already. 
 
 ### DataSync
-AWS DataSync is an online data transfer service that simplifies, automates, and accelerates copying large amounts of data to and from AWS storage services over the internet or AWS Direct Connect.
+AWS DataSync is an online data transfer service that simplifies, automates, and accelerates copying large amounts\
+of data to and from AWS storage services over the internet or AWS Direct Connect.
 
-AWS DataSync fully automates and accelerates moving large active datasets to AWS, up to 10 times faster than command-line tools. It is natively integrated with:
+AWS DataSync fully automates and accelerates moving large active datasets to AWS, up to 10 times faster than\
+command-line tools. It is natively integrated with:
 * Amazon S3
 * Amazon EFS
 * Amazon FSx for Windows File Server
@@ -122,7 +124,8 @@ DataSync uses a purpose-built network protocol and scale-out architecture to tra
 A single DataSync agent is capable of saturating a 10 Gbps network link.
 
 DataSync fully automates the data transfer.\
-It comes with retry and network resiliency mechanisms, network optimizations, built-in task scheduling, monitoring via the DataSync API and Console, and CloudWatch metrics, events, and logs that provide granular visibility into the transfer process.\
+It comes with retry and network resiliency mechanisms, network optimizations, built-in task scheduling, monitoring via\
+the DataSync API and Console, and CloudWatch metrics, events, and logs that provide granular visibility into the transfer process.\
 DataSync performs data integrity verification both during the transfer and at the end of the transfer.
 
 To make it work it is necessary to install a DataSync agent in client's DC.\

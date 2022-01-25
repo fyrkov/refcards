@@ -70,6 +70,11 @@ Use cases:
 * legal
 * reducing costs
 
+#### Encryption
+By default, all DynamoDB tables are encrypted under an AWS owned customer master key (CMK).\
+There is no option to enable or disable encryption for new or existing tables.\
+However, you can select an option to encrypt some or all of your tables under a customer-managed CMK or the AWS managed CMK for DynamoDB in your account.
+
 #### Transactions
 Allow writing to two tables at the same time transactionally.
 
