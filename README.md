@@ -18,3 +18,4 @@ Refcards:
 - [Python](./python.md)
 - [Kafka](./kafka.md)
 - [AWS](./AWS/index.md)
+- [Terraform](./terraform.md)
