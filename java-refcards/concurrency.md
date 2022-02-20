@@ -144,6 +144,17 @@ emptyList().stream()
         .toList();
 ```
 
+:exclamation: There is a significant overhead when using parallel streams which includes:
+* Threads management
+* Splitting/Forking. Some operations/data structures are naturally better for this, e.g. ArrayList is better than LinkedList
+* Merging/Joining. Some operations are naturally better for this, e.g. summing ints is better than collecting to sets or grouping to maps.
+
+**The NQ Model**.\
+In the NQ model, **N** stands for the number of source data elements, while **Q** represents the amount of computation performed per data element.\
+The larger the product of N*Q, the more likely the performance boost from parallelization.\
+For problems with a trivially small Q, such as summing up numbers, the rule of thumb is that N should be greater than **10,000**.\
+As the number of computations increases, the data size required to get a performance boost from parallelism decreases.
+
 ### CompletableFuture
 CompletableFuture is an _async reactive functional_ API.
 ```
@@ -171,5 +182,6 @@ Correspondence between CompletableFuture API and Reactor API
 | .thenAcceptAsync()                       | .doOnNext()                           |                 |
 | .thenCombineAsync(other, (o, o2) -> {})  | .zipWith(Mono other, (o, o2) -> {})   |                 |
 | .exceptionallyAsync(throwable -> {})     | .onErrorResume(throwable -> {})       |                 |
+| .get()                                   | .block()                              |                 |
 ```
 
