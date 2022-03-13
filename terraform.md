@@ -1,5 +1,11 @@
 ### Terraform
 
+#### Main commands
+* `terraform init` - initializing backend, pulling plugins, modules
+* `terraform validate` - verify configuration is syntactically valid and internally consistent, regardless of any provided variables or existing state
+* `terraform plan`
+* `terraform apply`
+* `terraform destroy`
 
 #### Structure
 A **module** is a collection of `.tf` files kept together in a directory.\
@@ -16,7 +22,7 @@ Blocks can declare:
 #### Authentication
 1. Directly specifying access_key and secret_key in the `main.tf`
 2. Env variables
-3. Have AWS ClI and set up a profile with `aws configure`. Specify the profile in the `main.tf`
+3. Have AWS CLI and set up a profile with `aws configure`. Specify the profile in the `main.tf`
 
 #### Tfenv
 Terraform version manager.\
@@ -24,10 +30,10 @@ A specific version for a project can be specified in the `.terraform-version` in
 Run `tfenv install` to set up a terraform distribution with the specified version.
 
 #### variable.tfvars vs. variable.tf
-So, what is the difference between `variable.tf` and `variable.tfvars` in Terraform?
+What is the difference between `variable.tf` and `variable.tfvars` in Terraform?
 
-The `tfvars` file is in the root folder of an environment to define values to variables (as one of the ways).\
-The `.tf` uses modules to declare variables.
+* The `.tf` uses modules to **declare variables**.
+* The `tfvars` file is in the root folder of an environment to define values to variables (as one of the ways).
 
 #### Provisioners
 Provisioners are used to execute scripts on a local or remote machine as part of resource creation or destruction.\
@@ -45,3 +51,113 @@ resource "aws_instance" "cls_instance_{{ cls_ix }}" {
   }
 }
 ```
+
+#### Modules
+Module is a set of Terraform files in a single directory.\
+Modules can be remote.\
+Official remote modules can be found in Terraform Registry: https://registry.terraform.io/browse/modules
+
+Example, using aws VPC module instead of defining a VPC resource manually:
+```
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "3.12.0"
+  # insert the 23 required variables here
+}
+```
+
+Terraform requires `init` to pull a remote module before using it.
+
+Modules can call other modules. They are called child modules in such case.
+
+#### Passing variables
+1. Using env vars gives a secure method to provide sensitive data 
+```
+export TF_VAR_vpcname=myvpc
+terraform plan
+```
+
+2. Using CLI vars
+```
+terraform plan -var="vpcname=myvpc"
+```
+
+3. Using `tfvars` file\
+Create a `terraform.tfvars` file in the root folder:
+```
+vpcname = "myvpc"
+```
+
+4. Using multiple `tfvars` files\
+Create a `prod.tfvars` file in the root folder:
+```
+vpcname = "prod_vpc"
+```
+Pass the filename in CLI:
+```
+terraform plan -var-file=prod.tfvars
+```
+
+Terraform loads variables in the following order, with later sources taking precedence over earlier ones:
+
+* Environment variables
+* The `terraform.tfvars` file, if present
+* Any `*.auto.tfvars` files
+* Any `-var` and `-var-file` options on the CLI
+
+#### Advanced commands
+* `terraform fmt` - formats files in a directory
+* `terraform taint` - informs Terraform that a particular object has become degraded or damaged.\
+  Terraform represents this by marking the object as "tainted" in the Terraform state, and Terraform will propose to replace it in the next plan you create.\
+  Superseded by the `terraform apply -replace="aws_instance.example[0]"` option.\
+  Use `terraform untaint`  to remove the taint marker from the object.
+* `terraform import aws_vpc.vpcimport <resource_id>` - imports an existing resource to the Terraform state.\
+Can be useful when some resources are created in the AWS Console and need to be added under the Terraform control.
+
+* `terraform workspace`\
+Each Terraform configuration has an associated backend where Terraform state is stored.\
+The persistent data stored in the backend belongs to a **workspace**.\
+Initially the backend has only one "default" workspace.\
+Certain backends support multiple named workspaces, allowing multiple states to be associated with a single configuration.\
+The configuration still has only one backend, but multiple distinct instances of that configuration to be deployed without configuring a new backend or changing authentication credentials.
+  * `terraform workspace list`
+  * `terraform workspace new <name>` - create new workspace
+  * `terraform workspace show` - show current workspace
+  * `terraform workspace select default` - to change workspace
+  * `terraform workspace delete <name>` - to delete workspace
+
+* `terraform state`
+  * `terraform state pull` - to see the state stored in a remote backend
+  * `terraform state mv <curr_name> <new_name>` - to rename resources in the state
+  * `terraform state rm <name>` - to delete resources in the state. May be useful if a resource is manually deleted in AWS Console.
+
+* `terraform refresh` - reads the current settings from all managed remote objects and updates the Terraform state to match.\
+The command is a part of `plan` and `apply` steps. Deprecated. 
+
+#### Debugging
+Set Terraform logging mode with: 
+```
+export TF_LOG=TRACE
+```
+
+#### State. Backends
+The local backend stores state on the local filesystem, locks that state using system APIs, and performs operations locally.
+
+The remote backend is typically stored in S3 with enabled versioning and encryption.\
+Create a `backend.tf`, example:
+```
+terraform {
+  backend "s3" {
+    bucket = "bucket-name"
+    key = "state/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+```
+
+Only one backend is allowed.
+
+A state file may contain sensitive information such as secrets.\
+Hence it must be stored securely.
+
+A state is protected with a lock to prevent concurrent updates.
