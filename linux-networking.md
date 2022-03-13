@@ -29,7 +29,7 @@ Host voyager-prod-bastion*
   LocalForward localhost:9993 voyager-db.prod.aws.zedconnect.com:3306
 ```
 
-#### Curl & Wget
+#### Curl, Wget, SCP
 
 **Curl** is a "CLI browser".
 
@@ -91,19 +91,20 @@ Copy file from local to remote:\
 
 #### Troubleshooting utilities
 
-To check connectivity to the host or reveal IP by the name of the host:\
-`ping <host>`
+To check connectivity to the host:\
+`ping <host>`\
+:exclamation: The `ping` command does not use TCP or UDP. It uses ICMP.
 
 To check IPs of the routers on the route and number of hops.\
 Can be used to locate where the loss of data occurs, and probably the node is down.\
 Can be used to locate slow nodes.\
 `traceroute <ip address>`
 
-Using telnet to test open ports:
+Using telnet to test open TCP ports:
 `telnet <domainname or ip> [port]`
 
 **iproute2** and **net-tools** packages.\
-`iproute2` package now reaplces deprecated `net-tools`.
+`iproute2` package now replaces deprecated `net-tools`.
 
 New `ip [opts] <object> <command>` is equivalent to old `ifconfig`.
 
@@ -117,7 +118,7 @@ The output of `ifconfig` or `ip -c link show` shows the list of network interfac
 - `docker0` - docker interface
 
 `ip` command objects can be:
-- `address` to show addresses addigned to network interfaces
+- `address` to show addresses assigned to network interfaces
 - `link` to show network interfaces
 - others
 
@@ -136,7 +137,7 @@ default via 192.168.0.1 dev wlp2s0 proto dhcp metric 600
 169.254.0.0/16 dev wlp2s0 scope link metric 1000 
 192.168.0.0/24 dev wlp2s0 proto kernel scope link src 192.168.0.17 metric 600 
 ```
-This is similar to `route -n` or `netstat -rn` which have following output:
+This is similar to `route -n` or `netstat -rn` which have the following output:
 ```
 Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
 0.0.0.0         192.168.0.1     0.0.0.0         UG        0 0          0 wlp2s0
@@ -180,7 +181,8 @@ Find out which process is using a particular port:\
 Show the list of network interfaces (similar to `ifconfig`):\
 `netstat -ie`
 
-**Nmcli** is a cli tool for controlling NetworkManager.It is used to create, display, edit, delete, activate, and deactivate network connections, as well as control and display network device status.
+**Nmcli** is a cli tool for controlling NetworkManager.\
+It is used to create, display, edit, delete, activate, and deactivate network connections, as well as control and display network device status.
 
 Show the list of network interfaces:\
 `nmcli device`
@@ -200,7 +202,7 @@ nc localhost 2389 // connecting
 ```
 There should now be a connection between the ports. Anything typed at the second console will be concatenated to the first, and vice-versa.
 
-Examples of data transer:
+Examples of data transfer:
 ```
 nc -l 1234 > filename.out
 nc host.example.com 1234 < filename.in
