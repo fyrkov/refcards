@@ -19,6 +19,14 @@ Blocks can declare:
 * Output - make info about infra available on the cli and for other TF configurations to use
 * Module - containers for multiple resources to reuse in configurations
 
+#### Variables
+Types of variables:
+* string
+* number: a numeric value (integer and fractional).
+* bool
+* list (or tuple): a sequence of values, like `["us-west-1a", "us-west-1c"]`. 
+* map (or object): a group of values identified by named labels, like `{name = "Mabel", age = 12}`.
+
 #### Authentication
 1. Directly specifying access_key and secret_key in the `main.tf`
 2. Env variables
@@ -106,13 +114,14 @@ Terraform loads variables in the following order, with later sources taking prec
 * Any `-var` and `-var-file` options on the CLI
 
 #### Advanced commands
-* `terraform fmt` - formats files in a directory
+* `terraform fmt [-recursive]` - formats files in a directory and optionally (with `-recursive`) in submodules
 * `terraform taint` - informs Terraform that a particular object has become degraded or damaged.\
   Terraform represents this by marking the object as "tainted" in the Terraform state, and Terraform will propose to replace it in the next plan you create.\
   Superseded by the `terraform apply -replace="aws_instance.example[0]"` option.\
   Use `terraform untaint`  to remove the taint marker from the object.
 * `terraform import aws_vpc.vpcimport <resource_id>` - imports an existing resource to the Terraform state.\
-Can be useful when some resources are created in the AWS Console and need to be added under the Terraform control.
+Can be useful when some resources are created in the AWS Console and need to be added under the Terraform control.\
+Configuration must be updated for the resource before importing.
 
 * `terraform workspace`\
 Each Terraform configuration has an associated backend where Terraform state is stored.\
@@ -126,13 +135,25 @@ The configuration still has only one backend, but multiple distinct instances of
   * `terraform workspace select default` - to change workspace
   * `terraform workspace delete <name>` - to delete workspace
 
-* `terraform state`
+* `terraform state` commands
+  * `terraform show` - to provide human-readable output from a state
+  * `terraform state list` - to list resources within a Terraform state
+  * `terraform state show [options] ADDRESS` - to show the attributes of a single resource in the Terraform state
   * `terraform state pull` - to see the state stored in a remote backend
   * `terraform state mv <curr_name> <new_name>` - to rename resources in the state
   * `terraform state rm <name>` - to delete resources in the state. May be useful if a resource is manually deleted in AWS Console.
 
 * `terraform refresh` - reads the current settings from all managed remote objects and updates the Terraform state to match.\
-The command is a part of `plan` and `apply` steps. Deprecated. 
+The command is a part of `plan` and `apply` steps. Deprecated and superseded by the `terraform apply -refresh-only`
+* `terraform get` is used to download and update modules mentioned in the root module.
+* `terraform console` provides an interactive console for evaluating expressions.\
+It will read the Terraform configuration in the current working directory and the Terraform state file from the configured backend.
+* `terraform force-unlock [options] LOCK_ID [DIR]` manually unlock the state for the defined configuration.
+* `terraform apply -replace=aws_instance.web` - manually marks a Terraform-managed resource for replacement, forcing it to be destroyed and recreated on the apply execution.
+* `terraform login` - to automatically obtain and save an API token for Terraform Cloud
+* `terraform graph` - to generate a visual representation of either a configuration or execution plan.\
+The output is in the DOT format, which can be used by GraphViz to generate charts.
+* `terraform init -reconfigure` - to update the backend configuration (e.g. local -> S3)
 
 #### Debugging
 Set Terraform logging mode with: 
@@ -160,4 +181,5 @@ Only one backend is allowed.
 A state file may contain sensitive information such as secrets.\
 Hence it must be stored securely.
 
-A state is protected with a lock to prevent concurrent updates.
+A state is protected with a lock to prevent concurrent updates.\
+Not all backends support locking.
