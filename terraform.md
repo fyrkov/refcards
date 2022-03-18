@@ -138,7 +138,7 @@ The configuration still has only one backend, but multiple distinct instances of
 * `terraform state` commands
   * `terraform show` - to provide human-readable output from a state
   * `terraform state list` - to list resources within a Terraform state
-  * `terraform state show [options] ADDRESS` - to show the attributes of a single resource in the Terraform state
+  * `terraform state show <resource_reference>` - to show the attributes of a single resource in the Terraform state
   * `terraform state pull` - to see the state stored in a remote backend
   * `terraform state mv <curr_name> <new_name>` - to rename resources in the state
   * `terraform state rm <name>` - to delete resources in the state. May be useful if a resource is manually deleted in AWS Console.
