@@ -137,29 +137,35 @@ The configuration still has only one backend, but multiple distinct instances of
 
 * `terraform state` commands
   * `terraform show` - to provide human-readable output from a state
-  * `terraform state list` - to list resources within a Terraform state
+  * `terraform state list` - to list resources within a Terraform state (without attributes unlike `terraform show`)
   * `terraform state show <resource_reference>` - to show the attributes of a single resource in the Terraform state
   * `terraform state pull` - to see the state stored in a remote backend
   * `terraform state mv <curr_name> <new_name>` - to rename resources in the state
   * `terraform state rm <name>` - to delete resources in the state. May be useful if a resource is manually deleted in AWS Console.
 
-* `terraform refresh` - reads the current settings from all managed remote objects and updates the Terraform state to match.\
-The command is a part of `plan` and `apply` steps. Deprecated and superseded by the `terraform apply -refresh-only`
 * `terraform get` is used to download and update modules mentioned in the root module.
 * `terraform console` provides an interactive console for evaluating expressions.\
-It will read the Terraform configuration in the current working directory and the Terraform state file from the configured backend.
+  It will read the Terraform configuration in the current working directory and the Terraform state file from the configured backend.
 * `terraform force-unlock [options] LOCK_ID [DIR]` manually unlock the state for the defined configuration.
+* `terraform refresh` - reads the current settings from all managed remote objects and updates the Terraform state to match.\
+  The command is a part of `plan` and `apply` steps. ~~Deprecated~~. Not deprecated again in TF v1.1.7?
+* `terraform apply -refresh-only` - depending on version? see, `refresh`
+* `terraform apply -refresh=true` - depending on version? see, `refresh`
 * `terraform apply -replace=aws_instance.web` - manually marks a Terraform-managed resource for replacement, forcing it to be destroyed and recreated on the apply execution.
 * `terraform login` - to automatically obtain and save an API token for Terraform Cloud
 * `terraform graph` - to generate a visual representation of either a configuration or execution plan.\
 The output is in the DOT format, which can be used by GraphViz to generate charts.
 * `terraform init -reconfigure` - to update the backend configuration (e.g. local -> S3)
+* `terraform init -backend-config=PATH` - to merge missing parts of the "partial" configuration with the provided file (e.g. secrets) 
+* `terraform plan -out=FILE` -  write a plan file to the given path.\
+This can be used as input to the "apply" command.
 
 #### Debugging
 Set Terraform logging mode with: 
 ```
 export TF_LOG=TRACE
 ```
+To persist logged output you can set `TF_LOG_PATH` in order to force the log to always be appended to a specific file when logging is enabled.
 
 #### State. Backends
 The local backend stores state on the local filesystem, locks that state using system APIs, and performs operations locally.
@@ -183,3 +189,35 @@ Hence it must be stored securely.
 
 A state is protected with a lock to prevent concurrent updates.\
 Not all backends support locking.
+
+
+#### Handling Secrets
+1. Do not store secretes in plain text: `.tf` files or other files.
+2. Mark variables as sensitive if necessary.
+```
+variable "x" {
+  type      = string
+  sensitive = true
+}
+```
+They will still appear in state files!
+3. Use environment variables to pass secrets that will not be stored in state files.
+```
+export TF_VAR_password=123
+```
+4. Use secret stores: Vault, AWS Secrets Manager, etc.
+```
+provider "vault" {
+  address = "http://127.0.0.1:8200`
+}
+...
+data "vault_generic_secret" "db_pass" {
+  path = secret/app"
+}
+...
+// could be a resource, but here it is data for testing purposes
+output "db_pass" {
+  value = data.vault_generic_secret.db_pass.data["db_password"]
+  sensitive = true
+}
+```
