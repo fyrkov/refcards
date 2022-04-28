@@ -22,7 +22,15 @@ Building dependency tree
 ```
 gradle dependencies
 gradle dependencies --configuration scm
+
+// for a sub-module
 gradle subproject:dependencies
+
+// for all sub-modules add a task in build.gradle
+subprojects {
+    task allDeps(type: DependencyReportTask) {}
+}
+gradle allDeps
 
 ```
 
