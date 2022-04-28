@@ -20,8 +20,10 @@ gradle -q help --task libs
 
 Building dependency tree
 ```
-gradle dependencies --configuration scm
 gradle dependencies
+gradle dependencies --configuration scm
+gradle subproject:dependencies
+
 ```
 
 Using the dependency insight report for a given dependency
