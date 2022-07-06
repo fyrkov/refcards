@@ -17,7 +17,6 @@ How to squash all commits in your feature branch into one\
 1.
 ```
 git reset --soft origin/master # will put all modifications to stage
-git add .
 git commit
 ```
 2.
