@@ -75,6 +75,9 @@ History:
 ```
 git log // full log records as hash + author + date + message
 git log --oneline //show commits as short hash + message
+
+// How to see commits only in this branch (branched from master)?
+git log --no-merges master..<branchname>
 ```
 
 Adding remote repo and naming it origin:
