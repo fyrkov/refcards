@@ -22,6 +22,10 @@ It can be for example queueing up user's request for the future processing.
 Isolates calls to remote resoureces into separate thread pools and thus reduce the risk that one slow request will take down the whole app.\
 Every remote service is assigned to it's own thread pool. 
 
+Netflix Hystrix is a circuit breaker lib.
+
+:exclamation: Hystrix is no longer developed since 2018. The successor is **resilience4j**.
+
 ### Usage
 
 1. Add a dependency

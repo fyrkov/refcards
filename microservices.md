@@ -213,7 +213,50 @@ Services often need to verify that a user is authorized to perform an operation.
 The API Gateway authenticates the request and passes an access token (e.g. [JWT](http://jwt.io)) that securely identifies the requestor in each request to the services. A service can include the access token in requests it makes to other services.
 
 ### Command Query Responsibility Segregation (CQRS)
-//TODO
+In traditional architectures, the same data model is used to query and update a database. That's simple and works well for basic CRUD operations. 
+
+![image](https://user-images.githubusercontent.com/39297890/143778582-78e7a408-7df8-466e-a918-6267abee6b60.png)
+
+In more complex applications, however, this approach can become unwieldy. For example, on the read side, the application may perform many different queries, returning data transfer objects (DTOs) with different shapes. Object mapping can become complicated. On the write side, the model may implement complex validation and business logic. As a result, you can end up with an overly complex model that does too much.
+
+Solution
+CQRS separates reads and writes into different models, using commands to update data, and queries to read data.
+
+![image](https://user-images.githubusercontent.com/39297890/143778605-db20e5c0-a98a-4c6b-a372-d0a72d63b608.png)
+
+Commands should be task-based, rather than data centric. ("Book hotel room", not "set ReservationStatus to Reserved").\
+Commands may be placed on a queue for asynchronous processing, rather than being processed synchronously.\
+Queries never modify the database. A query returns a DTO that does not encapsulate any domain knowledge.\
+The models can then be isolated.
+
+For greater isolation, you can separate the read data from the write data. In that case, the read database can use its own data schema that is optimized for queries. For example, it can store a materialized view of the data, in order to avoid complex joins or complex O/RM mappings. It might even use a different type of data store. For example, the write database might be relational, while the read database is a document database.
+
+If separate read and write databases are used, they must be kept in sync. Typically this is accomplished by having the write model publish an event whenever it updates the database.
+
+Benefits of CQRS include:
+
+ * Independent scaling. CQRS allows the read and write workloads to scale independently, and may result in fewer lock contentions.
+ * Optimized data schemas. The read side can use a schema that is optimized for queries, while the write side uses a schema that is optimized for updates.
+ * Security. It's easier to ensure that only the right domain entities are performing writes on the data.
+ * Separation of concerns. Segregating the read and write sides can result in models that are more maintainable and flexible. Most of the complex business logic goes into the write model. The read model can be relatively simple.
+ * Simpler queries. By storing a materialized view in the read database, the application can avoid complex joins when querying.
+
+Some challenges of implementing this pattern include:
+
+ * Complexity
+ * Messaging. Although CQRS does not require messaging, it's common to use messaging to process commands and publish update events. 
+ * Eventual consistency. If you separate the read and write databases, the read data may be stale.
+
+Consider CQRS for the following scenarios:
+
+ * Collaborative domains where many users access the same data in parallel
+ * Task-based user interfaces
+ * Scenarios where performance of data reads must be fine-tuned separately from performance of data writes
+
+This pattern isn't recommended when:
+
+ * The domain or the business rules are simple.
+ * A simple CRUD-style user interface and data access operations are sufficient.
 
 ### Saga Pattern
 //TODO

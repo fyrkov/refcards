@@ -73,3 +73,12 @@ To encrypt a property use `curl POST <config_server_host>:8888/encrypt -d "mysec
 Put the encrypted value with prepended `{cipher}` into the config file.
 Config server will then read the encypted property, decrypt it and expose decypted to a service. 
 However it is also possible to delegate decryption to a client service.
+
+### Refresh
+By default, services read configuration only once at startup.\
+The git-backed Configuration Server is able to update it's state when the configuration backend changes (polling?).\
+It is also possible to ask a service to refresh it's configration at runtime by calling `/actuator/refresh` endpoint.\
+However, given that services have several instances behind a load balancer, this is not optimal - only one intance will be updated.\
+To set up an automatic refresh it is necesary to add the Spring Cloud Bus which will broadcast state changes from Configuration Server to services via a message broker.
+
+

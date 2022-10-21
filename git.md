@@ -17,7 +17,6 @@ How to squash all commits in your feature branch into one\
 1.
 ```
 git reset --soft origin/master # will put all modifications to stage
-git add .
 git commit
 ```
 2.
@@ -76,6 +75,9 @@ History:
 ```
 git log // full log records as hash + author + date + message
 git log --oneline //show commits as short hash + message
+
+// How to see commits only in this branch (branched from master)?
+git log --no-merges master..<branchname>
 ```
 
 Adding remote repo and naming it origin:
@@ -189,6 +191,11 @@ git push --set-upstream origin new_branch   # Push the new branch, set local bra
 ### Cleaning up
 ```
  git branch | grep "EAG-2" | xargs git branch -D
+```
+
+Delete all local branches who's remote tracking branches has been deleted:
+```
+git fetch --prune && git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk '{print $1}' | xargs git branch -d
 ```
 
 

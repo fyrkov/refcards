@@ -397,6 +397,16 @@ To find current run level:
 who -r
 ```
 
+Find out the total memory allocated for a particular process, e.g. `bash`:
+```
+pidof bash | xargs ps -o rss,vsz
+```
+where 
+- `RSS`: resident set size, the non-swapped physical memory that a task has used in KiB.
+- `VSZ`: virtual memory size of the process in KiB.
+
+
+
 Linux boot process:
 ![linux_boot_process](linux_files/Stages-of-Linux-Boot-Process.jpg)
 
@@ -587,7 +597,7 @@ The first of the commands below starts the program abcd in the background in suc
 Note that nohupping backgrounded jobs is typically used to avoid terminating them when logging off from a remote SSH session. A different issue that often arises in this situation is that ssh is refusing to log off ("hangs"), since it refuses to lose any data from/to the background job(s).This problem can also be overcome by redirecting all three I/O streams:\
 `nohup ./myprogram > /dev/null 2>&1 &`
 
-`xargs` reads items from standard input as separated by blanks and executes a given command (or an `echo` if absent) once for each argument, for eaxample:\
+`xargs` reads items from standard input as separated by blanks and executes a given command (or an `echo` if absent) once for each argument, for example:\
 `echo 'one two three' | xargs mkdir`
 
 By default, xargs terminates/delimits items using blank spaces. Specify delimiter using `-d` option, for example `xargs -d\n` for newlines.

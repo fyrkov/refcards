@@ -33,7 +33,9 @@ eureka:
 ...
 ```
 :exclamation: Eureka requires 3 consecutive heartbeats with 10 secs interval before exposing a service
+
 3. Use `@SpringBootApplication` and `@EnableEurekaServer` on configuration class.
+
 4. Add a dependencies to client services, e.g.
 ```
 <dependency>

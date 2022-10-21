@@ -383,7 +383,7 @@ JPQL supported functions:
 #### 17. @Transactional
 
 `@Transactional` on a method makes all the code in this method be executed in one transaction.
-If an exceptions happens inside this code, then everything is rolled back.
+If an **runtime exceptions** happens inside this code, then everything is rolled back.
 
 Enabling TX annotations support:
 ```java
@@ -410,7 +410,7 @@ Tips:
 - `@EnableTransactionManagement` enables processing of `@Transactional` annotation
 - :exclamation: By default processing is done with "Spring AOP Proxies", i.e. `@Transactional` will work only if a method called as method of some `@Component`, and will not work if is called internally, i.e. from this class where he is defined.
 - :exclamation: Another limitation that comes form the previous one - `@Transactional` method can not be private
-- It is possible to switch the processing of the `@Transactional` annotaions to "AspectJ" mode. This will enable "Byte code weaving" instead of "Spring AOP Proxies" and overvome the limitations 2) and 3)
+- It is possible to switch the processing of the `@Transactional` annotaions to "AspectJ" mode. This will enable "Byte code weaving" instead of "Spring AOP Proxies" and overcome the limitations 2) and 3)
 
 
 By default, CRUD methods on repositories derived from `SimpleJpaRepository` are `@Transactional`.\
@@ -431,8 +431,59 @@ Mind also `@Modifying` here that which marks method as modifying and is only rel
 
 #### Transactional settings
 
-TBD
-e.g. Propagations, Isolations
+`org.springframework.transaction.annotation.@Transactional` can be configured with propagation behaviors and isolation levels.
+
+Propagations
+- `REQUIRED` - supports current tx if found or creates a new one
+- `REQUIRES_NEW` - always creates a new one and suspends current if found
+- `SUPPORTS` - supports current tx if found, does not create a new one
+- `MANDATORY` - supports current tx if found or throws ex
+- `NOT_SUPPORTED` - execute non-tx and suspends current if found
+- `NEVER` - execute non-tx and or throws ex if found
+- `NESTED` - execute in nested tx if found or creates a new one
+
+Isolations
+- `DEFAULT` - use the default isolation level of the underlying DB
+- `READ_UNCOMMITTED` - dirty reads, non-repeatable reads, lost updates and phantom reads can occur
+- `READ_COMMITTED` - non-repeatable reads, lost updates and phantom reads can occur
+- `REPEATABLE_READ` - phantom reads can occur
+- `SERIALIZABLE` - dirty reads, non-repeatable reads, lost updates and phantom reads are prevented.
+
+
+#### JPA `@Version` annotation
+`@Version` annotation is used to enable multi version concurrency control (MVCC) for an entity. 
+
+The most significant benefit is that it can prevent the "lost update" anomaly, therefore ensuring that data integrity is not compromised.
+
+```
+@Entity(name = "Product")
+@Table(name = "product")
+public class Product {
+ 
+    @Id
+    private Long id;
+ 
+    @Version
+    private int version;
+}
+```
+
+Hibernate uses the version property in the `WHERE` clause of the executing UPDATE statement:
+```
+UPDATE
+    product
+SET
+    quantity = 5,
+    version = 1
+WHERE
+    id = 1 AND
+    version = 0
+```
+
+If collision occurs, JPA will throw `OptimisticLockException`.
+
+:exclamation: `@Version` can also be configured to use pessimistic locking with `LockModeType`
+
 #### Manual tx management
 
 TBD

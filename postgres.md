@@ -1,5 +1,10 @@
 ### Postgres snippetes
 
+PSQL example:
+```
+psql -d ${db_name} -U ${postgres_user) -h localhost -p 33225
+```
+
 Operations with timestamp
 ```sql
 insert into event_store (business_event, due_time)  
@@ -17,6 +22,11 @@ order by
     indexname;
 ```
 
+Show tables:
+```
+SELECT * FROM pg_catalog.pg_tables WHERE schemaname != 'pg_catalog' AND schemaname != 'information_schema';
+```
+
 Create index over coulumn with function applied
 ```
 create index if not exists users_work_email_uppercase_key on permission.users (upper(work_email));
@@ -32,6 +42,11 @@ Postgres merge statement (ver > 9.5)
 insert into permission.users (id, work_email)
 select '02f7af3c-f4be-4498-9967-da2d70907a2b', 'scheduled.update@auto1.com'
 on conflict do nothing;
+```
+
+Explain plan
+```
+ explain [analyze] select * from transaction_service.transaction where ...;
 ```
 
 ### Hierarchical query
