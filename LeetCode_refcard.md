@@ -4,6 +4,7 @@
 
 Tips:
 * Fast and slow pointers
+* Reversing a list
 
 ### Backtracking 
 
@@ -120,3 +121,14 @@ Bottom up is done iteratively and using an array.
 ```
 #### Improving the space complexity
 Often there is no need to keep all states during memoization - only last 1 or 2 states are enough.
+
+### Stack and Queues
+Tips:
+* **Monotonic** stacks or queues are useful in problems that, for each element, involves finding the "next" element based on some criteria, for example, the next greater element.
+```
+    while (stack.length > 0 && stack[top] >= num) {
+        stack.pop()
+    }
+    stack.push(num)
+```
+* String problems with stacks. Stacks are useful for string matching because it saves a "history" of the previous characters. 
