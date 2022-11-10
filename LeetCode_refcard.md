@@ -59,7 +59,7 @@ while(!queue.isEmpty()) {
 
 #### Traversing.
 For graphs (unlike trees) it is important to avoid loops.\
-A set can be used fo this.
+A set or a boolean[] array can be used for this.
 
 DFS.
 ```
@@ -112,6 +112,10 @@ while (!queue.isEmpty()) {
 }
 
 ```
+
+Tips:
+* For chessfield-like graphs use directions to simplify getting neighbours:\
+`int[][] directions = new int[][]{{-1, 0}, {0, -1}, {0, 1}, {1, 0}};` 
 
 ### Linked Lists
 
