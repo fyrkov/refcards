@@ -61,7 +61,7 @@ while(!queue.isEmpty()) {
 For graphs (unlike trees) it is important to avoid loops.\
 A set or a boolean[] array can be used for this.
 
-DFS.
+DFS:
 ```
 Map<Integer, List<Integer>> graph = new HashMap<>();
 boolean[] seen;
