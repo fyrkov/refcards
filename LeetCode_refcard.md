@@ -1,5 +1,118 @@
 ## LeetCode refcards
 
+### Trees
+Inorder recursive DFS:
+```
+public void dfs(Node node) {
+    if (node == null) {
+        return;
+    }
+
+    dfs(node.left);
+    System.out.println(node.val);
+    dfs(node.right);
+}
+```
+Iterative DFS:
+```
+Stack<TreeNode> stack = new Stack<>();
+stack.push(node);
+
+while(!stack.isEmpty()) {
+    final TreeNode curr = stack.pop();
+    System.out.print(curr.val);
+    if (curr.right != null) {
+        stack.push(curr.right);
+    }
+    if (curr.left != null) {
+        stack.push(curr.left);
+    }
+}
+```
+BFS:
+```
+Queue<TreeNode> queue = new LinkedList<>();
+queue.add(root);
+
+while(!queue.isEmpty()) {
+    final int size = queue.size();
+    for (int i = 0; i < size; i++) {
+        final TreeNode node = queue.poll();
+        if (node.left != null) {
+            queue.add(node.left);
+        }
+        if (node.right != null) {
+            queue.add(node.right);
+        }
+    }
+}
+```
+
+### Graphs
+#### Representation
+![formula](LeetCode_refcard_files/graph.jpg)
+1. Adjacency list 
+   1. A 2D integer array, e.g. `graph = [[1], [2], [0, 3], []]`
+   2. Map of node to adjacent nodes
+2. Array of edges, e.g. `edges = [[0, 1], [1, 2], [2, 0], [2, 3]]`
+3. Adjacency matrix - 2D matrix where `graph[i][j] == 1` means there is an outgoing edge from node i to node j
+
+#### Traversing.
+For graphs (unlike trees) it is important to avoid loops.\
+A set can be used fo this.
+
+DFS.
+```
+Map<Integer, List<Integer>> graph = new HashMap<>();
+boolean[] seen;
+
+  public void dfs(int node) {
+  for (int neighbor: graph.get(node)) {
+      if (!seen[neighbor]) {
+          seen[neighbor] = true;
+          dfs(neighbor);
+      }
+  }
+}
+
+```
+Iterative DFS:
+```
+public void dfs(int start) {
+    Stack<Integer> stack = new Stack<>();
+    stack.push(start);
+    while (!stack.empty()) {
+        int node = stack.pop();
+        for (int neighbor: graph.get(node)) {
+            if (!seen.contains(neighbor)) {
+                seen.add(neighbor);
+                stack.push(neighbor);
+            }
+        }
+    }
+}
+
+```
+BFS:
+```
+Queue<TreeNode> queue = new LinkedList<>();
+Set<TreeNode> seen = new HashSet<>();
+        
+while (!queue.isEmpty()) {
+   int currentLength = queue.size();
+   for (int i = 0; i < currentLength; i++) {
+       TreeNode node = queue.remove();
+       for (TreeNode neighbor: ...) {
+           if (!seen.contains(neighbor)) {
+               seen.add(neighbor);
+               queue.add(neighbor);
+           }
+       }
+   }
+}
+
+```
+
 ### Linked Lists
 
 Tips:
