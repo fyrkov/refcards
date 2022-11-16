@@ -157,7 +157,7 @@ Abandoning a path is also sometimes called "pruning".
 
 Backtracking algorithms typically have a exponential time complexity or worse.
 
-Example:
+Example, generating permutations:
 ```
 public List permutations(int[] nums) {
     List<List<Integer>> ans = new ArrayList<>();
@@ -167,9 +167,9 @@ public List permutations(int[] nums) {
 }
 
 public void backtrack(List<Integer> curr, List<List<Integer>> ans, int[] nums) {
-    // Check for criteris when to accept the leaf or abandon the branch
+    // Check for criteria when to accept the leaf or abandon the branch
     if (curr.size() == nums.length) {
-        ans.add(new ArrayList<>(curr)); // mind the cope constructor
+        ans.add(new ArrayList<>(curr)); // mind the copy constructor
         return;
     }
     
