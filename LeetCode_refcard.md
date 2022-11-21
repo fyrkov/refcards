@@ -273,3 +273,9 @@ Tips:
     stack.push(num)
 ```
 * String problems with stacks. Stacks are useful for string matching because it saves a "history" of the previous characters. 
+
+### Bitwise operations
+1. `x ^ x = 0` XOR for two equal numbers gives zero 
+2. `x ^ 0 = x`
+2. `x <<` - multiply x2
+3. `x >>` - floor division /2
