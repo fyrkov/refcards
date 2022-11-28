@@ -28,7 +28,7 @@ App will get a fixed hostname like `xxx.region.elb.amazonaws.com`
 #### ALB
 Allows balancing to multiple apps across machines (target groups).\
 Allows balancing to multiple apps on the same host (containers).\
-Supports redirect, e.g. HTTPS -> HTTPS.
+Supports redirect, e.g. HTTP -> HTTPS.
 
 Routing can be based on URL, path, hostname, query string, headers, source IP.\
 For that listener rules can be modified after creation in IF-THEN style.
