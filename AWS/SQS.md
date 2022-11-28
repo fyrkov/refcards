@@ -71,6 +71,7 @@ Long polling can be configured at queue level or using the `WaitTimeSeconds` in 
 It is possible to set up a request-response communication model with 2 queues between 2 services.\
 To make it working it is necessary to embed correlation_id into messages.\
 With Java SDK there is no need to implement the pattern manually, it is done in the "SQS Temporary Queue Client"
+
 ![SQS-Request-Response](files/SQS-Request-Response.png)
 
 #### VPC Access
