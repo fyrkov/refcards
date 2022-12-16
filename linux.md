@@ -61,6 +61,9 @@ Finds file here and recursively,  `-type f` = files only:\
 Finds file which name begins with *"Chapter"*, `-iname` = case insensitive:\
 `find /usr -iname "Chapter*" -type f`
 
+Finds folder and suppress all errors when not root:\
+`find / -iname "Chapter" -type d 2> /dev/null`
+
 How do I remove files as a result of the find command?\
 `find -iname "<file>*" -delete`
 
