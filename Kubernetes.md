@@ -12,7 +12,7 @@ Kubernetes provides:
   * kube-apiserver
   * etcd (backing store for all cluster data)
   * kube-scheduler (assigns workloads to nodes)
-  * Controller
+  * Controller (monitor objects and react)
   * and others...
 * **Worker Node**. Runs pods. Sub-components:
   * Container runtime. Can be different: containerd, docker engine, CRI-O...
@@ -45,10 +45,10 @@ minikube kubectl -- {kubectl command}
 * `kubectl cluster-info`
 * `kubectl proxy --port=8080` to expose the cluster's API on the `localhost` without the need to authenticate. Otherwise, need to generate an API token and call the API server's IP.
 * `kubectl run hello-minikube --image ...` deploys an app onto cluster
-* `kubectl get nodes` list all nodes
-* `kubectl create -f definition.yaml` creates a pod from a file
 * `kubectl get pods` list all pods
-* `kubectl describe pod myapp-pod` list pod info
+* `kubectl get all` list all resources
+* `kubectl create -f definition.yaml` creates an object from a file
+* `kubectl describe pod {name}` list pod info
 
 ### Terms
 #### Namespaces 
@@ -56,10 +56,18 @@ Namespaces partition the cluster into virtual sub-clusters.\
 The names of the objects inside a Namespace are unique, but not across Namespaces in the cluster.\
 Namespaces provide a solution to multi-tenancy.\
 **Resource quotas** help users limit the overall resources consumed within Namespaces.
+```
+kubectl get ns
+```
+How to switch namespaces?
+```
+kubectl config set-context --current --namespace=dev 
+```
+How to search in all namespaces?
+```
+kubectl get ... --all-namespaces 
+```
 
-```
-kubectl get namespaces
-```
 
 #### Pods
 Pods is the smallest Kubernetes workload object.\
@@ -86,6 +94,22 @@ spec:
     ports:
     - containerPort: 80
 ```
+Getting pod definition from a running pod:
+```
+kubectl get pod <pod-name> -o yaml > pod-definition.yaml
+```
+
+#### Service 
+Service is an abstraction that makes a set of Pods available on the network so that clients can interact with it.\
+Types of Service:
+* ClusterIP - exposed internally within a cluster
+  * `--cluster-ip=none` makes a headless Service which has no internal IP
+* NodePort
+* LoadBalancer
+* ExternalName
+
+How Pods find a service?\
+With DNS server (add-on) enabled in a cluster each service gets a DNS name like `my-servce.my-namespace`.
 
 ### Workloads
 #### Deployment
@@ -98,11 +122,23 @@ or from a file:
 ```
 kubectl apply -f nginx-deployment.yaml
 ```
-List deployments:
-```
-kubectl get deployments
-```
+Deployment encapsulates Replica Sets and additionally support deployment strategies (e.g. rolling updates). 
 
+#### Replica Set
+Replicas set is a controller that specified number of Pods are running.\
+RS creates pods from a template definition.\
+RS uses `spec.selector.matchLabels` in the definition to identify its pods (for a case when pods are not created automatically from a template).\
+NB: RS is a lower abstraction than Deployment and in most cases a Deployment should be used.\
+Pods are linked to a Replica Set via `metadata.ownerReferences`.
+
+Scaling existing RS:
+```
+kubectl scale --replicas=6 replicaset {name}
+```
+Editing existing RS:
+```
+kubectl edit replicaset {name}
+```
 
 <br><br>
 #### Docker runtime vs containerd
