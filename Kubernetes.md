@@ -93,6 +93,12 @@ spec:
     image: nginx:1.22.1
     ports:
     - containerPort: 80
+    command: [ "sleep" ]
+    args: [ "5000" ]
+    env:
+      - name: APP_COLOR
+        value: ... <option 1>
+        valueFrom: ... <option 2>
 ```
 Getting pod definition from a running pod:
 ```
@@ -110,6 +116,42 @@ Types of Service:
 
 How Pods find a service?\
 With DNS server (add-on) enabled in a cluster each service gets a DNS name like `my-servce.my-namespace`.
+
+#### Config Maps
+A key value map. 
+Pods can get env vars injected from config maps.
+```
+kubectl create -f {file}
+```
+Config map file:
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_COLOR: "blue"
+```
+Then in Pod pick all configMap
+```
+spec:
+  containers:
+  - envFrom:
+    - configMapRef:
+        name: app-config
+```
+or just some vars from it
+```
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR
+      valueFrom: 
+        configMapKeyRef: 
+          name: webapp-config-map
+          key: APP_COLOR
+```
+<br>
 
 ### Workloads
 #### Deployment
