@@ -233,6 +233,27 @@ Affinity are based on Node labels and uses complex expressions.
 
 <br>
 
+#### Liveness and Readiness probes
+Pod condition "READY" (= container has started) does not always mean traffic can be routed to it.\
+For that add a Readiness probe in a Pod definition, e.g.
+```
+spec:
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 10
+    failureThreshold: 1
+```
+Types of probes:
+* HTTP
+* TCP
+* exec a command/script
+
+Liveness probes is needed when a container is running but the app inside is down.
+<br>
+
 ### Workloads
 #### Deployment
 User describes a desired state of pods in a Deployment and Deployment Controller checks on the health of pods and restarts the container if necessary.\
