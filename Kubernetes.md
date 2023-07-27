@@ -151,6 +151,86 @@ spec:
           name: webapp-config-map
           key: APP_COLOR
 ```
+#### Secrets
+A key value map. 
+Pods can get env vars injected from secrets.\
+Note 1: secrets are not encrypted by default in etcd. To add encryption at rest it is necessary to create a "encryption configuration" object in the cluster.\
+Note 2: anyone who has access to create/run pods in a Namespace can view secrets.\
+Note 3: it is possible to plug in 3rd party secrets provider instead of storing in etcd (e.g. AWS, GCP, Vault...)
+```
+kubectl create secret generic ...
+```
+Secret file:
+```
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+data:
+  DB_Password: {base64 encoded text}
+```
+Then in Pod pick all secrets
+```
+spec:
+  containers:
+  - envFrom:
+    - secretRef:
+        name: app-secret
+```
+or just some vars from it
+```
+spec:
+  containers:
+  - env:
+    - name: APP_COLOR
+      valueFrom: 
+        secretKeyRef: 
+          name: app-secret
+          key: DB_Password
+```
+
+<br> 
+
+#### Resources
+Pod definition can specify resources per each container with `requests` and `limits`.
+Kubernetes has also objects `kind: LimitRanges` which a pod can refer to.
+![pod_resources.png](Kubernetes_files%2Fpod_resources.png)
+
+Kubernetes has objects `kind: ResourceQuota` at namespace level which limits total resources for all pods.
+
+<br>
+
+#### Taints and Tolerations
+Can be used to restrict placing Pods on certain Nodes (e.g. with specific resources).\
+Normally Kube Scheduler assigns pods to nodes in randomly balanced manner.\
+Taints are set on Nodes (as a repellent) and Tolerations are set on Pods.\
+Taints and Tolerations can not make a Pod go to a specific Node! For that use "Node Affinity" or "Node Selectors".\
+Note: Master Node (Control Plane) is tainted by default to prevent regular workloads placement.
+
+```
+kubectl taint nodes ...
+```
+
+<br>
+
+#### Node Selectors
+Nodes can be labelled.\
+Pods can pick Nodes with Node Selectors which refer to labels:
+```
+kubectl label nodes node1 <key>=<value>
+...
+spec:
+  nodeSelectors:
+    <key>: <value>
+```
+Node selectors do not support complex bool expressions like "small OR medium", "NOT large".\
+For that use "Node Affinity".
+
+<br>
+
+#### Node Affinity
+Affinity are based on Node labels and uses complex expressions.
+
 <br>
 
 ### Workloads
