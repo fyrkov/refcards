@@ -254,9 +254,40 @@ Types of probes:
 Liveness probes is needed when a container is running but the app inside is down.
 <br>
 
+#### Logging
+```
+kubectl logs <pod> <optional:container>
+```
+<br>
+
+#### Monitoring
+Kube has limited monitoring but can plug in specialized tools like:
+* Prometheus (free)
+* Metrics Server (in-memory, free)
+* OpenStack (free)
+* Datadog (proprietary)
+
+If metrics server is enabled (e.g. by default in Minikube) user can run
+```
+kubectl top node
+kubectl top pod
+```
+If not first install it 
+<br>
+
+#### Labels and Selectors
+Labels and Selectors is a standard way of grouping and filtering objects in K8s.\
+Labels are key-value pairs.\
+Then Selectors come into play:
+```
+kubectl get pods --selector app=app1
+```
+<br>
+
 ### Workloads
 #### Deployment
-User describes a desired state of pods in a Deployment and Deployment Controller checks on the health of pods and restarts the container if necessary.\
+Deployment describes a desired state of pods.\
+Deployment Controller checks on the health of pods and restarts containers if necessary.\
 A deployment can be created like:
 ```
 kubectl create deployment hello-minikube --image=kicbase/echo-server:1.0
@@ -266,6 +297,25 @@ or from a file:
 kubectl apply -f nginx-deployment.yaml
 ```
 Deployment encapsulates Replica Sets and additionally support deployment strategies (e.g. rolling updates). 
+
+Deployment strategies:
+* Recreate (with downtime)
+* Rolling update (by default)
+
+Deployment triggers a rollout under certain conditions, e.g. manually:
+```
+kubectl set image <deployment> <container_name>=<image>
+```
+During a rollout a Deployment creates new Replica Set and keeps the old one.\ 
+How to check rollout status/progress?
+```
+kubectl rollout status <deployment> 
+kubectl rollout history <deployment> <optional:--revision=1>
+```
+How to rollback manually?
+```
+kubectl rollout undo <deployment>
+```
 
 #### Replica Set
 Replicas set is a controller that specified number of Pods are running.\
