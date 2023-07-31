@@ -333,6 +333,34 @@ Editing existing RS:
 kubectl edit replicaset {name}
 ```
 
+#### Jobs 
+Jobs are designed to run a task and finish.\
+A normal pod with a container finishing with 0 would restart again and again.\
+For that a `restartPolicy` config property is responsible which is `Always` by default but can also be `Never` or `OnFailure`.\
+Instead, use a job object like:
+```
+apiVersion: batch/v1
+kind: Job 
+...
+spec:
+  completions: 3 // To run a task until 3 succesfful completions
+  parallelism: 3 // By default jobs are sequential, but this can be changed wit this prop 
+```
+A job is considered successful when the container finishes with `0` exit code.\
+`.spec.backoffLimit` config property is responsible for a number of retries and =6 by default.
+
+#### CronJobs
+Jobs are designed to run a task on a scheduled basis and finish.\
+```
+apiVersion: batch/v1
+kind: CronJob 
+...
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec: // A spec of a job object. 
+```
+
 <br><br>
 #### Docker runtime vs containerd
 Initially Kubernetes worked with Docker directly.\
