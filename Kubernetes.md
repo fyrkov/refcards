@@ -295,6 +295,11 @@ Ingress defines rules to route traffic to different services based on:
 - hostnames (e.g. different subdomains)
 - URL paths
 
+To create an NGINX Ingress Controller:
+1. Create a Config Map
+2. Create 2 Service Accounts
+3. Create a service from the ingress-nginx image - this is an actual Ingress Controller
+
 <br>
 
 ### Workloads
