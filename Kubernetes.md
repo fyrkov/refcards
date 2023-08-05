@@ -46,7 +46,7 @@ minikube kubectl -- {kubectl command}
 * `kubectl proxy --port=8080` to expose the cluster's API on the `localhost` without the need to authenticate. Otherwise, need to generate an API token and call the API server's IP.
 * `kubectl run hello-minikube --image ...` deploys an app onto cluster
 * `kubectl get pods` list all pods
-* `kubectl get all` list all resources
+* `kubectl get all <opitonal:--all-namespaces>` list all resources
 * `kubectl create -f definition.yaml` creates an object from a file
 * `kubectl describe pod {name}` list pod info
 
@@ -284,6 +284,19 @@ kubectl get pods --selector app=app1
 ```
 <br>
 
+#### Ingress
+An API object that manages external access to the services in a cluster, typically HTTP.\
+Ingress may provide load balancing, SSL termination and name-based virtual hosting.\
+Ingress Controller must be created for the Ingress object to work.\
+K8s does not come with Ingress Controller by default.\
+User needs to deploy something like a special NGINX-based Ingress Controller.
+
+Ingress defines rules to route traffic to different services based on:
+- hostnames (e.g. different subdomains)
+- URL paths
+
+<br>
+
 ### Workloads
 #### Deployment
 Deployment describes a desired state of pods.\
@@ -360,6 +373,21 @@ spec:
   jobTemplate:
     spec: // A spec of a job object. 
 ```
+
+#### Service
+Services expose groups of pods for external communication.\
+A Service in K8s encapsulates the service discovery mechanism.\
+Service types:
+* NodePort - maps ip:port of a pod to ip:port of a node.\
+A specific Pod inside the Node is linked to a Service via Selectors.\
+I case of several Pods matching the Services acts as a LoadBalancer with random distribution.
+![NodePort.png](Kubernetes_files%2FNodePort.png)
+In case of several Pods spread across several Nodes it will be different Nodes IPs but the same port: 
+![NodePort2.png](Kubernetes_files%2FNodePort2.png)
+* ClusterIP - virtual IP inside a cluster for the whole service (default).\
+All Pods are accessed by a **unique** `ClusterIP` or a `Service name`.\
+Can get `ClusterIP` after Service creation by `kubectl get services`.
+* LoadBalancer - supported by external cloud providers
 
 <br><br>
 #### Docker runtime vs containerd
