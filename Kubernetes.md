@@ -302,6 +302,18 @@ To create an NGINX Ingress Controller:
 
 <br>
 
+#### Network policies
+By default, K8s is configured with "All allow" rule that allows traffic between all Pods or Services within the Cluster. 
+What if we need to hide a Database Pod?\
+Create a Network Policy object and link it to the Pod via Selectors.\
+Define rules in the Network Policy object.\
+Rules can be of 2 types:
+* Ingress - limits incoming traffic to a Pod 
+* Egress - limits outgoing traffic from a Pod
+
+Rules can refer to Pods and/or Namespaces or IP ranges.
+<br>
+
 ### Workloads
 #### Deployment
 Deployment describes a desired state of pods.\
