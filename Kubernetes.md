@@ -314,6 +314,47 @@ Rules can be of 2 types:
 Rules can refer to Pods and/or Namespaces or IP ranges.
 <br>
 
+#### Volumes
+Volumes can be attached to Pods to persist data.\
+Volumes can be mount using different mechanisms like local FS or specialized cloud provider solutions like AWS EBS.\
+See https://kubernetes.io/docs/concepts/storage/ \
+Volume has a lifetime of a Pod and can be configured in Pod definition files.\
+Persistent Volumes (PV) exist beyond the lifetime of a pod and are created centrally for the whole cluster:
+```
+kind: PersistedVolume
+```
+
+```
+kind: PersistedVolumeClaim
+```
+Persisted Volume Claim is another object that `binds` Persisted Volumes to Claims based on request and properties such as:
+* Sufficient capacity 
+* Access mode
+* Volume mode
+* Storage class
+
+There can be multiple matching Volumes to a single Claim.\
+In this case Selectors can help to uniquely set a Volume.
+
+If no matching Volume is found a Claim remains in `pending` state.
+
+When a PVC is deleted a PV based on `persistentVolumeReclaimPolicy` can be:
+- Retain
+- Delete
+- Recycle (data erased)
+
+Specifying PVC in Pod (Deployment on ReplicaSet) definition:
+```
+kind: Pod
+metadata:
+spec:
+  volumes:
+    - name: mypd
+      persistentVolumeClaim:
+        claimName: myclaim
+```
+<br>
+
 ### Workloads
 #### Deployment
 Deployment describes a desired state of pods.\
