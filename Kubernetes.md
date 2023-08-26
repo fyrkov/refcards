@@ -49,6 +49,7 @@ minikube kubectl -- {kubectl command}
 * `kubectl get all <opitonal:--all-namespaces>` list all resources
 * `kubectl create -f definition.yaml` creates an object from a file
 * `kubectl describe pod {name}` list pod info
+* `kubectl exec -it {name} -- /bin/sh` exec into a pod interactively
 
 ### Terms
 #### Namespaces 
@@ -316,6 +317,20 @@ Rules can refer to Pods and/or Namespaces or IP ranges.
 
 #### Volumes
 Volumes can be attached to Pods to persist data.\
+Simplest example using FS on the Node:
+```
+kind: Pod
+spec:
+  containers:
+    volumeMounts:
+    - mountPath: /test-pd
+      name: test-volume
+  volumes:
+  - name: test-volume
+    hostPath:
+      path: /data
+      type: Directory
+```
 Volumes can be mount using different mechanisms like local FS or specialized cloud provider solutions like AWS EBS.\
 See https://kubernetes.io/docs/concepts/storage/ \
 Volume has a lifetime of a Pod and can be configured in Pod definition files.\
@@ -327,8 +342,8 @@ kind: PersistedVolume
 ```
 kind: PersistedVolumeClaim
 ```
-Persisted Volume Claim is another object that `binds` Persisted Volumes to Claims based on request and properties such as:
-* Sufficient capacity 
+Persisted Volume Claim is another object that `binds` Persisted Volumes to Pods based properties such as:
+* Capacity 
 * Access mode
 * Volume mode
 * Storage class
@@ -343,7 +358,7 @@ When a PVC is deleted a PV based on `persistentVolumeReclaimPolicy` can be:
 - Delete
 - Recycle (data erased)
 
-Specifying PVC in Pod (Deployment on ReplicaSet) definition:
+Specifying PVC in Pod (Deployment or ReplicaSet) definition:
 ```
 kind: Pod
 metadata:
@@ -353,6 +368,9 @@ spec:
       persistentVolumeClaim:
         claimName: myclaim
 ```
+
+:exclamation: When a PVC is deleted and a PV is persistentVolumeReclaimPolicy = Retain, it stays in the cluster but is not Available immediately (Released state instead).\
+:exclamation: PVC can not be deleted when it is used by a Pod.
 <br>
 
 ### Workloads
