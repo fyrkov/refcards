@@ -3,8 +3,7 @@
 ### Core concepts
 
 Context. Scope. Coroutine. Job.
-![img.png](img.png)
-
+![img_1.png](img_1.png)
 
 ### Suspend functions
 
