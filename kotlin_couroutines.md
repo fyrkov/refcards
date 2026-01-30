@@ -36,3 +36,13 @@ fun foo(x: Int, cont: Continuation<String>): Any?
 | runBlocking()           | runs a coroutine and blocks until it completes               | top-level only (main, tests). provides an implicit CoroutineScope inside               | use to run suspend code from blocking code                                      | yes (root scope)                 |
 | withContext()           | switches coroutine context for a suspend block               | must be executed inside a running coroutine (i.e., inside suspend code)                | use to switch dispatcher for a block of code  (for example IO or Default)       | no (same scope, updated context) |
 | coroutineScope{}        | creates a child scope and suspends until all children finish | must be executed inside a running coroutine (i.e., inside suspend code)                | use when you need to start several coroutines and wait until all of them finish | yes (child scope)                |
+
+### Dispatchers
+
+| dispatcher             | purpose                           | threads / pool                            | typical use cases                                 |
+|------------------------|-----------------------------------|-------------------------------------------|---------------------------------------------------|
+| Dispatchers.Default    | cpu-bound work                    | shared fork-join pool (≈ number of cores) | parsing, calculations, diffing                    |
+| Dispatchers.IO         | blocking io                       | shared elastic pool (up to ~64+ threads)  | database calls, http, file io, blocking libraries |
+| Dispatchers.Main       | ui thread                         | single main thread                        | android ui updates                                |
+| Dispatchers.Unconfined | no fixed thread, runs immediately | caller thread → resumes anywhere          | tests, low-level primitives                       |
+
