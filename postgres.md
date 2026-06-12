@@ -100,3 +100,58 @@ with recursive subdepartments as (
     inner join subdepartments sub on sub.id = e.parent_id
 ) select * from subdepartments;
 ```
+
+## Notes on physical vs logical replication
+
+Physical = byte-for-byte clone of the entire cluster via raw WAL. Logical = decoded row-level changes for selected tables.
+
+The practical differences:
+
+┌─────────────────────────┬─────────────────────────────────────────────────────┬───────────────────────────────────────────────────────────────────────┐
+│                         │                Physical (streaming)                 │                           Logical (pub/sub)                           │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Scope                   │ whole cluster, all databases                        │ selected tables (or all tables) in one database                       │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Standby writable?       │ No - strictly read-only                             │ Yes - subscriber is a normal writable DB                              │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Replicates DDL?         │ Yes - new tables, schema changes flow automatically │ No - schema must exist on subscriber; ALTER TABLE not replicated      │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Cross PG version?       │ No - identical major version required               │ Yes - PG 15 → PG 17 works                                             │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Cross OS/arch?          │ No - same architecture                              │ Yes                                                                   │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Replication unit        │ WAL bytes (physical pages)                          │ logical change events (rows)                                          │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Subscriber a full copy? │ Yes - exact replica                                 │ No - only subscribed tables, can have extra tables/indexes of its own │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Setup complexity        │ higher (basebackup, standby mode)                   │ lower (a few SQL commands)                                            │
+├─────────────────────────┼─────────────────────────────────────────────────────┼───────────────────────────────────────────────────────────────────────┤
+│ Overhead                │ lower (no decoding)                                 │ higher (WAL decoding + apply)                                         │
+└─────────────────────────┴─────────────────────────────────────────────────────┴───────────────────────────────────────────────────────────────────────┘
+
+When to use PHYSICAL:
+
+1. High availability / failover - the #1 use. Standby is a hot spare ready to promote if the primary dies. Identical clone, near-zero data loss with sync replication.
+2. Read scaling - offload read-only queries (reports, analytics) to standbys. Your DH read_sql could hit a read replica instead of the write primary.
+3. Disaster recovery - a standby in another datacenter/region.
+4. You want everything - all tables, all databases, automatically, including future schema changes.
+
+The mental model: "I want a complete, always-current, read-only copy of my whole database for failover or read offload."
+
+When to use LOGICAL:
+
+1. Zero-downtime major-version upgrades - the killer use. Replicate PG 16 → PG 17 (physical can't cross versions), let it catch up, cut over with seconds of downtime. The standard way large shops upgrade.
+2. Selective replication - you only need some tables on the target (e.g. ship trades to an analytics DB but not the rest).
+3. Consolidation / fan-in - many databases replicate their tables into one central warehouse.
+4. Fan-out / distribution - one source distributes specific tables to many targets that each also have their own local data.
+5. CDC (Change Data Capture) - Debezium and similar tools use logical replication (logical decoding) to stream row changes into Kafka → your DH pipelines (Labs 2-5). This is the proper "live PG → DH" path we discussed.
+6. Different schema/indexes on the target - the subscriber can have extra indexes, different partitioning, additional columns with defaults.
+
+The decisive questions:
+
+- Need the target writable? → logical (physical is read-only).
+- Need failover / a full hot spare? → physical.
+- Crossing PG versions? → logical (physical can't).
+- Need only some tables? → logical (physical is all-or-nothing).
+- Need DDL to flow automatically? → physical (logical doesn't replicate schema).
+- Feeding a streaming pipeline (Kafka/DH)? → logical decoding / CDC.
