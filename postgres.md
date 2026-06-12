@@ -26,8 +26,6 @@ where state = 'active'
 order by query_start
 limit 5;
 
---pg_backend_pid() is your own connection - exclude it so you don't see this diagnostic query as the longest-running one.
-
 --3. Most-bloated tables (from pg_stat_user_tables):
 
 select
