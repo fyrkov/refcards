@@ -1,5 +1,46 @@
 ### Postgres snippetes
 
+Maintenance and monitoring
+```postgres-psql
+--1. Top 5 slow queries (from pg_stat_statements):
+
+select
+    left(query, 70)                      as query,
+    calls,
+    round(mean_exec_time::numeric, 1)    as mean_ms,
+    round(total_exec_time::numeric, 1)   as total_ms
+from pg_stat_statements
+order by total_exec_time desc
+limit 5;
+
+--2. Longest-running active session (from pg_stat_activity):
+
+select
+    pid,
+    now() - query_start  as running_for,
+    state,
+    left(query, 70)      as query
+from pg_stat_activity
+where state = 'active'
+  and pid <> pg_backend_pid()      -- exclude this query itself
+order by query_start
+limit 5;
+
+--pg_backend_pid() is your own connection - exclude it so you don't see this diagnostic query as the longest-running one.
+
+--3. Most-bloated tables (from pg_stat_user_tables):
+
+select
+    relname,
+    n_live_tup,
+    n_dead_tup,
+    round(100 * n_dead_tup::numeric / nullif(n_live_tup + n_dead_tup, 0), 1) as dead_pct,
+    last_autovacuum
+from pg_stat_user_tables
+order by n_dead_tup desc
+limit 5;
+```
+
 PSQL example:
 ```
 psql -d ${db_name} -U ${postgres_user) -h localhost -p 33225
